@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Game :user="user" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Game from './components/Game.vue'
+import Data from './data/user'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Game
+  },
+  data: () => {
+    return {
+      user: {}
+    }
+  },
+  mounted(){
+    if(!this.$cookies.isKey('user')) {
+      this.$cookies.set('user', Data, -1)
+    }
+    return this.user = this.$cookies.get('user')
   }
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
