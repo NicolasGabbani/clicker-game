@@ -1,11 +1,12 @@
 <template>
-  <Game :user="user" :builds="builds" />
+  <Game :user="user" :builds="builds" :success="success" />
 </template>
 
 <script>
 import Game from './components/Game.vue'
 import Data from './data/user'
 import Builds from '@/data/builds'
+import Success from '@/data/success'
 export default {
   name: 'App',
   components: {
@@ -14,7 +15,8 @@ export default {
   data: () => {
     return {
       user: {},
-      builds: null
+      builds: null,
+      success: null
     }
   },
   created(){
@@ -27,6 +29,11 @@ export default {
       this.$cookies.set('builds', JSON.stringify(Builds), -1)
     }
     this.builds = this.$cookies.get('builds')
+
+    if(!this.$cookies.isKey('success')) {
+      this.$cookies.set('success', JSON.stringify(Success), -1)
+    }
+    this.success = this.$cookies.get('success')
   }
 }
 </script>
