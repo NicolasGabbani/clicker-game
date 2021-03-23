@@ -61,7 +61,9 @@ export default {
 
       build.number += 1
 
-      this.display_success.filter(succ => succ.buildName === build.name && succ.id == 'haveOne')[0].done = true
+      if(this.display_success.filter(succ => succ.buildName === build.name && succ.id == 'haveOne').length){
+        this.display_success.filter(succ => succ.buildName === build.name && succ.id == 'haveOne')[0].done = true
+      }
 
       this.user.tps = 0
       for(let index in this.display_builds){
