@@ -4,7 +4,7 @@
       <a href="#" class="btn" @click.prevent="increment(1)">🍪</a>
       <button @click.prevent="reset">reset game</button>
       <button @click.prevent="save">save game</button>
-      <div>{{ display_currency }} truc(s)</div>
+      <div class="truc">{{ display_currency }} truc(s)</div>
       <div>{{ display_tps }} truc(s) par seconde</div>
       <a href="#" @click.prevent="buy(build)" v-for="build in display_builds" :key="build.name" class="build" :class="{ disable: !build.buyable }">
         <h2>{{ build.name }}</h2>
@@ -121,12 +121,17 @@ export default {
 
 <style lang="sass">
   .game
+    width: 40vw
+    margin: 50px auto
     display: grid
     grid-template-columns: repeat(2, 1fr)
   .btn
     display: block
     font-size: 10rem
     text-decoration: none
+
+  .truc
+    font-size: 2rem
 
   .build
     color: black
