@@ -1,0 +1,47 @@
+body
+  background-image: url('~@/assets/images/bg/bg-nml.png')
+  background-repeat: no-repeat
+  background-postion: center
+  background-size: cover
+  height: 100vh
+
+  display: flex
+  justify-content: center
+  align-items: center
+
+  font-family: var(--font-press)
+  
+.game
+  width: 80vw
+  height: 700px
+  margin: 0 auto
+  background: var(--clr-semi-black)
+  padding: 30px
+  border-radius: var(--bor-ra)
+
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+
+.centered
+  display: flex
+  justify-content: center
+  align-items: center
+
+.text-center
+  text-align: center
+
+.saved
+  justify-content: center
+  align-items: center
+  background: var(--clr-semi-black)
+  color: white
+  height: 50px
+  width: 30vw
+  border-radius: var(--bor-ra)
+  display: none
+  position: fixed
+  bottom: 10px
+  left: 50%
+  transform: translateX(-50%)
+  &.onsave
+    display: flex

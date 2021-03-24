@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="success">
     <h2>Succès</h2>
     <div class="success" v-for="succ in success" :key="succ.id">
       <p>{{succ.name}}</p>
@@ -17,3 +17,8 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .success
+    display: none
+</style>

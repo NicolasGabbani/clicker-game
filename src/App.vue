@@ -1,8 +1,10 @@
 <template>
+  <Header />
   <Game :user="user" :builds="builds" :success="success" />
 </template>
 
 <script>
+import Header from './components/Header.vue'
 import Game from './components/Game.vue'
 import Data from './data/user'
 import Builds from '@/data/builds'
@@ -10,7 +12,8 @@ import Success from '@/data/success'
 export default {
   name: 'App',
   components: {
-    Game
+    Game,
+    Header
   },
   data: () => {
     return {
@@ -37,3 +40,5 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" src="./assets/sass/app.sass"></style>
