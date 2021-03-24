@@ -1,26 +1,13 @@
 <template>
   <div class="game">
     <div class="col">
-      <a href="#" class="btn" @click.prevent="increment(1)">🍪</a>
-      <button @click.prevent="reset">reset game</button>
-      <button @click.prevent="save">save game</button>
-      <div class="truc">{{ display_currency }} truc(s)</div>
-      <div>{{ display_tps }} truc(s) par seconde</div>
-      <a href="#" @click.prevent="buy(build)" v-for="build in display_builds" :key="build.name" class="build" :class="{ disable: !build.buyable }">
-        <h2>{{ build.name }}</h2>
-        <p>inc: {{ build.inc }}</p>
-        <p>prix: {{ build.price }}</p>
-        <p>nombre: {{ build.number }}</p>
-        <p>buyable: {{build.buyable ? 'oui' : 'non' }}</p>
-      </a>
+      <ClickButton @inc="increment" />
+      <Menu @reset="reset" @save="save" />
+      <Score :currency="display_currency" :tps="display_tps" />
+      <Builds @buy="buy" :builds="display_builds" />
     </div>
     <div class="col">
-      <h2>Succès</h2>
-      <div class="success" v-for="succ in display_success" :key="succ.id">
-        <p>{{succ.name}}</p>
-        <p>done: {{succ.done ? 'oui' : 'non' }}</p>
-        <hr>
-      </div>
+      <Success :success="display_success" />
     </div>
 
     <div class="saved" :class="{ onsave: onsave }">jeu sauvegardé</div>
@@ -28,15 +15,26 @@
 </template>
 
 <script>
-
+import ClickButton from '@/components/ClickButton.vue'
+import Menu from '@/components/Menu.vue'
+import Score from '@/components/Score.vue'
+import Builds from '@/components/Builds.vue'
+import Success from '@/components/Success.vue'
 export default {
   name: 'Game',
+  components: {
+    ClickButton,
+    Menu,
+    Score,
+    Builds,
+    Success
+  },
   props: {
     user: Object,
     builds: String,
     success: String
   },
-  data: function() {
+  data() {
     return {
       display_currency: numeral(this.user.currency).format('0,0'),
       display_tps: numeral(this.user.tps).format('0,0'),
@@ -47,7 +45,7 @@ export default {
     }
   },
   methods: {
-    increment: function(inc, number = 1){
+    increment(inc = 1, number = 1){
       if (this.user.currency == 1) {
         this.display_success.filter(succ => succ.id === 'oneClicked')[0].done = true
       }
@@ -55,7 +53,7 @@ export default {
       return this.display_currency = numeral(this.user.currency).format('0,0')
     },
 
-    buy: function(build){
+    buy(build){
       this.user.currency = this.user.currency - build.price
       this.display_currency = numeral(this.user.currency).format('0,0')
 
@@ -74,13 +72,13 @@ export default {
       build.price *= 2
     },
 
-    save: function(){
+    save(){
       this.$cookies.set('user', this.user, -1)
       this.$cookies.set('builds', JSON.stringify(this.display_builds), -1)
       this.$cookies.set('success', JSON.stringify(this.display_success), -1)
       this.onsave = true
     },
-    reset: function(){
+    reset(){
       console.log('game reset')
       this.$cookies.remove('user')
       this.$cookies.remove('builds')
@@ -88,7 +86,7 @@ export default {
       window.location.reload()
     }
   },
-  mounted: function() {
+  mounted() {
     this.$timer = setInterval(() => {
       for(let index in this.display_builds){
         this.display_builds[index].buyable = this.user.currency >= this.display_builds[index].price
@@ -103,7 +101,7 @@ export default {
     }, this.onsaveTimer);
 
   },
-  unmounted: function() {
+  unmounted() {
     clearInterval(this.$timer)
     clearInterval(this.$timer2)
     clearInterval(this.$timer3)
