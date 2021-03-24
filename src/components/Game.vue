@@ -103,8 +103,7 @@ export default {
   mounted() {
     this.$timer = setInterval(() => {
       for (let index in this.display_builds) {
-        this.display_builds[index].buyable =
-          this.user.currency >= this.display_builds[index].price;
+        this.display_builds[index].buyable = this.user.currency >= this.display_builds[index].price;
       }
 
       this.increment(this.user.tps / 10);

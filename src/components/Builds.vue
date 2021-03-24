@@ -1,11 +1,11 @@
 <template>
   <div class="builds">
-    <div @click.prevent="$emit('buy', build)" v-for="build in builds" :key="build.name" class="build" :class="{ disable: !build.buyable }">
+    <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build" :class="{ disable: !build.buyable }" :ref='`build${index}`'>
       <div class="build-name">{{ build.name }}</div>
       <span class="build-ps">+{{ build.inc }}<span>⭐️</span>/seconde</span>
       <span class="build-price">{{ build.price }}<span>⭐️</span></span>
       <span class="build-number">{{ build.number }}</span>
-      <span style="display: none">buyable: {{build.buyable ? 'oui' : 'non' }}</span>
+      <span style="display: none" :class="{buyable: build.buyable}">buyable: {{build.buyable ? 'oui' : 'non' }}</span>
     </div>
   </div>
 </template>
@@ -16,6 +16,16 @@ export default {
   props: {
     builds: Array,
     buy: Function
+  },
+  mounted(){
+    setInterval(() => {
+      for (let index in this.$refs) {
+        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[4].classList.contains('buyable')){
+          this.$refs[index].classList.add('disable')
+          console.log('triche')
+        }
+      }
+    }, 100);
   }
 }
 </script>
