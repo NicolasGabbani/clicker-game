@@ -17,16 +17,16 @@ export default {
     builds: Array,
     buy: Function
   },
-  mounted(){
-    setInterval(() => {
-      for (let index in this.$refs) {
-        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[4].classList.contains('buyable')){
-          this.$refs[index].classList.add('disable')
-          console.log('triche')
-        }
-      }
-    }, 100);
-  }
+  // mounted(){
+  //   setInterval(() => {
+  //     for (let index in this.$refs) {
+  //       if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[4].classList.contains('buyable')){
+  //         this.$refs[index].classList.add('disable')
+  //         console.log('triche')
+  //       }
+  //     }
+  //   }, 100);
+  // }
 }
 </script>
 

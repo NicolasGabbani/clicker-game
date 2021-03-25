@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-score" @click.prevent="$emit('inc'); displayScore();">🦄</button>
+  <button class="btn-score" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();">🦄</button>
 </template>
 
 <script>
@@ -46,8 +46,4 @@ export default {
       color: var(--clr-white)
       text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
       animation: fadeOutTop .35s ease
-  @keyframes fadeOutTop
-    to
-      margin-top: -10px
-      opacity: 0
 </style>

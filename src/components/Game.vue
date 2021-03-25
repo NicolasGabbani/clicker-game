@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div id="game-content">
+    <Bonus @inc="increment" :top="bonusTop" :left="bonusLeft" :interval="bonusDisplayedTimer" v-if="haveBonus" />
     <div class="game">
       <div class="col centered text-center">
         <div>
@@ -29,6 +30,7 @@ import Menu from "@/components/Menu.vue";
 import Score from "@/components/Score.vue";
 import Builds from "@/components/Builds.vue";
 import Success from "@/components/Success.vue";
+import Bonus from "@/components/Bonus.vue";
 export default {
   name: "Game",
   components: {
@@ -37,6 +39,7 @@ export default {
     Score,
     Builds,
     Success,
+    Bonus,
   },
   props: {
     user: Object,
@@ -51,12 +54,36 @@ export default {
       display_success: JSON.parse(this.success),
       onsave: false,
       onsaveTimer: 60000,
-      optionsOpen: false
+      optionsOpen: false,
+      haveBonus: false,
+      bonusMinInterval: 1000,
+      bonusMaxInterval: 5000,
+      intervalBonus: Math.floor(Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) + this.bonusMinInterval),
+      bonusTop: `${Math.floor(Math.random() * 99)}%`,
+      bonusLeft: `${Math.floor(Math.random() * 99)}%`,
+      bonusDisplayedTimer: 5000
     };
   },
   methods: {
-    increment(inc = 1, number = 1) {
-      if (this.user.currency == 1) {
+    randomBonusInit(){
+      this.$randomBonus = setTimeout(() => {
+        this.intervalBonus = Math.floor(Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) + this.bonusMinInterval)
+        this.bonusTop = `${Math.floor(Math.random() * 99)}%`,
+        this.bonusLeft = `${Math.floor(Math.random() * 99)}%`
+        this.haveBonus = true
+        this.$bonusTimer = setTimeout(() => {
+          clearTimeout(this.$randomBonus)
+          this.haveBonus = false
+          this.randomBonusInit()
+        }, this.bonusDisplayedTimer);
+        
+      }, this.intervalBonus);
+    },
+    increment(inc = 1, number = 1, el = null) {
+      if(el == 'bonus' && !this.display_success.filter((succ) => succ.id === "oneBonus")[0].done){
+        this.display_success.filter((succ) => succ.id === "oneBonus")[0].done = true;
+      }
+      if (el == 'button' && !this.display_success.filter((succ) => succ.id === "oneClicked")[0].done) {
         this.display_success.filter((succ) => succ.id === "oneClicked")[0].done = true;
       }
       this.user.currency = this.user.currency + inc * number;
@@ -96,7 +123,6 @@ export default {
       this.onsave = true;
     },
     reset() {
-      console.log("game reset");
       this.$cookies.remove("user");
       this.$cookies.remove("builds");
       this.$cookies.remove("success");
@@ -107,6 +133,7 @@ export default {
     }
   },
   mounted() {
+    this.randomBonusInit()
     this.$timer = setInterval(() => {
       for (let index in this.display_builds) {
         this.display_builds[index].buyable = this.user.currency >= this.display_builds[index].price;
@@ -114,16 +141,17 @@ export default {
 
       this.increment(this.user.tps / 10);
       document.title = `${this.display_currency} ⭐️ - Super Licorne Clicker`;
-    }, 100);
+    }, 100)
 
     this.$timer2 = setInterval(() => {
       this.save();
-    }, this.onsaveTimer);
+    }, this.onsaveTimer)
   },
   unmounted() {
-    clearInterval(this.$timer);
-    clearInterval(this.$timer2);
-    clearInterval(this.$timer3);
+    clearInterval(this.$timer)
+    clearInterval(this.$timer2)
+    clearInterval(this.$timer3)
+    clearTimeout(this.$randomBonus)
   },
 
   watch: {

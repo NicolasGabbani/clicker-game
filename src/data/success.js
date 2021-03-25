@@ -1,7 +1,12 @@
 export default [
   {
     id: 'oneClicked',
-    name: 'Avoir une étoile',
+    name: 'Avoir cliqué sur la licorne',
+    done: false
+  },
+  {
+    id: 'oneBonus',
+    name: 'Avoir cliqué sur une étoile bonus',
     done: false
   },
   {
