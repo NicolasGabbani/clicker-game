@@ -32,8 +32,6 @@ export default {
       this.haveBonus = true
       bonusAdded.innerHTML = randomNumber > 0 ? `+${randomNumber}⭐️` : `${randomNumber}⭐️`
       setTimeout(() => {
-        //document.querySelector('.bonus-content').removeChild(bonusAdded)
-        //document.querySelector('.bonus-content').removeChild(document.querySelector('.bonus'))
         this.haveBonus = false
       }, this.interval);
     }

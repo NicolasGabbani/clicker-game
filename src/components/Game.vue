@@ -1,6 +1,12 @@
 <template>
   <div id="game-content">
-    <Bonus @inc="increment" :top="bonusTop" :left="bonusLeft" :interval="bonusDisplayedTimer" v-if="haveBonus" />
+    <Bonus
+      @inc="increment"
+      :top="bonusTop"
+      :left="bonusLeft"
+      :interval="bonusDisplayedTimer"
+      v-if="haveBonus"
+    />
     <div class="game">
       <div class="col centered text-center">
         <div>
@@ -9,7 +15,9 @@
         </div>
       </div>
       <div class="col">
-        <div class="btn-options-container"><button class="btn-options" @click.prevent="openOptions">options</button></div>
+        <div class="btn-options-container">
+          <button class="btn-options" @click.prevent="openOptions">options</button>
+        </div>
         <div class="centered">
           <div class="options-content" v-show="optionsOpen">
             <Menu @reset="reset" @save="save" />
@@ -18,9 +26,9 @@
           <Builds @buy="buy" :builds="display_builds" v-show="!optionsOpen" />
         </div>
       </div>
-      
     </div>
     <div class="saved" :class="{ onsave: onsave }">jeu sauvegardé</div>
+    <HaveSuccess v-if="haveSuccess" :success="currentSuccess" />
   </div>
 </template>
 
@@ -31,6 +39,7 @@ import Score from "@/components/Score.vue";
 import Builds from "@/components/Builds.vue";
 import Success from "@/components/Success.vue";
 import Bonus from "@/components/Bonus.vue";
+import HaveSuccess from "@/components/HaveSuccess.vue";
 export default {
   name: "Game",
   components: {
@@ -40,6 +49,7 @@ export default {
     Builds,
     Success,
     Bonus,
+    HaveSuccess
   },
   props: {
     user: Object,
@@ -55,36 +65,49 @@ export default {
       onsave: false,
       onsaveTimer: 60000,
       optionsOpen: false,
+      haveSuccess: false,
+      currentSuccess: '',
       haveBonus: false,
       bonusMinInterval: 1000,
       bonusMaxInterval: 5000,
-      intervalBonus: Math.floor(Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) + this.bonusMinInterval),
+      intervalBonus: Math.floor(
+        Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) +
+          this.bonusMinInterval
+      ),
       bonusTop: `${Math.floor(Math.random() * 99)}%`,
       bonusLeft: `${Math.floor(Math.random() * 99)}%`,
-      bonusDisplayedTimer: 5000
+      bonusDisplayedTimer: 5000,
     };
   },
   methods: {
-    randomBonusInit(){
+    randomBonusInit() {
       this.$randomBonus = setTimeout(() => {
-        this.intervalBonus = Math.floor(Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) + this.bonusMinInterval)
-        this.bonusTop = `${Math.floor(Math.random() * 99)}%`,
-        this.bonusLeft = `${Math.floor(Math.random() * 99)}%`
-        this.haveBonus = true
+        this.intervalBonus = Math.floor(
+          Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) +
+            this.bonusMinInterval
+        );
+        (this.bonusTop = `${Math.floor(Math.random() * 99)}%`),
+          (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`);
+        this.haveBonus = true;
         this.$bonusTimer = setTimeout(() => {
-          clearTimeout(this.$randomBonus)
-          this.haveBonus = false
-          this.randomBonusInit()
+          clearTimeout(this.$randomBonus);
+          this.haveBonus = false;
+          this.randomBonusInit();
         }, this.bonusDisplayedTimer);
-        
       }, this.intervalBonus);
     },
     increment(inc = 1, number = 1, el = null) {
-      if(el == 'bonus' && !this.display_success.filter((succ) => succ.id === "oneBonus")[0].done){
-        this.display_success.filter((succ) => succ.id === "oneBonus")[0].done = true;
+      if (
+        el == "bonus" &&
+        !this.display_success.filter((succ) => succ.id === "oneBonus")[0].done
+      ) {
+        this.displaySuccess(this.display_success.filter((succ) => succ.id === "oneBonus")[0])
       }
-      if (el == 'button' && !this.display_success.filter((succ) => succ.id === "oneClicked")[0].done) {
-        this.display_success.filter((succ) => succ.id === "oneClicked")[0].done = true;
+      if (
+        el == "button" &&
+        !this.display_success.filter((succ) => succ.id === "oneClicked")[0].done
+      ) {
+        this.displaySuccess(this.display_success.filter((succ) => succ.id === "oneClicked")[0])
       }
       this.user.currency = this.user.currency + inc * number;
       return (this.display_currency = numeral(this.user.currency).format("0,0"));
@@ -101,9 +124,9 @@ export default {
           (succ) => succ.buildName === build.name && succ.id == "haveOne"
         ).length
       ) {
-        this.display_success.filter(
+        this.displaySuccess(this.display_success.filter(
           (succ) => succ.buildName === build.name && succ.id == "haveOne"
-        )[0].done = true;
+        )[0]);
       }
 
       this.user.tps = 0;
@@ -129,29 +152,35 @@ export default {
       window.location.reload();
     },
     openOptions() {
-      this.optionsOpen = !this.optionsOpen
+      this.optionsOpen = !this.optionsOpen;
+    },
+    displaySuccess(succ) {
+      this.currentSuccess = succ.name
+      succ.done = true
+      this.haveSuccess = true
     }
   },
   mounted() {
-    this.randomBonusInit()
+    this.randomBonusInit();
     this.$timer = setInterval(() => {
       for (let index in this.display_builds) {
-        this.display_builds[index].buyable = this.user.currency >= this.display_builds[index].price;
+        this.display_builds[index].buyable =
+          this.user.currency >= this.display_builds[index].price;
       }
 
       this.increment(this.user.tps / 10);
       document.title = `${this.display_currency} ⭐️ - Super Licorne Clicker`;
-    }, 100)
+    }, 100);
 
     this.$timer2 = setInterval(() => {
       this.save();
-    }, this.onsaveTimer)
+    }, this.onsaveTimer);
   },
   unmounted() {
-    clearInterval(this.$timer)
-    clearInterval(this.$timer2)
-    clearInterval(this.$timer3)
-    clearTimeout(this.$randomBonus)
+    clearInterval(this.$timer);
+    clearInterval(this.$timer2);
+    clearInterval(this.$timer3);
+    clearTimeout(this.$randomBonus);
   },
 
   watch: {
@@ -160,6 +189,13 @@ export default {
         setTimeout(() => {
           this.onsave = false;
         }, 1000);
+      }
+    },
+    haveSuccess: function (val) {
+      if (val) {
+        setTimeout(() => {
+          this.haveSuccess = false;
+        }, 2000);
       }
     },
   },
