@@ -2,7 +2,7 @@
   <div class="success-content">
     <h2>Succès</h2>
     <div class="success" v-for="succ in success" :key="succ.id">
-      <span class="success-name">{{succ.name}}</span>
+      <span class="success-name" v-if="succ.done">{{succ.name}}</span>
       <span class="success-unlock" v-if="succ.done">
         déverouillé ! :D
       </span>

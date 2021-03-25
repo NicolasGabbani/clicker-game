@@ -87,7 +87,7 @@ export default {
             this.bonusMinInterval
         );
         (this.bonusTop = `${Math.floor(Math.random() * 99)}%`),
-          (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`);
+        (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`);
         this.haveBonus = true;
         this.$bonusTimer = setTimeout(() => {
           clearTimeout(this.$randomBonus);
