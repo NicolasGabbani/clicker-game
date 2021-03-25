@@ -22,26 +22,20 @@ body
   display: grid
   grid-template-columns: repeat(2, 1fr)
 
-.centered
-  display: flex
-  justify-content: center
-  align-items: center
-
-.text-center
-  text-align: center
-
-.saved
-  justify-content: center
-  align-items: center
+.btn-options, .btn-menu
+  margin-bottom: 20px
   background: var(--clr-semi-black)
-  color: white
-  height: 50px
-  width: 30vw
-  border-radius: var(--bor-ra)
-  display: none
-  position: fixed
-  bottom: 10px
-  left: 50%
-  transform: translateX(-50%)
-  &.onsave
-    display: flex
+  color: var(--clr-white)
+  font-family: var(--font-press)
+  padding: .5rem 1.5rem
+  border: 2px solid var(--clr-semi-black)
+  outline: 2px solid var(--clr-semi-black)
+  outline-offset: -2px
+  cursor: pointer
+  transition: outline-offset .1s ease
+  &:hover
+    outline-offset: 2px
+
+.btn-menu
+  display: inline-block
+  margin: 0 10px 0 0

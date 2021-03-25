@@ -1,7 +1,7 @@
 export default [
   {
     id: 'oneClicked',
-    name: 'Avoir un truc',
+    name: 'Avoir une étoile',
     done: false
   },
   {

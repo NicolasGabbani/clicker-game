@@ -31,11 +31,11 @@ export default {
 </script>
 
 <style lang="sass">
-  .builds
-    width: 70%
-    height: 650px
+  .builds, .options-content
+    width: 100%
+    height: 580px
     overflow-y: scroll
-    padding-right: 30px
+    padding: 12px 30px 12px 12px
   .build
     all: unset
     display: block
@@ -47,6 +47,8 @@ export default {
     padding: 12px
     border-radius: var(--bor-ra)
     cursor: pointer
+    &:last-child
+      margin-bottom: 0
 
     &-name
       margin: 5px 0 15px 0

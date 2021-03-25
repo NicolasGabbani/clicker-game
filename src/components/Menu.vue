@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <button @click.prevent="$emit('reset')">reset game</button>
-    <button @click.prevent="$emit('save')">save game</button>
+  <div class="menu">
+    <button class="btn-menu" @click.prevent="$emit('reset')">reset game</button>
+    <button class="btn-menu" @click.prevent="$emit('save')">save game</button>
   </div>
 </template>
 
@@ -14,3 +14,8 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .menu
+    margin-bottom: 20px
+</style>

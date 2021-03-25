@@ -8,15 +8,17 @@
         </div>
       </div>
       <div class="col">
-        
-        <Success :success="display_success" />
+        <div class="btn-options-container"><button class="btn-options" @click.prevent="openOptions">options</button></div>
         <div class="centered">
-          <Builds @buy="buy" :builds="display_builds" />
+          <div class="options-content" v-show="optionsOpen">
+            <Menu @reset="reset" @save="save" />
+            <Success :success="display_success" />
+          </div>
+          <Builds @buy="buy" :builds="display_builds" v-show="!optionsOpen" />
         </div>
       </div>
       
     </div>
-    <Menu @reset="reset" @save="save" />
     <div class="saved" :class="{ onsave: onsave }">jeu sauvegardé</div>
   </div>
 </template>
@@ -49,6 +51,7 @@ export default {
       display_success: JSON.parse(this.success),
       onsave: false,
       onsaveTimer: 60000,
+      optionsOpen: false
     };
   },
   methods: {
@@ -99,6 +102,9 @@ export default {
       this.$cookies.remove("success");
       window.location.reload();
     },
+    openOptions() {
+      this.optionsOpen = !this.optionsOpen
+    }
   },
   mounted() {
     this.$timer = setInterval(() => {
