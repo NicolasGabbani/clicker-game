@@ -37,7 +37,9 @@ export default {
     margin-bottom: 30px
     position: relative
     &:active
-      transform: scale(.9)
+      transform: scale(.9) !important
+    &:hover
+      transform: scale(1.05)
     span
       display: block
       position: absolute
