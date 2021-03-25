@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    <div class="nav-name">Super Licorne Clicker</div>
+    <div class="nav-name">🦄Super Licorne Clicker🦄</div>
   </nav>
 </template>
 

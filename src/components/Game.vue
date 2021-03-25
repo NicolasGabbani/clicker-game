@@ -113,7 +113,7 @@ export default {
       }
 
       this.increment(this.user.tps / 10);
-      document.title = this.display_currency;
+      document.title = `${this.display_currency} ⭐️ - Super Licorne Clicker`;
     }, 100);
 
     this.$timer2 = setInterval(() => {
