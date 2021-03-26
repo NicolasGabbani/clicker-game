@@ -1,8 +1,13 @@
 <template>
-  <div class="bonus-content" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
-    <button class="bonus" @click.prevent.once="addRandomBonus" v-show="!bonusClicked">⭐️</button>
-    <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
-
+  <div>
+    <div class="bonus-content" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
+      <button class="bonus" @click.prevent.once="addRandomBonus" v-show="!bonusClicked">⭐️</button>
+      <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
+    </div>
+    <div class="buff" v-show="bonusCpsClicked">
+      CPSx2
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -19,6 +24,7 @@ export default {
   data(){
     return {
       bonusClicked: false,
+      bonusCpsClicked: false,
       minBonus: -100,
       maxBonus: 1000,
       haveBonus: false,
@@ -52,11 +58,22 @@ export default {
       this.$emit('cps', 2)
       this.$emit('inc', 0, 1, 'bonus')
       this.bonusClicked = true
+      this.bonusCpsClicked = true
       document.querySelector('.bonus-added').innerHTML = 'CPSx2'
+      let bonusTime = this.bonusDisplayedTimer / 1000
+      document.querySelector('.buff > span').innerHTML = bonusTime 
+      const bonusTimer = setInterval(() => {
+        --bonusTime
+        document.querySelector('.buff > span').innerHTML = bonusTime
+        if(bonusTime == -1) {
+          clearInterval(bonusTimer)
+          this.bonusCpsClicked = false
+        }
+      }, 1000);
       setTimeout(() => {
         this.bonusClicked = false
         this.$emit('cps')
-      }, this.bonusDisplayedTimer);
+      }, this.bonusDisplayedTimer)
     },
     randomBonusInit() {
       this.intervalBonus = this.randomIntFromInterval(this.bonusMinInterval, this.bonusMaxInterval)
@@ -104,5 +121,16 @@ export default {
     &.fadeout
       display: block
       animation: fadeOutTop 1.5s ease forwards
-  
+  .buff
+    position: fixed
+    top: 1%
+    left: 1%
+    background: var(--clr-semi-black)
+    color: var(--clr-white)
+    padding: 30px
+    border-radius: var(--bor-ra)
+    text-align: center
+    span
+      display: block
+      margin-top: 20px
 </style>
