@@ -11,7 +11,7 @@
       <div class="col centered text-center">
         <div>
           <ClickButton @inc="increment" />
-          <Score :currency="display_currency" :tps="display_tps" />
+          <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
         </div>
       </div>
       <div class="col">
@@ -23,7 +23,7 @@
             <Menu @reset="reset" @save="save" />
             <Success :success="display_success" />
           </div>
-          <Builds @buy="buy" :builds="display_builds" v-show="!optionsOpen" />
+          <Builds @buy="buy" :builds="display_builds" :total="this.user.total" v-show="!optionsOpen" />
         </div>
       </div>
     </div>
@@ -58,8 +58,9 @@ export default {
   },
   data() {
     return {
+      display_total: numeral(this.user.total).format("0,0"),
       display_currency: numeral(this.user.currency).format("0,0"),
-      display_tps: numeral(this.user.tps).format("0,0.0"),
+      display_cps: numeral(this.user.cps).format("0,0.0"),
       display_builds: JSON.parse(this.builds),
       display_success: JSON.parse(this.success),
       onsave: false,
@@ -110,7 +111,9 @@ export default {
         this.displaySuccess(this.display_success.filter((succ) => succ.id === "oneClicked")[0])
       }
       this.user.currency = this.user.currency + inc * number;
-      return (this.display_currency = numeral(this.user.currency).format("0,0"));
+      this.user.total = this.user.total + inc * number;
+      this.display_currency = numeral(this.user.currency).format("0,0")
+      this.display_total = numeral(this.user.total).format("0,0")
     },
 
     buy(build) {
@@ -129,12 +132,12 @@ export default {
         )[0]);
       }
 
-      this.user.tps = 0;
+      this.user.cps = 0;
       for (let index in this.display_builds) {
-        this.user.tps +=
+        this.user.cps +=
           this.display_builds[index].number * this.display_builds[index].inc;
       }
-      this.display_tps = numeral(this.user.tps).format("0,0.0");
+      this.display_cps = numeral(this.user.cps).format("0,0.0");
 
       build.price *= 2;
     },
@@ -168,7 +171,7 @@ export default {
           this.user.currency >= this.display_builds[index].price;
       }
 
-      this.increment(this.user.tps / 10);
+      this.increment(this.user.cps / 10);
       document.title = `${this.display_currency} ⭐️ - Super Licorne Clicker`;
     }, 100);
 

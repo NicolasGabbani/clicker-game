@@ -1,4 +1,5 @@
 export default {
   currency: 0,
-  tps: 0
+  cps: 0,
+  total: 0
 }
