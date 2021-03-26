@@ -1,7 +1,7 @@
 <template>
   <div class="score">
-    <div class="stars">{{ currency }}kg</div>
-    <div class="starsps">{{ cps }}kg/seconde</div>
+    <div class="stars">{{ currency }}<span>⭐️</span></div>
+    <div class="starsps">{{ cps }}<span>⭐️</span>/seconde</div>
     <div class="total">total: {{ total }}kg</div>
   </div>
 </template>
@@ -28,16 +28,16 @@ export default {
     span
       display: inline-block
       font-size: 3rem
-      margin-left: -15px
-      margin-top: -5px
+      margin-left: -5px
+      position: relative
+      top: -5px
   .starsps
     font-size: .7rem
-    margin-top: 20px
     span
       display: inline-block
       font-size: 1.2rem
-      margin-left: -5px
-      margin-top: -5px
+      position: relative
+      top: -2px
   .total
     margin-top: 20px
 </style>

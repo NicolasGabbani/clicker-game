@@ -47,7 +47,6 @@ export default {
         (this.bonusTop = `${Math.floor(Math.random() * 99)}%`),
         (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`);
         this.haveBonus = true;
-        console.log(this.haveBonus)
         this.$bonusTimer = setTimeout(() => {
           clearTimeout(this.$randomBonus);
           this.haveBonus = false;
