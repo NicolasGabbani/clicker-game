@@ -1,12 +1,6 @@
 <template>
   <div id="game-content">
-    <Bonus
-      @inc="increment"
-      :top="bonusTop"
-      :left="bonusLeft"
-      :interval="bonusDisplayedTimer"
-      v-if="haveBonus"
-    />
+    <Bonus @inc="increment" />
     <div class="game">
       <div class="col centered text-center">
         <div>
@@ -68,35 +62,9 @@ export default {
       optionsOpen: false,
       haveSuccess: false,
       currentSuccess: '',
-      haveBonus: false,
-      bonusMinInterval: 1000,
-      bonusMaxInterval: 5000,
-      intervalBonus: Math.floor(
-        Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) +
-          this.bonusMinInterval
-      ),
-      bonusTop: `${Math.floor(Math.random() * 99)}%`,
-      bonusLeft: `${Math.floor(Math.random() * 99)}%`,
-      bonusDisplayedTimer: 5000,
     };
   },
   methods: {
-    randomBonusInit() {
-      this.$randomBonus = setTimeout(() => {
-        this.intervalBonus = Math.floor(
-          Math.random() * (this.bonusMaxInterval - this.bonusMinInterval + 1) +
-            this.bonusMinInterval
-        );
-        (this.bonusTop = `${Math.floor(Math.random() * 99)}%`),
-        (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`);
-        this.haveBonus = true;
-        this.$bonusTimer = setTimeout(() => {
-          clearTimeout(this.$randomBonus);
-          this.haveBonus = false;
-          this.randomBonusInit();
-        }, this.bonusDisplayedTimer);
-      }, this.intervalBonus);
-    },
     increment(inc = 1, number = 1, el = null) {
       if (
         el == "bonus" &&
@@ -164,7 +132,6 @@ export default {
     }
   },
   mounted() {
-    this.randomBonusInit();
     this.$timer = setInterval(() => {
       for (let index in this.display_builds) {
         this.display_builds[index].buyable =
@@ -183,7 +150,6 @@ export default {
     clearInterval(this.$timer);
     clearInterval(this.$timer2);
     clearInterval(this.$timer3);
-    clearTimeout(this.$randomBonus);
   },
 
   watch: {

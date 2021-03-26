@@ -1,7 +1,7 @@
 <template>
-  <div class="bonus-content" :style="{top: top, left: left}">
-    <button class="bonus" @click.prevent.once="addBonus" v-show="!haveBonus">⭐️</button>
-    <span class="bonus-added" :class="{fadeout: haveBonus}"></span>
+  <div class="bonus-content" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
+    <button class="bonus" @click.prevent.once="addBonus" v-show="!bonusClicked">⭐️</button>
+    <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
   </div>
 </template>
 
@@ -16,9 +16,16 @@ export default {
   },
   data(){
     return {
-      haveBonus: false,
+      bonusClicked: false,
       minBonus: -100,
-      maxBonus: 1000
+      maxBonus: 1000,
+      haveBonus: false,
+      bonusMinInterval: 1000,
+      bonusMaxInterval: 5000,
+      intervalBonus: this.randomIntFromInterval(this.bonusMinInterval, this.bonusMaxInterval),
+      bonusTop: `${Math.floor(Math.random() * 99)}%`,
+      bonusLeft: `${Math.floor(Math.random() * 99)}%`,
+      bonusDisplayedTimer: 5000,
     }
   },
   methods: {
@@ -27,15 +34,34 @@ export default {
     },
     addBonus(){
       const randomNumber = this.randomIntFromInterval(this.minBonus, this.maxBonus)
-      const bonusAdded = document.querySelector('.bonus-added')
       this.$emit('inc', randomNumber, 1, 'bonus')
-      this.haveBonus = true
-      bonusAdded.innerHTML = randomNumber > 0 ? `+${randomNumber}⭐️` : `${randomNumber}⭐️`
+      this.bonusClicked = true
+      document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${randomNumber}⭐️` : `${randomNumber}⭐️`
       setTimeout(() => {
-        this.haveBonus = false
-      }, this.interval);
+        this.bonusClicked = false
+      }, this.bonusDisplayedTimer);
+    },
+    randomBonusInit() {
+      this.intervalBonus = this.randomIntFromInterval(this.bonusMinInterval, this.bonusMaxInterval)
+      this.$randomBonus = setTimeout(() => {
+        (this.bonusTop = `${Math.floor(Math.random() * 99)}%`),
+        (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`);
+        this.haveBonus = true;
+        console.log(this.haveBonus)
+        this.$bonusTimer = setTimeout(() => {
+          clearTimeout(this.$randomBonus);
+          this.haveBonus = false;
+          this.randomBonusInit();
+        }, this.bonusDisplayedTimer);
+      }, this.intervalBonus);
     }
-  }
+  },
+  mounted(){
+    this.randomBonusInit();
+  },
+  unmounted() {
+    clearTimeout(this.$randomBonus)
+  },
 }
 </script>
 
