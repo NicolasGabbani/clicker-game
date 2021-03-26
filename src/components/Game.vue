@@ -52,8 +52,8 @@ export default {
   },
   data() {
     return {
-      display_total: numeral(this.user.total).format("0,0"),
-      display_currency: numeral(this.user.currency).format("0,0"),
+      display_total: numeral(this.user.total).format("0.0a"),
+      display_currency: numeral(this.user.currency).format("0.0a"),
       display_cps: numeral(this.user.cps).format("0,0.0"),
       display_builds: JSON.parse(this.builds),
       display_success: JSON.parse(this.success),
@@ -80,8 +80,8 @@ export default {
       }
       this.user.currency = this.user.currency + inc * number;
       this.user.total = this.user.total + inc * number;
-      this.display_currency = numeral(this.user.currency).format("0,0")
-      this.display_total = numeral(this.user.total).format("0,0")
+      this.display_currency = numeral(this.user.currency).format("0.0a")
+      this.display_total = numeral(this.user.total).format("0.0a")
     },
 
     calcCps(multiple = 1){
@@ -96,7 +96,7 @@ export default {
 
     buy(build) {
       this.user.currency = this.user.currency - build.price;
-      this.display_currency = numeral(this.user.currency).format("0,0");
+      this.display_currency = numeral(this.user.currency).format("0.0a");
 
       build.number += 1;
 
@@ -164,7 +164,7 @@ export default {
   },
   mounted() {
     this.cps()
-
+    
     this.$timer2 = setInterval(() => {
       this.save();
     }, this.onsaveTimer);

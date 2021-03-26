@@ -1,8 +1,8 @@
 <template>
   <div class="bonus-content" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
-    <button class="bonus" @click.prevent.once="addBonusCps" v-show="!bonusClicked">⭐️</button>
+    <button class="bonus" @click.prevent.once="addRandomBonus" v-show="!bonusClicked">⭐️</button>
     <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
-    
+
   </div>
 </template>
 
@@ -28,11 +28,16 @@ export default {
       bonusTop: `${Math.floor(Math.random() * 99)}%`,
       bonusLeft: `${Math.floor(Math.random() * 99)}%`,
       bonusDisplayedTimer: 5000,
+      randomFunc: [this.addBonusInc, this.addBonusCps]
     }
   },
   methods: {
     randomIntFromInterval(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    addRandomBonus(){
+      const random = Math.floor(Math.random() * this.randomFunc.length)
+      this.randomFunc[random].call()
     },
     addBonusInc(){
       const randomNumber = this.randomIntFromInterval(this.minBonus, this.maxBonus)
