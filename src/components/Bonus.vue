@@ -1,7 +1,8 @@
 <template>
   <div class="bonus-content" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
-    <button class="bonus" @click.prevent.once="addBonus" v-show="!bonusClicked">⭐️</button>
+    <button class="bonus" @click.prevent.once="addBonusCps" v-show="!bonusClicked">⭐️</button>
     <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
+    
   </div>
 </template>
 
@@ -10,6 +11,7 @@ export default {
   name: 'Bonus',
   props: {
     inc: Function,
+    cps: Function,
     top: String,
     left: String,
     interval: Number
@@ -32,13 +34,22 @@ export default {
     randomIntFromInterval(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
-    addBonus(){
+    addBonusInc(){
       const randomNumber = this.randomIntFromInterval(this.minBonus, this.maxBonus)
       this.$emit('inc', randomNumber, 1, 'bonus')
       this.bonusClicked = true
       document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${randomNumber}⭐️` : `${randomNumber}⭐️`
       setTimeout(() => {
         this.bonusClicked = false
+      }, this.bonusDisplayedTimer);
+    },
+    addBonusCps(){
+      this.$emit('cps', 2)
+      this.bonusClicked = true
+      document.querySelector('.bonus-added').innerHTML = 'CPSx2'
+      setTimeout(() => {
+        this.bonusClicked = false
+        this.$emit('cps')
       }, this.bonusDisplayedTimer);
     },
     randomBonusInit() {

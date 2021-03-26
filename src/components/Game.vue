@@ -1,6 +1,6 @@
 <template>
   <div id="game-content" :class="classConditionBg">
-    <Bonus @inc="increment" />
+    <Bonus @inc="increment" @cps="cps" />
     <div class="game">
       <div class="col centered text-center">
         <div>
@@ -84,6 +84,16 @@ export default {
       this.display_total = numeral(this.user.total).format("0,0")
     },
 
+    calcCps(multiple = 1){
+      this.user.cps = 0;
+      for (let index in this.display_builds) {
+        this.user.cps +=
+          this.display_builds[index].number * this.display_builds[index].inc;
+      }
+      this.user.cps = this.user.cps * multiple
+      this.display_cps = numeral(this.user.cps).format("0,0.0");
+    },
+
     buy(build) {
       this.user.currency = this.user.currency - build.price;
       this.display_currency = numeral(this.user.currency).format("0,0");
@@ -100,14 +110,27 @@ export default {
         )[0]);
       }
 
-      this.user.cps = 0;
-      for (let index in this.display_builds) {
-        this.user.cps +=
-          this.display_builds[index].number * this.display_builds[index].inc;
-      }
-      this.display_cps = numeral(this.user.cps).format("0,0.0");
+      this.calcCps()
 
       build.price *= 2;
+    },
+
+    cps(multiple = 1) {
+      if(this.$timer){
+        clearInterval(this.$timer)
+      }
+
+      this.calcCps(multiple)
+
+      this.$timer = setInterval(() => {
+        for (let index in this.display_builds) {
+          this.display_builds[index].buyable =
+            this.user.currency >= this.display_builds[index].price;
+        }
+
+        this.increment(this.user.cps / 10);
+        document.title = `${this.display_currency} étoiles - Super Licorne Clicker`;
+      }, 100);
     },
 
     save() {
@@ -140,15 +163,7 @@ export default {
     }
   },
   mounted() {
-    this.$timer = setInterval(() => {
-      for (let index in this.display_builds) {
-        this.display_builds[index].buyable =
-          this.user.currency >= this.display_builds[index].price;
-      }
-
-      this.increment(this.user.cps / 10);
-      document.title = `${this.display_currency} ⭐️ - Super Licorne Clicker`;
-    }, 100);
+    this.cps()
 
     this.$timer2 = setInterval(() => {
       this.save();

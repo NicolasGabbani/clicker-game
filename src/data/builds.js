@@ -1,7 +1,7 @@
 export default [
   {
     name: "ferme",
-    inc: 0.1,
+    inc: 1,
     price: 15,
     number: 0,
     buyable: false,

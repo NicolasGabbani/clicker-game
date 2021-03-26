@@ -7,7 +7,7 @@ export default {
   name: 'ClickButton',
   props: {
     inc: Function,
-    classBg: Function
+    classBg: Object
   },
   methods: {
     displayScore(){
