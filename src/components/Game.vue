@@ -1,10 +1,10 @@
 <template>
-  <div id="game-content">
+  <div id="game-content" :class="classConditionBg">
     <Bonus @inc="increment" />
     <div class="game">
       <div class="col centered text-center">
         <div>
-          <ClickButton @inc="increment" />
+          <ClickButton @inc="increment" :classBg="classConditionBg" />
           <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
         </div>
       </div>
@@ -61,7 +61,7 @@ export default {
       onsaveTimer: 60000,
       optionsOpen: false,
       haveSuccess: false,
-      currentSuccess: '',
+      currentSuccess: ''
     };
   },
   methods: {
@@ -129,6 +129,14 @@ export default {
       this.currentSuccess = succ.name
       succ.done = true
       this.haveSuccess = true
+    }
+  },
+  computed: {
+    classConditionBg() {
+      return {
+        l3tsg01: this.user.total >= 15 & this.user.total < 30,
+        cb0nc4: this.user.total >= 30
+      }
     }
   },
   mounted() {

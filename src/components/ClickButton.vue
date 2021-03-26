@@ -1,12 +1,13 @@
 <template>
-  <button class="btn-score" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();">🦄</button>
+  <button class="btn-score" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">🦄</button>
 </template>
 
 <script>
 export default {
   name: 'ClickButton',
   props: {
-    inc: Function
+    inc: Function,
+    classBg: Function
   },
   methods: {
     displayScore(){
@@ -48,4 +49,8 @@ export default {
       color: var(--clr-white)
       text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
       animation: fadeOutTop .35s ease
+    &.l3tsg01
+      background: pink
+    &.cb0nc4
+      background: purple
 </style>

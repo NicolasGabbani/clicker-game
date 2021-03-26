@@ -1,16 +1,21 @@
 body
-  background-image: url('~@/assets/images/bg/bg-nml.png')
-  background-repeat: no-repeat
-  background-postion: center
-  background-size: cover
   height: 100vh
-
+  font-family: var(--font-press)
+  
+#game-content
+  height: 100vh
   display: flex
   justify-content: center
   align-items: center
+  background-image: url('~@/assets/images/bg/bg-nml.png')
+  background-repeat: no-repeat
+  background-size: cover
+  transition: all var(--tr-du) ease
+  &.l3tsg01
+    background: pink
+  &.cb0nc4
+    background: purple
 
-  font-family: var(--font-press)
-  
 .game
   width: 80vw
   height: 700px
