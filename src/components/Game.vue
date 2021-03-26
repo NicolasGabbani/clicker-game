@@ -17,7 +17,7 @@
             <Menu @reset="reset" @save="save" />
             <Success :success="display_success" />
           </div>
-          <Builds @buy="buy" :builds="display_builds" :total="this.user.total" v-show="!optionsOpen" />
+          <Builds @buy="buy" :builds="display_builds" :total="this.user.total" :cps="this.user.cps" v-show="!optionsOpen" />
         </div>
       </div>
     </div>
@@ -164,7 +164,7 @@ export default {
   },
   mounted() {
     this.cps()
-    
+
     this.$timer2 = setInterval(() => {
       this.save();
     }, this.onsaveTimer);

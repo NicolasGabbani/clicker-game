@@ -11,32 +11,32 @@ export default [
   },
   {
     id: 'haveOne',
-    buildName: 'ferme',
-    name: 'Avoir une ferme',
+    buildName: 'Fraisier',
+    name: 'Avoir un fraisier',
     done: false
   },
   {
     id: 'haveOne',
-    buildName: 'mine',
-    name: 'Avoir une mine',
+    buildName: 'Yaourtière',
+    name: 'Avoir une yaourtière',
     done: false
   },
   {
     id: 'haveOne',
-    buildName: 'robot',
-    name: 'Avoir un robot',
+    buildName: 'Jardin potager BIO',
+    name: 'Avoir un jardin potager BIO',
     done: false
   },
   {
     id: 'haveOne',
-    buildName: 'usine',
-    name: 'Avoir une usine',
+    buildName: 'Blablapareil à gauffres',
+    name: 'Avoir une blablapareil à gauffres',
     done: false
   },
   {
     id: 'haveOne',
-    buildName: 'vaisseau',
-    name: 'Avoir un vaisseau',
+    buildName: 'BlablaRiceCooker',
+    name: 'Avoir un BlablaRiceCooker',
     done: false
   }
 ]
