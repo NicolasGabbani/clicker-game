@@ -4,6 +4,7 @@
     <div class="game">
       <div class="col centered text-center">
         <div>
+          <Name :name="this.user.name" @changeName="changeName" />
           <ClickButton @inc="increment" :classBg="classConditionBg" />
           <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
         </div>
@@ -30,6 +31,7 @@
 import ClickButton from "@/components/ClickButton.vue";
 import Menu from "@/components/Menu.vue";
 import Score from "@/components/Score.vue";
+import Name from "@/components/Name.vue";
 import Builds from "@/components/Builds.vue";
 import Success from "@/components/Success.vue";
 import Bonus from "@/components/Bonus.vue";
@@ -40,6 +42,7 @@ export default {
     ClickButton,
     Menu,
     Score,
+    Name,
     Builds,
     Success,
     Bonus,
@@ -152,6 +155,10 @@ export default {
       this.currentSuccess = succ.name
       succ.done = true
       this.haveSuccess = true
+    },
+    changeName(name){
+      this.user.name = name
+      this.save()
     }
   },
   computed: {
