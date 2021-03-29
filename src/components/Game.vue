@@ -162,7 +162,6 @@ export default {
       this.optionsOpen = !this.optionsOpen;
     },
     displaySuccess(succ) {
-      console.log(this.haveSuccess)
       if(this.haveSuccess){
         setTimeout(() => {
           this.displaySuccess(succ)
