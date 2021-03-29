@@ -4,9 +4,9 @@
     <div class="container-scroll container-success" data-simplebar data-simplebar-auto-hide="false">
       <div class="success-content">
         <div class="success nes-container is-rounded is-dark" v-for="succ in success" :key="succ.id">
-          <!-- <span class="success__name" v-if="succ.done">{{succ.name}}</span> -->
+          <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="succ.name" class="success__tooltip" v-show="succ.done"></span>
           <span class="success-unlock" v-if="succ.done">
-            !
+            <i class="nes-icon trophy is-large"></i>
           </span>
           <span class="success-lock" v-else>
             ?
@@ -36,6 +36,15 @@ export default {
     justify-content: center
     align-items: center
     height: 120px
+    position: relative
+    &__tooltip
+      display: block
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      z-index: 99
   .container-success
     height: 73vh !important
 </style>

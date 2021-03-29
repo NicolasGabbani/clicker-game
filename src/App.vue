@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import './libs/tooltip.js'
 import Header from './components/Header.vue'
 import Game from './components/Game.vue'
 import Data from './data/user'
