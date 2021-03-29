@@ -1,5 +1,4 @@
 <template>
-  <Header />
   <Game :user="user" :builds="builds" :success="success" />
 </template>
 

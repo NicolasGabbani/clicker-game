@@ -32,7 +32,7 @@ export default [
     visible: 1000
   },
   {
-    name: "BlablaRiceCooker",
+    name: "BlablaRice Cooker",
     inc: 10,
     price: 250000,
     number: 0,

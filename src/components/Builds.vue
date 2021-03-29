@@ -1,16 +1,27 @@
 <template>
-  <div class="builds">
-    <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
-      <div class="build-name">{{ build.name }}</div>
-      <span class="build-ps">+{{ build.inc }}<span>⭐️</span>/seconde</span>
-      <span class="build-price">{{ build.price }}<span>⭐️</span></span>
-      <span class="build-number">{{ build.number }}</span>
-      <span class="build-percent">{{ Math.floor((build.inc*build.number * 100) / cps) }}% du total par seconde</span>
-      <span style="display: none" :class="{buyable: build.buyable}">buyable: {{build.buyable ? 'oui' : 'non' }}</span>
+  <div class="nes-container is-rounded is-semi-white">
+    <p class="title">Bâtiments</p>
+    <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
+      <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total <= build.visible" :ref='`build${index}`'>
+        <div class="build__avatar">
+          <div class="build__avatar-img" :style="{backgroundImage: `url(${require('@/assets/images/icons/flan.png')})` }"></div>
+        </div>
+        <div class="build-content">
+          <p class="build__title nes-container is-rounded is-centered">{{ build.name }}</p>
+          <p class="build__price">{{ build.price }}<span class="price">⭐️</span></p>
+          <p class="build__ps">+{{ build.inc }}<span class="price">⭐️</span>/seconde</p>
+          <p class="build__price"></p>
+          <p class="build__number">{{ build.number }}</p>
+          <p class="build__percent">{{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde</p>
+          <p style="display: none" :class="{buyable: build.buyable}">buyable: {{build.buyable ? 'oui' : 'non' }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import 'simplebar'
+import 'simplebar/dist/simplebar.css'
 export default {
   name: 'Builds',
   props: {
@@ -20,56 +31,57 @@ export default {
     cps: Number
   },
   mounted(){
-    setInterval(() => {
+    this.$timer = setInterval(() => {
       for (let index in this.$refs) {
-        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[5].classList.contains('buyable')){
+        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[1].children[6].classList.contains('buyable')){
           this.$refs[index].classList.add('disable')
           console.log('triche')
         }
       }
     }, 100);
-  }
+  },
+  unmounted() {
+    clearInterval(this.$timer)
+  },
 }
 </script>
 
 <style lang="sass">
-  .builds, .options-content
-    width: 100%
-    height: 580px
-    overflow-y: scroll
-    padding: 12px 30px 12px 12px
   .build
-    all: unset
-    display: block
-    position: relative
-    color: var(--clr-white)
-    margin-bottom: 30px
-    padding-bottom: 30px
-    background: var(--clr-semi-black)
-    padding: 12px
-    border-radius: var(--bor-ra)
-    cursor: pointer
-    &:last-child
+    position: relative !important
+    margin-bottom: 20px !important
+    font-size: .7rem
+    display: grid
+    grid-template-columns: 90px 1fr
+    background: rgba(255,255,255,.1)
+    backdrop-filter: blur(10px)
+    &__avatar
+      margin-left: -15px
+      text-align: center
+      &-img
+        width: 90px
+        height: 90px
+        border-radius: 50%
+        border: 4px solid var(--clr-black)
+        background-repeat: no-repeat
+        background-size: cover
+        background-position: center center
+    &__title
+      font-size: .8rem
+    &__number
+      position: absolute
+      bottom: 0
+      right: 10px
+      font-size: 2rem
+      color: var(--clr-grey)
+    &__percent
       margin-bottom: 0
-
-    &-name
-      margin: 5px 0 15px 0
-      font-size: 1.4rem
-      text-transform: uppercase
-    span
-      display: block
-      font-size: .7rem
-      span
-        display: inline-block
-        font-size: 1.4rem
-        margin-left: 2px
-      &.build-number
-        position: absolute
-        top: 50%
-        transform: translateY(-50%)
-        right: 20px
-        font-size: 1.4rem
-    &.disable
-      pointer-events: none
-      color: red
+      font-size: .4rem
+  .disable
+    pointer-events: none !important
+    color: red !important
+  .price
+    display: inline-block
+    position: relative
+    top: -4px
 </style>

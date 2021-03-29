@@ -1,46 +1,28 @@
 body
   height: 100vh
   font-family: var(--font-press)
+  color: var(--clr-black)
   
 #game-content
   height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
+  background: var(--clr-white)
   background-image: url('~@/assets/images/bg/bg-nml.png')
   background-repeat: no-repeat
   background-size: cover
   transition: all var(--tr-du) ease
   &.l3tsg01
-    background-image: url('~@/assets/images/bg/bg-dark-blue.png')
+    //background-image: url('~@/assets/images/bg/bg-dark-blue.png')
   &.cb0nc4
-    background-image: url('~@/assets/images/bg/bg-supercoins.jpg')
+    //background-image: url('~@/assets/images/bg/bg-supercoins.jpg')
 
 .game
-  width: 80vw
-  height: 700px
-  margin: 0 auto
-  background: var(--clr-semi-black)
-  padding: 30px
-  border-radius: var(--bor-ra)
+  width: 100%
+  height: 100vh
+  padding: 20px
 
-  display: grid
-  grid-template-columns: repeat(2, 1fr)
-
-.btn-options, .btn-menu
+.options-btn
   margin-bottom: 20px
-  background: var(--clr-semi-black)
-  color: var(--clr-white)
-  font-family: var(--font-press)
-  padding: .5rem 1.5rem
-  border: 2px solid var(--clr-semi-black)
-  outline: 2px solid var(--clr-semi-black)
-  outline-offset: -2px
-  cursor: pointer
-  transition: outline-offset .1s ease
-  &:hover
-    outline-offset: 2px
 
-.btn-menu
-  display: inline-block
-  margin: 0 10px 0 0
+.is-semi-white
+  background-color: var(--clr-semi-white)
+  backdrop-filter: blur(10px)

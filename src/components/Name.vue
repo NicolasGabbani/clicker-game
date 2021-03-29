@@ -1,9 +1,11 @@
 <template>
-  <div class="game-name">
-    <div class="name" v-show="!displayInput" @dblclick="toggleInput"> {{name}}</div>
-    <form class="change-name" v-show="displayInput">
-      <input type="text" v-model="name" :maxlength="max">
-      <button type="submit" @click.prevent="$emit('changeName', name); toggleInput();">valider</button>
+  <div class="name">
+    <div class="nes-container is-semi-white is-rounded nes-pointer name__name" v-show="!displayInput" @dblclick="toggleInput"> {{name}}</div>
+    <form v-show="displayInput">
+      <div class="nes-field">
+        <input type="text" id="name_field" class="nes-input" v-model="name" :maxlength="max">
+        <button class="nes-btn is-success name__btn" type="submit" @click.prevent="$emit('changeName', name); toggleInput();">valider</button>
+      </div>
     </form>
   </div>
 </template>
@@ -29,15 +31,11 @@ export default {
 }
 </script>
 
-<style lang="sass">
-  .game-name
-    color: var(--clr-white)
-    font-size: 3rem
-    margin-bottom: 20px
+<style lang="sass" scoped>
   .name
-    padding: 18px
-    transition: all var(--tr-du)
-    cursor: pointer
-    &:hover
-      background: var(--clr-semi-black)
+    &__name
+      font-size: 2rem
+    &__btn
+      margin-top: 10px
+      width: 100%
 </style>

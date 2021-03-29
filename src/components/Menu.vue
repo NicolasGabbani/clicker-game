@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
-    <button class="btn-menu" @click.prevent="$emit('reset')">reset game</button>
-    <button class="btn-menu" @click.prevent="$emit('save')">save game</button>
+    <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
+    <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
   </div>
 </template>
 
@@ -18,4 +18,6 @@ export default {
 <style lang="sass">
   .menu
     margin-bottom: 20px
+    display: flex
+    justify-content: space-between
 </style>

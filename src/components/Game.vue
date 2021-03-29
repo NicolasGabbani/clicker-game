@@ -1,24 +1,28 @@
 <template>
   <div id="game-content" :class="classConditionBg">
     <Bonus @inc="increment" @cps="cps" />
-    <div class="game">
-      <div class="col centered text-center">
-        <div>
-          <Name :name="this.user.name" @changeName="changeName" />
-          <ClickButton @inc="increment" :classBg="classConditionBg" />
-          <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
-        </div>
+    <div class="game container">
+      <div class="col container-centered-col text-center">
+        <Name :name="this.user.name" @changeName="changeName" />
+        <ClickButton @inc="increment" :classBg="classConditionBg" />
+        <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
       </div>
       <div class="col">
-        <div class="btn-options-container">
-          <button class="btn-options" @click.prevent="openOptions">options</button>
-        </div>
-        <div class="centered">
-          <div class="options-content" v-show="optionsOpen">
+        <div>
+          <button class="nes-btn options-btn" @click.prevent="openOptions">options</button>
+          <div v-show="optionsOpen">
             <Menu @reset="reset" @save="save" />
             <Success :success="display_success" />
           </div>
-          <Builds @buy="buy" :builds="display_builds" :total="this.user.total" :cps="this.user.cps" v-show="!optionsOpen" />
+          <div v-show="!optionsOpen">
+            <Builds
+              @buy="buy"
+              :builds="display_builds"
+              :total="this.user.total"
+              :cps="this.user.cps"
+              
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -46,7 +50,7 @@ export default {
     Builds,
     Success,
     Bonus,
-    HaveSuccess
+    HaveSuccess,
   },
   props: {
     user: Object,
@@ -64,7 +68,7 @@ export default {
       onsaveTimer: 60000,
       optionsOpen: false,
       haveSuccess: false,
-      currentSuccess: ''
+      currentSuccess: "",
     };
   },
   methods: {
@@ -73,27 +77,31 @@ export default {
         el == "bonus" &&
         !this.display_success.filter((succ) => succ.id === "oneBonus")[0].done
       ) {
-        this.displaySuccess(this.display_success.filter((succ) => succ.id === "oneBonus")[0])
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.id === "oneBonus")[0]
+        );
       }
       if (
         el == "button" &&
         !this.display_success.filter((succ) => succ.id === "oneClicked")[0].done
       ) {
-        this.displaySuccess(this.display_success.filter((succ) => succ.id === "oneClicked")[0])
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.id === "oneClicked")[0]
+        );
       }
       this.user.currency = this.user.currency + inc * number;
       this.user.total = this.user.total + inc * number;
-      this.display_currency = numeral(this.user.currency).format("0.0a")
-      this.display_total = numeral(this.user.total).format("0.0a")
+      this.display_currency = numeral(this.user.currency).format("0.0a");
+      this.display_total = numeral(this.user.total).format("0.0a");
     },
 
-    calcCps(multiple = 1){
+    calcCps(multiple = 1) {
       this.user.cps = 0;
       for (let index in this.display_builds) {
         this.user.cps +=
           this.display_builds[index].number * this.display_builds[index].inc;
       }
-      this.user.cps = this.user.cps * multiple
+      this.user.cps = this.user.cps * multiple;
       this.display_cps = numeral(this.user.cps).format("0,0.0");
     },
 
@@ -108,22 +116,24 @@ export default {
           (succ) => succ.buildName === build.name && succ.id == "haveOne"
         ).length
       ) {
-        this.displaySuccess(this.display_success.filter(
-          (succ) => succ.buildName === build.name && succ.id == "haveOne"
-        )[0]);
+        this.displaySuccess(
+          this.display_success.filter(
+            (succ) => succ.buildName === build.name && succ.id == "haveOne"
+          )[0]
+        );
       }
 
-      this.calcCps()
+      this.calcCps();
 
       build.price *= 2;
     },
 
     cps(multiple = 1) {
-      if(this.$timer){
-        clearInterval(this.$timer)
+      if (this.$timer) {
+        clearInterval(this.$timer);
       }
 
-      this.calcCps(multiple)
+      this.calcCps(multiple);
 
       this.$timer = setInterval(() => {
         for (let index in this.display_builds) {
@@ -152,25 +162,25 @@ export default {
       this.optionsOpen = !this.optionsOpen;
     },
     displaySuccess(succ) {
-      this.currentSuccess = succ.name
-      succ.done = true
-      this.haveSuccess = true
+      this.currentSuccess = succ.name;
+      succ.done = true;
+      this.haveSuccess = true;
     },
-    changeName(name){
-      this.user.name = name
-      this.save()
-    }
+    changeName(name) {
+      this.user.name = name;
+      this.save();
+    },
   },
   computed: {
     classConditionBg() {
       return {
-        l3tsg01: this.user.total >= 15 & this.user.total < 30,
-        cb0nc4: this.user.total >= 30
-      }
-    }
+        l3tsg01: (this.user.total >= 15) & (this.user.total < 30),
+        cb0nc4: this.user.total >= 30,
+      };
+    },
   },
   mounted() {
-    this.cps()
+    this.cps();
 
     this.$timer2 = setInterval(() => {
       this.save();
