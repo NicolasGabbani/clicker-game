@@ -1,5 +1,7 @@
 <template>
-  <button class="btn-score" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">🦄</button>
+  <button class="btn-score" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">
+    <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
+  </button>
 </template>
 
 <script>
@@ -13,8 +15,8 @@ export default {
     displayScore(){
       const span = document.createElement('span')
       span.innerHTML = '+1'
-      span.style.top = `${Math.floor(Math.random() * 99)}px`
-      span.style.left = `${Math.floor(Math.random() * 99)}px`
+      span.style.top = `${Math.floor(Math.random() * 99)}%`
+      span.style.left = `${Math.floor(Math.random() * 99)}%`
       document.querySelector('.btn-score').appendChild(span)
       setTimeout(() => {
         document.querySelector('.btn-score').removeChild(span)
@@ -31,12 +33,12 @@ export default {
     outline: none
     cursor: pointer
     transition: all var(--tr-du) linear
-    line-height: 1
-    background: var(--clr-white)
+    //background: var(--clr-white)
+    background: none
+    outline: none !important
     padding: 12px
-    border-radius: var(--bor-ra)
-    margin-bottom: 30px
     position: relative
+    width: 50%
     &:active
       transform: scale(.9) !important
     &:hover
@@ -50,7 +52,9 @@ export default {
       text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
       animation: fadeOutTop .35s ease
     &.l3tsg01
-      background: pink
+      //background: pink
     &.cb0nc4
-      background: purple
+      //background: purple
+    img
+      width: 100%
 </style>

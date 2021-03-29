@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="saved" :class="{ onsave: onsave }">jeu sauvegardé</div>
+    <div class="saved nes-container is-dark is-rounded is-centered" :class="{ onsave: onsave }">jeu sauvegardé</div>
     <HaveSuccess v-if="haveSuccess" :success="currentSuccess" />
   </div>
 </template>
@@ -113,7 +113,7 @@ export default {
 
       if (
         this.display_success.filter(
-          (succ) => succ.buildName === build.name && succ.id == "haveOne"
+          (succ) => succ.buildName === build.name && succ.id == "haveOne" && succ.done == false
         ).length
       ) {
         this.displaySuccess(
@@ -162,9 +162,16 @@ export default {
       this.optionsOpen = !this.optionsOpen;
     },
     displaySuccess(succ) {
-      this.currentSuccess = succ.name;
-      succ.done = true;
-      this.haveSuccess = true;
+      console.log(this.haveSuccess)
+      if(this.haveSuccess){
+        setTimeout(() => {
+          this.displaySuccess(succ)
+        }, 3500);
+      } else {
+        this.currentSuccess = succ.name;
+        succ.done = true;
+        this.haveSuccess = true;
+      }
     },
     changeName(name) {
       this.user.name = name;
@@ -204,7 +211,7 @@ export default {
       if (val) {
         setTimeout(() => {
           this.haveSuccess = false;
-        }, 2000);
+        }, 3500);
       }
     },
   },

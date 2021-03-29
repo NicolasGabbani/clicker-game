@@ -1,6 +1,8 @@
 <template>
   <div class="have_success">
-    <div>{{success}}</div>
+    <div class="nes-container is-rounded is-centered is-dark animate__animated animate__flip">
+      <div>{{success}}</div>
+    </div>
   </div>
 </template>
 
@@ -15,18 +17,9 @@ export default {
 
 <style lang="sass">
   .have_success
+    width: 30vw
     position: fixed
-    bottom: 10px
+    bottom: 100px
     left: 50%
     transform: translateX(-50%)
-    background: var(--clr-black)
-    padding: 70px
-    border-radius: var(--bor-ra)
-    color: var(--clr-white)
-    font-size: 1.7rem
-    border: 2px solid var(--clr-white)
-    display: flex
-    justify-content: center
-    align-items: center
-    text-align: center
 </style>

@@ -5,8 +5,10 @@
       <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
     </div>
     <div class="buff" v-show="bonusCpsClicked">
-      CPSx2
-      <span></span>
+      <div class="nes-container is-dark is-rounded is-centered">
+        CPSx2
+        <span></span>
+      </div>
     </div>
   </div>
 </template>
@@ -61,10 +63,10 @@ export default {
       this.bonusCpsClicked = true
       document.querySelector('.bonus-added').innerHTML = 'CPSx2'
       let bonusTime = this.bonusDisplayedTimer / 1000
-      document.querySelector('.buff > span').innerHTML = bonusTime 
+      document.querySelector('.buff > .nes-container > span').innerHTML = bonusTime 
       const bonusTimer = setInterval(() => {
         --bonusTime
-        document.querySelector('.buff > span').innerHTML = bonusTime
+        document.querySelector('.buff > .nes-container > span').innerHTML = bonusTime
         if(bonusTime == -1) {
           clearInterval(bonusTimer)
           this.bonusCpsClicked = false
@@ -125,12 +127,8 @@ export default {
     position: fixed
     top: 1%
     left: 1%
-    background: var(--clr-semi-black)
-    color: var(--clr-white)
-    padding: 30px
-    border-radius: var(--bor-ra)
-    text-align: center
+    width: 150px
     span
       display: block
-      margin-top: 20px
+      margin-top: 10px
 </style>
