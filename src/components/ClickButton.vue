@@ -3,13 +3,14 @@
     <button class="btn-score nes-pointer" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">
       <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
     </button>
-    <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="haveSuccess">
-      {{success?.name}}
+    <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="haveSuccess || haveDialog">
+      {{success?.content || this.licorneDialog}}
     </p>
   </div>
 </template>
 
 <script>
+import Dialog from '@/data/dialog'
 export default {
   name: 'ClickButton',
   props: {
@@ -17,6 +18,14 @@ export default {
     classBg: Object,
     haveSuccess: Boolean,
     success: String
+  },
+  data(){
+    return {
+      licorneDialog: '',
+      dialog: Dialog,
+      haveDialog: false,
+      dialogInterval: 10000
+    }
   },
   methods: {
     displayScore(){
@@ -27,7 +36,26 @@ export default {
       document.querySelector('.btn-score').appendChild(span)
       setTimeout(() => {
         document.querySelector('.btn-score').removeChild(span)
-      }, 350);
+      }, 1000);
+    },
+    randomDialog(){
+      this.$timer = setInterval(() => {
+        this.haveDialog = true
+        this.licorneDialog = this.dialog[Math.floor(Math.random() * this.dialog.length)]
+      }, this.dialogInterval); 
+    }
+  },
+  mounted(){
+    this.randomDialog()
+  },
+  unmounted(){
+    clearInterval(this.$timer)
+  },
+  watch: {
+    haveDialog: function(){
+      setTimeout(() => {
+        this.haveDialog = false
+      }, 3000);
     }
   }
 }
@@ -65,7 +93,7 @@ export default {
     img
       width: 100%
   .licorne-balloon
-    max-width: 300px
+    max-width: 320px
     position: absolute
     right: 30px
     top: 10px

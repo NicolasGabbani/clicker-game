@@ -210,14 +210,15 @@ export default {
     onsave: function (val) {
       if (val) {
         setTimeout(() => {
-          this.onsave = false;
+          this.onsave = false
         }, 1000);
       }
     },
     haveSuccess: function (val) {
       if (val) {
         setTimeout(() => {
-          this.haveSuccess = false;
+          this.haveSuccess = false
+          this.currentSuccess = null
         }, 3500);
       }
     },
