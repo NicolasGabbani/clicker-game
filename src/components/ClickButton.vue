@@ -35,7 +35,7 @@ export default {
     displayScore(){
       this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.2
       const span = document.createElement('span')
-      span.innerHTML = `+${this.clickInc}⭐️`
+      span.innerHTML = `+${numeral(this.clickInc).format('0,0.0')}⭐️`
       span.style.top = `${Math.floor(Math.random() * 99)}%`
       span.style.left = `${Math.floor(Math.random() * 99)}%`
       document.querySelector('.btn-score').appendChild(span)

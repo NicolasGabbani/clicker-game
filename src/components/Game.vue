@@ -228,7 +228,10 @@ export default {
       }
     },
     haveBonusCpsClicked: function(val) {
-      setTimeout(() => {
+      if(this.bonusCpsClikedTimeOut){
+        clearTimeout(this.bonusCpsClikedTimeOut)
+      }
+      this.bonusCpsClikedTimeOut = setTimeout(() => {
         this.haveBonusCpsClicked = false
       }, this.bonusCpsClickedTimer);
     }
