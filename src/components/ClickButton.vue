@@ -104,8 +104,8 @@ export default {
     img
       width: 100%
   .licorne-balloon
-    max-width: 320px
+    width: 320px
     position: absolute
-    right: 30px
-    top: 10px
+    left: 80%
+    top: -10%
 </style>
