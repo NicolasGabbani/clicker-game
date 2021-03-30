@@ -1,7 +1,11 @@
 <template>
-  <div class="menu">
-    <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
-    <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
+  <div class="nes-container is-semi-white is-rounded popup">
+    <p class="title">Options</p>
+    <button class="closed nes-container is-white is-rounded" @click.prevent="$emit('closeOptions')"><i class="nes-icon close is-small"></i></button>
+    <div class="menu">
+      <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
+      <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
+    </div>
   </div>
 </template>
 
@@ -10,7 +14,8 @@ export default {
   name: 'Menu',
   props: {
     reset: Function,
-    save: Function
+    save: Function,
+    closeOptions: Function
   }
 }
 </script>
@@ -20,4 +25,11 @@ export default {
     margin-bottom: 20px
     display: flex
     justify-content: space-between
+    position: relative
+
+  .closed
+    padding: 0 4px !important
+    position: absolute
+    top: -20px
+    right: -10px
 </style>

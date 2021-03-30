@@ -38,5 +38,10 @@ export default [
     buildName: 'BlablaRiceCooker',
     name: 'Avoir un BlablaRiceCooker',
     done: false
+  },
+  {
+    id: 'changeName',
+    name: 'Avoir changé le nom de la licorne',
+    done: false
   }
 ]

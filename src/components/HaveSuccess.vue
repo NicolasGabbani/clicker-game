@@ -1,7 +1,7 @@
 <template>
   <div class="have_success">
     <div class="nes-container is-rounded is-centered is-dark animate__animated animate__tada">
-      <div>{{success}}</div>
+      <div>{{success?.name}}</div>
     </div>
   </div>
 </template>

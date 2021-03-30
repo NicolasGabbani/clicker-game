@@ -2,7 +2,7 @@
   <div class="nes-container is-rounded is-semi-white container-content">
     <p class="title">Bâtiments</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
-      <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total <= build.visible" :ref='`build${index}`'>
+      <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
         <div class="build__avatar">
           <div class="build__avatar-img" :style="{backgroundImage: `url(${require('@/assets/images/icons/flan.png')})` }"></div>
         </div>

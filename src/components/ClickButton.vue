@@ -1,7 +1,12 @@
 <template>
-  <button class="btn-score nes-pointer" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">
-    <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
-  </button>
+  <div class="btn-score-container">
+    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">
+      <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
+    </button>
+    <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="haveSuccess">
+      {{success?.name}}
+    </p>
+  </div>
 </template>
 
 <script>
@@ -9,12 +14,14 @@ export default {
   name: 'ClickButton',
   props: {
     inc: Function,
-    classBg: Object
+    classBg: Object,
+    haveSuccess: Boolean,
+    success: String
   },
   methods: {
     displayScore(){
       const span = document.createElement('span')
-      span.innerHTML = '+1'
+      span.innerHTML = '+1⭐️'
       span.style.top = `${Math.floor(Math.random() * 99)}%`
       span.style.left = `${Math.floor(Math.random() * 99)}%`
       document.querySelector('.btn-score').appendChild(span)
@@ -27,8 +34,9 @@ export default {
 </script>
 
 <style lang="sass">
+  .btn-score-container
+    position: relative
   .btn-score
-    font-size: 10rem
     border: none
     outline: none
     transition: all var(--tr-du) linear
@@ -56,4 +64,9 @@ export default {
       //background: purple
     img
       width: 100%
+  .licorne-balloon
+    max-width: 300px
+    position: absolute
+    right: 30px
+    top: 10px
 </style>

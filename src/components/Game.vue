@@ -4,17 +4,17 @@
     <div class="game container">
       <div class="col container-centered-col text-center">
         <Name :name="this.user.name" @changeName="changeName" />
-        <ClickButton @inc="increment" :classBg="classConditionBg" />
+        <ClickButton @inc="increment" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" />
         <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
       </div>
       <div class="col">
         <div>
           <div class="options">
-            <button class="nes-btn" @click.prevent="show('openSuccess')">succès</button>
-            <button class="nes-btn" @click.prevent="show('openOptions')">options</button>
+            <button class="nes-btn" :class="{'is-success': openSuccess}" @click.prevent="openSuccess = !openSuccess">succès</button>
+            <button class="nes-btn" :class="{'is-success': openOptions}" @click.prevent="openOptions = !openOptions">options</button>
           </div>
+          <Menu @reset="reset" @save="save" @closeOptions="closeOptions" v-show="openOptions" />
           <div v-show="openSuccess">
-            <Menu @reset="reset" @save="save" />
             <Success :success="display_success" />
           </div>
           <div v-show="!openSuccess">
@@ -23,7 +23,6 @@
               :builds="display_builds"
               :total="this.user.total"
               :cps="this.user.cps"
-              
             />
           </div>
         </div>
@@ -162,24 +161,29 @@ export default {
       this.$cookies.remove("success");
       window.location.reload();
     },
-    show(option) {
-      option = !option
-    },
     displaySuccess(succ) {
       if(this.haveSuccess){
         setTimeout(() => {
           this.displaySuccess(succ)
         }, 3500);
       } else {
-        this.currentSuccess = succ.name;
+        this.currentSuccess = succ;
         succ.done = true;
         this.haveSuccess = true;
       }
     },
     changeName(name) {
       this.user.name = name;
+      if (!this.display_success.filter((succ) => succ.id === "changeName")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.id === "changeName")[0]
+        );
+      }
       this.save();
     },
+    closeOptions(){
+      this.openOptions = false
+    }
   },
   computed: {
     classConditionBg() {
