@@ -1,9 +1,9 @@
 <template>
   <div class="name">
-    <div class="nes-container is-semi-white is-rounded nes-pointer name__name" v-show="!displayInput" @dblclick="toggleInput"> {{name}}</div>
+    <div data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" title="Double cliquer pour changer de nom !" class="nes-container is-semi-white is-rounded nes-pointer name__name" v-show="!displayInput" @dblclick="toggleInput"> {{name}}</div>
     <form v-show="displayInput">
       <div class="nes-field">
-        <input type="text" id="name_field" class="nes-input" v-model="name" :maxlength="max">
+        <input type="text"  class="nes-input" v-model="name" :maxlength="max">
         <button class="nes-btn is-success name__btn" type="submit" @click.prevent="$emit('changeName', name); toggleInput();">valider</button>
       </div>
     </form>
@@ -32,9 +32,12 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .nes-input
+    width: 100%
   .name
     &__name
       font-size: 2rem
+      user-select: none
     &__btn
       margin-top: 10px
       width: 100%

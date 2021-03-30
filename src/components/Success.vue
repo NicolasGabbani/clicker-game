@@ -1,7 +1,7 @@
 <template>
-  <div class="nes-container is-rounded is-semi-white">
+  <div class="nes-container is-rounded is-semi-white container-content">
     <p>Succès</p>
-    <div class="container-scroll container-success" data-simplebar data-simplebar-auto-hide="false">
+    <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
       <div class="success-content">
         <div class="success nes-container is-rounded is-dark" v-for="succ in success" :key="succ.id">
           <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="succ.name" class="success__tooltip" v-show="succ.done"></span>
@@ -45,6 +45,4 @@ export default {
       right: 0
       bottom: 0
       z-index: 99
-  .container-success
-    height: 73vh !important
 </style>

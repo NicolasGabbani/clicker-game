@@ -1,8 +1,8 @@
 <template>
-  <div class="nes-container is-rounded is-semi-white">
+  <div class="nes-container is-rounded is-semi-white container-content">
     <p class="title">Bâtiments</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
-      <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
+      <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total <= build.visible" :ref='`build${index}`'>
         <div class="build__avatar">
           <div class="build__avatar-img" :style="{backgroundImage: `url(${require('@/assets/images/icons/flan.png')})` }"></div>
         </div>
@@ -55,6 +55,7 @@ export default {
     grid-template-columns: 90px 1fr
     background: rgba(255,255,255,.1)
     backdrop-filter: blur(10px)
+    user-select: none
     &__avatar
       margin-left: -15px
       text-align: center
@@ -77,6 +78,8 @@ export default {
     &__percent
       margin-bottom: 0
       font-size: .4rem
+    &:last-child
+      margin-bottom: 5px !important
   .disable
     pointer-events: none !important
     color: red !important

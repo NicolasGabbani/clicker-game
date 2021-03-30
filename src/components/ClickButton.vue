@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-score" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">
+  <button class="btn-score nes-pointer" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">
     <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
   </button>
 </template>
@@ -31,7 +31,6 @@ export default {
     font-size: 10rem
     border: none
     outline: none
-    cursor: pointer
     transition: all var(--tr-du) linear
     //background: var(--clr-white)
     background: none

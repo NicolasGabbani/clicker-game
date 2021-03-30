@@ -9,12 +9,15 @@
       </div>
       <div class="col">
         <div>
-          <button class="nes-btn options-btn" @click.prevent="openOptions">options</button>
-          <div v-show="optionsOpen">
+          <div class="options">
+            <button class="nes-btn" @click.prevent="show('openSuccess')">succès</button>
+            <button class="nes-btn" @click.prevent="show('openOptions')">options</button>
+          </div>
+          <div v-show="openSuccess">
             <Menu @reset="reset" @save="save" />
             <Success :success="display_success" />
           </div>
-          <div v-show="!optionsOpen">
+          <div v-show="!openSuccess">
             <Builds
               @buy="buy"
               :builds="display_builds"
@@ -66,7 +69,8 @@ export default {
       display_success: JSON.parse(this.success),
       onsave: false,
       onsaveTimer: 60000,
-      optionsOpen: false,
+      openSuccess: false,
+      openOptions: false,
       haveSuccess: false,
       currentSuccess: "",
     };
@@ -158,8 +162,8 @@ export default {
       this.$cookies.remove("success");
       window.location.reload();
     },
-    openOptions() {
-      this.optionsOpen = !this.optionsOpen;
+    show(option) {
+      option = !option
     },
     displaySuccess(succ) {
       if(this.haveSuccess){

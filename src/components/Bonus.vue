@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="bonus-content" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
-      <button class="bonus" @click.prevent.once="addRandomBonus" v-show="!bonusClicked">⭐️</button>
+    <div class="bonus-content nes-pointer" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
+      <button class="bonus nes-pointer" @click.prevent.once="addRandomBonus" v-show="!bonusClicked">⭐️</button>
       <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
     </div>
     <div class="buff" v-show="bonusCpsClicked">
@@ -111,7 +111,6 @@ export default {
     border-radius: 50%
     background: var(--clr-black)
     box-shadow: 0 0 10px 0 var(--clr-black)
-    cursor: pointer
     display: flex
     justify-content: center
     align-items: center
