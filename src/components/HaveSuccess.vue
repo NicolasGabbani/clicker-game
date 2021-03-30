@@ -10,7 +10,7 @@
 export default {
   name: 'HaveSuccess',
   props: {
-    success: String
+    success: Object
   }
 }
 </script>

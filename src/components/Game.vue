@@ -4,7 +4,7 @@
     <div class="game container">
       <div class="col container-centered-col text-center">
         <Name :name="this.user.name" @changeName="changeName" />
-        <ClickButton @inc="increment" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" />
+        <ClickButton @inc="increment" :cps="this.user.cps" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" />
         <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
       </div>
       <div class="col">
@@ -71,7 +71,7 @@ export default {
       openSuccess: false,
       openOptions: false,
       haveSuccess: false,
-      currentSuccess: "",
+      currentSuccess: {},
     };
   },
   methods: {
@@ -218,7 +218,7 @@ export default {
       if (val) {
         setTimeout(() => {
           this.haveSuccess = false
-          this.currentSuccess = null
+          this.currentSuccess = {}
         }, 3500);
       }
     },

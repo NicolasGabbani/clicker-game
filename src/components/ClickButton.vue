@@ -1,6 +1,6 @@
 <template>
   <div class="btn-score-container">
-    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', 1, 1, 'button'); displayScore();" :class="classBg">
+    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore();" :class="classBg">
       <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
     </button>
     <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="haveSuccess || haveDialog">
@@ -15,12 +15,14 @@ export default {
   name: 'ClickButton',
   props: {
     inc: Function,
+    cps: Number,
     classBg: Object,
     haveSuccess: Boolean,
-    success: String
+    success: Object
   },
   data(){
     return {
+      clickInc: this.cps == 0 ? 1 : (1 + this.cps) * 1.2,
       licorneDialog: '',
       dialog: Dialog,
       haveDialog: false,
@@ -29,8 +31,9 @@ export default {
   },
   methods: {
     displayScore(){
+      this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.2
       const span = document.createElement('span')
-      span.innerHTML = '+1⭐️'
+      span.innerHTML = `+${this.clickInc}⭐️`
       span.style.top = `${Math.floor(Math.random() * 99)}%`
       span.style.left = `${Math.floor(Math.random() * 99)}%`
       document.querySelector('.btn-score').appendChild(span)

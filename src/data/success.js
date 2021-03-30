@@ -49,6 +49,7 @@ export default [
   {
     id: 'changeName',
     name: 'Avoir changé le nom de la licorne',
+    content: "Il déchire ce petit nom !",
     done: false
   }
 ]
