@@ -1,5 +1,6 @@
 <template>
   <div class="btn-score-container">
+    <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon" v-if="haveBonusCpsClicked">
     <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore();" :class="classBg">
       <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
     </button>
@@ -18,7 +19,8 @@ export default {
     cps: Number,
     classBg: Object,
     haveSuccess: Boolean,
-    success: Object
+    success: Object,
+    haveBonusCpsClicked: Boolean
   },
   data(){
     return {
@@ -67,6 +69,12 @@ export default {
 <style lang="sass">
   .btn-score-container
     position: relative
+  .rayon
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%) rotate(0deg)
+    animation: rayonRotate 6s linear infinite
   .btn-score
     border: none
     outline: none

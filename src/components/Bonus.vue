@@ -59,6 +59,7 @@ export default {
     addBonusCps(){
       this.$emit('cps', 2)
       this.$emit('inc', 0, 1, 'bonus')
+      this.$emit('bonusCpsClicked', this.bonusDisplayedTimer)
       this.bonusClicked = true
       this.bonusCpsClicked = true
       document.querySelector('.bonus-added').innerHTML = 'CPSx2'

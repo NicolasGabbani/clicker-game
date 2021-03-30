@@ -1,10 +1,10 @@
 <template>
   <div id="game-content" :class="classConditionBg">
-    <Bonus @inc="increment" @cps="cps" />
+    <Bonus @inc="increment" @cps="cps" @bonusCpsClicked="bonusCpsClicked" />
     <div class="game container">
       <div class="col container-centered-col text-center">
         <Name :name="this.user.name" @changeName="changeName" />
-        <ClickButton @inc="increment" :cps="this.user.cps" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" />
+        <ClickButton @inc="increment" :cps="this.user.cps" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" :haveBonusCpsClicked="haveBonusCpsClicked" />
         <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
       </div>
       <div class="col">
@@ -72,6 +72,7 @@ export default {
       openOptions: false,
       haveSuccess: false,
       currentSuccess: {},
+      haveBonusCpsClicked: false
     };
   },
   methods: {
@@ -183,6 +184,10 @@ export default {
     },
     closeOptions(){
       this.openOptions = false
+    },
+    bonusCpsClicked(timer){
+      this.bonusCpsClickedTimer = timer
+      this.haveBonusCpsClicked = true
     }
   },
   computed: {
@@ -222,6 +227,11 @@ export default {
         }, 3500);
       }
     },
+    haveBonusCpsClicked: function(val) {
+      setTimeout(() => {
+        this.haveBonusCpsClicked = false
+      }, this.bonusCpsClickedTimer);
+    }
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="nes-container is-rounded is-semi-white">
+  <div class="nes-container is-rounded is-white">
     <div class="currency">{{ currency }}<span>⭐️</span></div>
     <div class="cps">{{ cps }}<span>⭐️</span>/seconde</div>
     <div class="total">total: {{ total }} kg</div>
