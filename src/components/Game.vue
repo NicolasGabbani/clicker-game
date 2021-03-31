@@ -150,7 +150,7 @@ export default {
         }
 
         this.increment(this.user.cps / 10);
-        document.title = `${this.display_currency} étoiles - Super Licorne Clicker`;
+        document.title = `${this.display_currency} étoiles - Super jeu de clique dans l'univers de SuperBlablaland`;
       }, 100);
     },
 
