@@ -1,6 +1,6 @@
 <template>
   <div id="game-content" :class="classConditionBg">
-    <Bonus @inc="increment" @cps="cps" @bonusCpsClicked="bonusCpsClicked" />
+    <Bonus @inc="increment" @cps="cps" :cpsNum="this.user.cps" @bonusCpsClicked="bonusCpsClicked" />
     <div class="game container">
       <div class="col container-centered-col text-center">
         <Name :name="this.user.name" @changeName="changeName" />

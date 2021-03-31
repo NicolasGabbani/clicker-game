@@ -19,6 +19,7 @@ export default {
   props: {
     inc: Function,
     cps: Function,
+    cpsNum: Number,
     top: String,
     left: String,
     interval: Number
@@ -48,7 +49,7 @@ export default {
       this.randomFunc[random].call()
     },
     addBonusInc(){
-      const randomNumber = this.randomIntFromInterval(this.minBonus, this.maxBonus)
+      const randomNumber = this.randomIntFromInterval((this.minBonus * this.cpsNum) + this.minBonus, (this.maxBonus * this.cpsNum) + this.maxBonus)
       this.$emit('inc', randomNumber, 1, 'bonus')
       this.bonusClicked = true
       document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${randomNumber}⭐️` : `${randomNumber}⭐️`
