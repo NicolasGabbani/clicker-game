@@ -1,6 +1,6 @@
 <template>
   <div class="name">
-    <div data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" title="Double cliquer pour changer de nom !" class="nes-container is-white is-rounded nes-pointer name__name" v-show="!displayInput" @dblclick="toggleInput"> {{name}}</div>
+    <div data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" title="Double cliquer pour changer de nom !" class="nes-badge nes-pointer name__name" v-show="!displayInput" @dblclick="toggleInput"><span class="is-dark">{{name}}</span></div>
     <form v-show="displayInput">
       <div class="nes-field">
         <input type="text"  class="nes-input" v-model="name" :maxlength="max">
@@ -32,6 +32,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .nes-badge span:first-child
+    left: 0
   .nes-input
     width: 100%
   .name

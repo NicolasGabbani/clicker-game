@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="bottom-deco">
-      <div class="grand-sage"></div>
+      <p class="grand-sage-balloon nes-balloon from-left animate__animated" :class="{ animate__fadeOut: displayTuto == false, animate__fadeIn: displayTuto }">
+        Le but du jeu est de nourrir ta licorne pour qu'elle devienne aussi immense que possible ! <br><br>
+        Aide-toi des bâtiments pour nourrir ta licorne automatiquement et clique sur ta licorne !
+      </p>
+      <div class="grand-sage nes-pointer" @mouseover="displayTuto = true" @mouseleave="displayTuto = false"></div>
       <img :src="require('@/assets/images/deco/sol.png')" alt="sol" class="sol">
     </div>
   </div>
@@ -9,7 +13,12 @@
 
 <script>
 export default {
-  name: 'Deco'
+  name: 'Deco',
+  data(){
+    return {
+      displayTuto: null
+    }
+  }
 }
 </script>
 
@@ -32,4 +41,11 @@ export default {
     bottom: 5px
     background: url('~@/assets/images/deco/grand-sage-sprite.png') left center
     animation: grand-sage-animation 1s steps(20) infinite
+
+  .grand-sage-balloon
+    position: fixed
+    left: 230px
+    bottom: 160px
+    width: 500px
+    opacity: 0
 </style>
