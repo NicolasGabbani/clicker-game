@@ -30,10 +30,12 @@
     </div>
     <div class="saved nes-container is-dark is-rounded is-centered" :class="{ onsave: onsave }">jeu sauvegardé</div>
     <HaveSuccess v-if="haveSuccess" :success="currentSuccess" />
+    <Deco />
   </div>
 </template>
 
 <script>
+import '@/libs/tooltip.js'
 import ClickButton from "@/components/ClickButton.vue";
 import Menu from "@/components/Menu.vue";
 import Score from "@/components/Score.vue";
@@ -42,6 +44,7 @@ import Builds from "@/components/Builds.vue";
 import Success from "@/components/Success.vue";
 import Bonus from "@/components/Bonus.vue";
 import HaveSuccess from "@/components/HaveSuccess.vue";
+import Deco from "@/components/Deco.vue";
 export default {
   name: "Game",
   components: {
@@ -53,6 +56,7 @@ export default {
     Success,
     Bonus,
     HaveSuccess,
+    Deco
   },
   props: {
     user: Object,

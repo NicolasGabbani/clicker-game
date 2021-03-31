@@ -1,10 +1,11 @@
 <template>
-  <Game :user="user" :builds="builds" :success="success" />
+  <Loading v-show="isLoading" />
+  <Game :user="user" :builds="builds" :success="success" v-show='!isLoading' />
 </template>
 
 <script>
-import './libs/tooltip.js'
 import Header from './components/Header.vue'
+import Loading from './components/Loading.vue'
 import Game from './components/Game.vue'
 import Data from './data/user'
 import Builds from '@/data/builds'
@@ -13,16 +14,60 @@ export default {
   name: 'App',
   components: {
     Game,
-    Header
+    Header,
+    Loading
   },
   data: () => {
     return {
       user: {},
       builds: null,
-      success: null
+      success: null,
+      imagesToPreload: [
+        require('@/assets/images/bg/bg-nml.png'),
+        require('@/assets/images/licorne/licorne_01.png'),
+        require('@/assets/images/licorne/licorne_01r.png'),
+        require('@/assets/images/licorne/licorne_02.png'),
+        require('@/assets/images/licorne/licorne_02r.png'),
+        require('@/assets/images/licorne/licorne_03.png'),
+        require('@/assets/images/licorne/licorne_03r.png'),
+        require('@/assets/images/licorne/licorne_04.png'),
+        require('@/assets/images/licorne/licorne_04r.png'),
+        require('@/assets/images/licorne/licorne_05.png'),
+        require('@/assets/images/licorne/licorne_05r.png'),
+        require('@/assets/images/licorne/licorne_06.png'),
+        require('@/assets/images/licorne/licorne_06r.png'),
+        require('@/assets/images/licorne/licorne_07.png'),
+        require('@/assets/images/licorne/licorne_07r.png'),
+        require('@/assets/images/licorne/licorne_08.png'),
+        require('@/assets/images/licorne/licorne_08r.png'),
+        require('@/assets/images/bg/bg-dark-blue.png'),
+        require('@/assets/images/bg/bg-supercoins.jpg'),
+        require('@/assets/images/deco/grand-sage-sprite.png')
+      ],
+      isLoading: true
+    }
+  },
+  methods: {
+    loadImgs(){
+      let imageLoaded = 0;
+      for (const imageSrc of this.imagesToPreload) {
+        const img = new Image();
+        img.src = imageSrc;
+
+        img.onload = () => {
+          imageLoaded++;
+
+          if (imageLoaded === this.imagesToPreload.length) {
+            setTimeout(() => {
+              this.isLoading = false;
+            }, 1000);
+          }
+        };
+      }
     }
   },
   created(){
+    this.loadImgs()
     if(!this.$cookies.isKey('user')) {
       this.$cookies.set('user', Data, -1)
     }
