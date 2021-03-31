@@ -39,7 +39,6 @@ export default {
   .name
     &__name
       font-size: 2rem
-      user-select: none
     &__btn
       margin-top: 10px
       width: 100%

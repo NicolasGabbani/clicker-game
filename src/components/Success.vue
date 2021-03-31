@@ -35,8 +35,8 @@ export default {
     display: flex
     justify-content: center
     align-items: center
-    height: 120px
     position: relative
+    aspect-ratio: 1
     &__tooltip
       display: block
       position: absolute

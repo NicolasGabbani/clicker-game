@@ -55,7 +55,6 @@ export default {
     grid-template-columns: 90px 1fr
     background: rgba(255,255,255,.1)
     backdrop-filter: blur(10px)
-    user-select: none
     &__avatar
       margin-left: -15px
       text-align: center
