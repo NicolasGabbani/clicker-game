@@ -1,9 +1,7 @@
 <template>
   <div class="btn-score-container">
     <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon" v-if="haveBonusCpsClicked">
-    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore();" :class="classBg">
-      <img :src="require('@/assets/images/icons/licorne.png')" alt="licorne">
-    </button>
+    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore();" :class="classBg"></button>
     <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="haveSuccess || haveDialog">
       {{success?.content || this.licorneDialog}}
     </p>
@@ -41,7 +39,7 @@ export default {
       document.querySelector('.btn-score').appendChild(span)
       setTimeout(() => {
         document.querySelector('.btn-score').removeChild(span)
-      }, 1000);
+      }, 750);
     },
     randomDialog(){
       this.$timer = setInterval(() => {
@@ -69,6 +67,7 @@ export default {
 <style lang="sass">
   .btn-score-container
     position: relative
+    width: 360px
   .rayon
     position: absolute
     top: 50%
@@ -79,16 +78,21 @@ export default {
     border: none
     outline: none
     transition: all var(--tr-du) linear
-    //background: var(--clr-white)
-    background: none
+    background-image: url('~@/assets/images/licorne/licorne_01.png')
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: center center
+    background-color: transparent
     outline: none !important
     padding: 12px
     position: relative
-    width: 50%
+    width: 100%
+    height: 298px
     &:active
       transform: scale(.9) !important
     &:hover
       transform: scale(1.05)
+      background-image: url('~@/assets/images/licorne/licorne_01r.png')
     span
       display: block
       position: absolute
@@ -98,14 +102,36 @@ export default {
       text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
       animation: fadeOutTop .35s ease
     &.l3tsg01
-      //background: pink
+      background-image: url('~@/assets/images/licorne/licorne_02.png')
+      &:hover
+        background-image: url('~@/assets/images/licorne/licorne_02r.png')
     &.cb0nc4
-      //background: purple
-    img
-      width: 100%
+      background-image: url('~@/assets/images/licorne/licorne_03.png')
+      &:hover
+        background-image: url('~@/assets/images/licorne/licorne_03r.png')
+    &.jml3sp0p
+      background-image: url('~@/assets/images/licorne/licorne_04.png')
+      &:hover
+        background-image: url('~@/assets/images/licorne/licorne_04r.png')
+    &.j4im3l3sch4ts
+      background-image: url('~@/assets/images/licorne/licorne_05.png')
+      &:hover
+        background-image: url('~@/assets/images/licorne/licorne_05r.png')
+    &.cm4rr4nt
+      background-image: url('~@/assets/images/licorne/licorne_06.png')
+      &:hover
+        background-image: url('~@/assets/images/licorne/licorne_06r.png')
+    &.jss1l1c0rn3
+      background-image: url('~@/assets/images/licorne/licorne_07.png')
+      &:hover
+        background-image: url('~@/assets/images/licorne/licorne_07r.png')
+    &.g4m4d0n3gg
+      background-image: url('~@/assets/images/licorne/licorne_08.png')
+      &:hover
+        background-image: url('~@/assets/images/licorne/licorne_08r.png')
   .licorne-balloon
     width: 320px
     position: absolute
-    left: 80%
+    left: 100%
     top: -10%
 </style>

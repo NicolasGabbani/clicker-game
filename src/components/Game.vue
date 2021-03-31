@@ -193,8 +193,13 @@ export default {
   computed: {
     classConditionBg() {
       return {
-        l3tsg01: (this.user.total >= 15) & (this.user.total < 30),
-        cb0nc4: this.user.total >= 30,
+        l3tsg01: (this.user.total >= 15) && (this.user.total < 30),
+        cb0nc4: this.user.total >= 30 && (this.user.total < 60),
+        jml3sp0p: (this.user.total >= 60) && (this.user.total < 120),
+        j4im3l3sch4ts: (this.user.total >= 120) && (this.user.total < 200),
+        cm4rr4nt: (this.user.total >= 200) && (this.user.total < 500),
+        jss1l1c0rn3: (this.user.total >= 500) && (this.user.total < 1000),
+        g4m4d0n3gg: (this.user.total >= 1000)
       };
     },
   },
