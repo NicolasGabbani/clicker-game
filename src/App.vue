@@ -24,6 +24,9 @@ export default {
       success: null,
       imagesToPreload: [
         require('@/assets/images/bg/bg-nml.png'),
+        require('@/assets/images/bg/bg-dark-blue.png'),
+        require('@/assets/images/bg/bg-supercoins.jpg'),
+
         require('@/assets/images/licorne/licorne_01.png'),
         require('@/assets/images/licorne/licorne_01r.png'),
         require('@/assets/images/licorne/licorne_02.png'),
@@ -40,9 +43,10 @@ export default {
         require('@/assets/images/licorne/licorne_07r.png'),
         require('@/assets/images/licorne/licorne_08.png'),
         require('@/assets/images/licorne/licorne_08r.png'),
-        require('@/assets/images/bg/bg-dark-blue.png'),
-        require('@/assets/images/bg/bg-supercoins.jpg'),
+
         require('@/assets/images/deco/grand-sage-sprite.png'),
+        require('@/assets/images/deco/nuage.png'),
+        
         require('@/assets/images/builds/unites-production-1.png'),
         require('@/assets/images/builds/unites-production-2.png'),
         require('@/assets/images/builds/unites-production-3.png'),

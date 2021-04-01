@@ -114,6 +114,7 @@ export default {
     },
 
     buy(build) {
+      if(this.user.currency < build.price) return
       this.user.currency = this.user.currency - build.price;
       this.display_currency = numeral(this.user.currency).format("0.0a");
 

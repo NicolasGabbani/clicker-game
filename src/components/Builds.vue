@@ -110,7 +110,7 @@ export default {
       display: inline-block
       vertical-align: baseline
     &__ps
-      font-size: .8rem
+      font-size: .7rem
       margin-left: 15px
     &__number
       position: absolute
@@ -120,12 +120,12 @@ export default {
       color: var(--clr-grey)
     &__percent
       margin-bottom: 0
-      font-size: .4rem
+      font-size: .6rem
     &:last-child
       margin-bottom: 5px !important
   .disable
     pointer-events: none !important
-    color: red !important
+    color: var(--clr-red) !important
   .price
     display: inline-block
     position: relative
