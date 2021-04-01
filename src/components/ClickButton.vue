@@ -72,6 +72,7 @@ export default {
     position: absolute
     top: 50%
     left: 50%
+    z-index: 2
     transform: translate(-50%, -50%) rotate(0deg)
     animation: rayonRotate 6s linear infinite
   .btn-score
@@ -86,6 +87,7 @@ export default {
     outline: none !important
     padding: 12px
     position: relative
+    z-index: 3
     width: 100%
     height: 298px
     &:active

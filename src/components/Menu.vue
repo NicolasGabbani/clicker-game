@@ -21,6 +21,13 @@ export default {
 </script>
 
 <style lang="sass">
+  .popup
+    width: 30vw
+    position: fixed
+    top: 50%
+    left: 50%
+    z-index: 999
+    transform: translate(-50%, -50%)
   .menu
     margin-bottom: 20px
     display: flex

@@ -37,6 +37,8 @@ export default {
   .nes-input
     width: 100%
   .name
+    position: relative
+    z-index: 4
     &__name
       font-size: 2rem
     &__btn
