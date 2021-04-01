@@ -37,6 +37,7 @@ export default {
     align-items: center
     position: relative
     aspect-ratio: 1
+    min-height: 110px
     &__tooltip
       display: block
       position: absolute
