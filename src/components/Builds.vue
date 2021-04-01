@@ -2,16 +2,16 @@
   <div class="nes-container is-rounded is-semi-white container-content">
     <p class="title">Bâtiments</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
-      <div @click.prevent="$emit('buy', build)" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
+      <div @click.prevent="$emit('buy', build); buildAdded(index);" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
         <div class="build__avatar">
           <div class="build__avatar-img nes-container is-rounded" :style="{backgroundImage: `url(${require('@/assets/images/icons/flan.png')})` }"></div>
         </div>
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
           <p class="build__price">{{ build.price }}<span class="price">⭐️</span></p>
-          <p class="build__ps">+{{ build.inc }}<span class="price">⭐️</span>/seconde</p>
-          <p class="build__number">{{ build.number }}</p>
-          <p class="build__percent">{{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde</p>
+          <p class="build__ps">(+{{ build.inc }}<span class="price">⭐️</span>/seconde)</p>
+          <p class="build__number animate__animated" :class="{animate__tada: index == addBuild}">{{ build.number }}</p>
+          <p class="build__percent">({{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde)</p>
           <p style="display: none" :class="{buyable: build.buyable}"></p>
         </div>
       </div>
@@ -35,6 +35,16 @@ export default {
     total: Number,
     cps: Number
   },
+  data(){
+    return{
+      addBuild: null
+    }
+  },
+  methods: {
+    buildAdded(index){
+      this.addBuild = index
+    }
+  },
   mounted(){
     this.$timer = setInterval(() => {
       for (let index in this.$refs) {
@@ -48,6 +58,16 @@ export default {
   unmounted() {
     clearInterval(this.$timer)
   },
+  watch: {
+    addBuild: function(val){
+      if(this.$timer){
+        clearTimeout(this.$timer)
+      }
+      this.$timer = setTimeout(() => {
+        this.addBuild = null
+      }, 500);
+    }
+  }
 }
 </script>
 
@@ -57,9 +77,7 @@ export default {
     margin-bottom: 20px !important
     padding: .5rem 1.5rem !important
     font-size: .7rem
-    min-height: 137px
-    //display: grid
-    //grid-template-columns: 120px 1fr
+    min-height: 105px
     background: rgba(255,255,255,.1)
     backdrop-filter: blur(10px)
     transition: all var(--tr-du)
@@ -87,10 +105,17 @@ export default {
         bottom: 0
     &__title
       font-size: 1rem
+      width: 90%
+    &__price, &__ps
+      display: inline-block
+      vertical-align: baseline
+    &__ps
+      font-size: .6rem
+      margin-left: 15px
     &__number
       position: absolute
-      bottom: 0
-      right: 10px
+      bottom: -20px
+      right: 5px
       font-size: 2rem
       color: var(--clr-grey)
     &__percent
