@@ -161,6 +161,8 @@ export default {
       this.onsave = true;
     },
     reset() {
+      let c = confirm("T'es sûr de vouloir effacer ta partie ?")
+      if (!c) return this.closeOptions()
       this.$cookies.remove("user");
       this.$cookies.remove("builds");
       this.$cookies.remove("success");
