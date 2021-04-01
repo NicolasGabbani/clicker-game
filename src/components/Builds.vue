@@ -4,7 +4,7 @@
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
       <div @click.prevent="$emit('buy', build); buildAdded(index);" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
         <div class="build__avatar">
-          <div class="build__avatar-img nes-container is-rounded" :style="{backgroundImage: `url(${require('@/assets/images/icons/flan.png')})` }"></div>
+          <div class="build__avatar-img nes-container is-rounded" :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${index+1}.png`)})` }"></div>
         </div>
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
@@ -110,7 +110,7 @@ export default {
       display: inline-block
       vertical-align: baseline
     &__ps
-      font-size: .6rem
+      font-size: .8rem
       margin-left: 15px
     &__number
       position: absolute

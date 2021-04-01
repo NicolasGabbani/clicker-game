@@ -8,7 +8,7 @@ export default [
     visible: 0
   },
   {
-    name: "Yaourtière",
+    name: "Jardin potager BIO",
     inc: 0.5,
     price: 1000,
     number: 0,
@@ -16,7 +16,7 @@ export default [
     visible: 300
   },
   {
-    name: "Jardin potager BIO",
+    name: "Blablapareil à gauffres",
     inc: 2,
     price: 3500,
     number: 0,
@@ -24,36 +24,12 @@ export default [
     visible: 600
   },
   {
-    name: "Blablapareil à gauffres",
+    name: "N-50 de cuisine",
     inc: 4.5,
     price: 10000,
     number: 0,
     buyable: false,
     visible: 1000
-  },
-  {
-    name: "BlablaRice Cooker",
-    inc: 10,
-    price: 250000,
-    number: 0,
-    buyable: false,
-    visible: 2000
-  },
-  {
-    name: "N-100 de cuisine",
-    inc: 10,
-    price: 250000,
-    number: 0,
-    buyable: false,
-    visible: 2000
-  },
-  {
-    name: "Machine à raclette au charbon",
-    inc: 10,
-    price: 250000,
-    number: 0,
-    buyable: false,
-    visible: 2000
   },
   {
     name: "BlaBarbecue",
@@ -112,15 +88,7 @@ export default [
     visible: 2000
   },
   {
-    name: "Pizzeria à l'ananas",
-    inc: 10,
-    price: 250000,
-    number: 0,
-    buyable: false,
-    visible: 2000
-  },
-  {
-    name: "Fast food & furious",
+    name: "Restaurant Coco Luxe",
     inc: 10,
     price: 250000,
     number: 0,
@@ -129,14 +97,6 @@ export default [
   },
   {
     name: "Usine de gâteaux au sucre doux",
-    inc: 10,
-    price: 250000,
-    number: 0,
-    buyable: false,
-    visible: 2000
-  },
-  {
-    name: "Blahiti Bar",
     inc: 10,
     price: 250000,
     number: 0,
@@ -193,6 +153,46 @@ export default [
   },
   {
     name: "Galaxie en chocolat",
+    inc: 10,
+    price: 250000,
+    number: 0,
+    buyable: false,
+    visible: 2000
+  },
+  {
+    name: "Arc-en-ciel gourmand",
+    inc: 10,
+    price: 250000,
+    number: 0,
+    buyable: false,
+    visible: 2000
+  },
+  {
+    name: "Vortex fruité",
+    inc: 10,
+    price: 250000,
+    number: 0,
+    buyable: false,
+    visible: 2000
+  },
+  {
+    name: "Univers de surcreries",
+    inc: 10,
+    price: 250000,
+    number: 0,
+    buyable: false,
+    visible: 2000
+  },
+  {
+    name: "Machine à rêves",
+    inc: 10,
+    price: 250000,
+    number: 0,
+    buyable: false,
+    visible: 2000
+  },
+  {
+    name: "Fraisier omniprésent",
     inc: 10,
     price: 250000,
     number: 0,
