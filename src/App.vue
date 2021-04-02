@@ -1,6 +1,6 @@
 <template>
   <Loading v-show="isLoading" />
-  <Game :user="user" :builds="builds" :success="success" :buildsSuccess="buildsSuccess" :loaded="!isLoading" v-show='!isLoading' />
+  <Game :user="user" :builds="builds" :store="store" :success="success" :buildsSuccess="buildsSuccess" :loaded="!isLoading" v-show='!isLoading' />
 </template>
 
 <script>
@@ -9,6 +9,7 @@ import Loading from './components/Loading.vue'
 import Game from './components/Game.vue'
 import Data from './data/user'
 import Builds from '@/data/builds'
+import Store from '@/data/store'
 import Success from '@/data/success'
 import BuildsSuccess from '@/data/builds_success'
 export default {
@@ -22,6 +23,7 @@ export default {
     return {
       user: {},
       builds: null,
+      store: null,
       success: null,
       buildsSuccess: null,
       imagesToPreload: [
@@ -137,6 +139,11 @@ export default {
       this.$cookies.set('buildssuccess', JSON.stringify(BuildsSuccess), -1)
     }
     this.buildsSuccess = this.$cookies.get('buildssuccess')
+
+    if(!this.$cookies.isKey('store')) {
+      this.$cookies.set('store', JSON.stringify(Store), -1)
+    }
+    this.store = this.$cookies.get('store')
   }
 }
 </script>

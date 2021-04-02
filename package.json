@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
-    "serve": "vue-cli-service serve",
+    "serve": "NODE_OPTIONS='--max-http-header-size=100000' vue-cli-service serve",
     "build": "vue-cli-service build"
   },
   "dependencies": {

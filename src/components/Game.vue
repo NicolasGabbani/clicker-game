@@ -51,8 +51,10 @@
             <Builds
               @buy="buy"
               :builds="display_builds"
+              :store="display_store"
               :total="this.user.total"
               :cps="this.user.cps"
+              :currency="this.user.currency"
             />
           </div>
         </div>
@@ -98,6 +100,7 @@ export default {
   props: {
     user: Object,
     builds: String,
+    store: String,
     success: String,
     buildsSuccess: String,
     loaded: Boolean,
@@ -108,6 +111,7 @@ export default {
       display_currency: this.renderNumeral(this.user.currency),
       display_cps: this.renderNumeral(this.user.cps),
       display_builds: JSON.parse(this.builds),
+      display_store: JSON.parse(this.store),
       display_success: JSON.parse(this.success),
       display_builds_success: JSON.parse(this.buildsSuccess),
       onsave: false,
@@ -173,7 +177,7 @@ export default {
 
       this.calcCps();
 
-      build.price *= 2;
+      //build.price *= 2; // EASY MODE
     },
 
     cps(multiple = 1) {
@@ -197,6 +201,7 @@ export default {
     save() {
       this.$cookies.set("user", this.user, -1);
       this.$cookies.set("builds", JSON.stringify(this.display_builds), -1);
+      this.$cookies.set("store", JSON.stringify(this.display_store), -1);
       this.$cookies.set("success", JSON.stringify(this.display_success), -1);
       this.$cookies.set("buildssuccess", JSON.stringify(this.display_builds_success), -1);
       this.onsave = true;
@@ -206,6 +211,7 @@ export default {
       if (!c) return this.closeOptions();
       this.$cookies.remove("user");
       this.$cookies.remove("builds");
+      this.$cookies.remove("store");
       this.$cookies.remove("success");
       this.$cookies.remove("buildssuccess");
       window.location.reload();
