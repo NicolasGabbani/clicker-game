@@ -3,7 +3,7 @@
     <Bonus @inc="increment" @cps="cps" :cpsNum="this.user.cps" @bonusCpsClicked="bonusCpsClicked" />
     <div class="game container">
       <div class="col container-centered-col text-center po-r">
-        <Fontain :loaded="loaded" :cps="this.user.cps" :total="this.user.currency" />
+        <Fontain :loaded="loaded" :cps="this.user.cps" />
         <Name :name="this.user.name" @changeName="changeName" />
         <ClickButton @inc="increment" :cps="this.user.cps" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" :haveBonusCpsClicked="haveBonusCpsClicked" />
         <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
