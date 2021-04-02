@@ -1,5 +1,5 @@
 <template>
-  <div class="fontain" :key="key">
+  <div class="fontain">
     <Particles
       id="tsparticles"
       v-if="loaded && cps != 0"

@@ -49,6 +49,7 @@ export default {
 
         require('@/assets/images/icons/rayon.png'),
         require('@/assets/images/icons/fraise.png'),
+        require('@/assets/images/icons/coupe.png'),
         
         require('@/assets/images/builds/unites-production-1.png'),
         require('@/assets/images/builds/unites-production-2.png'),

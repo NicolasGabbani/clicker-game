@@ -6,7 +6,7 @@
         <div class="success nes-container is-rounded is-dark" v-for="succ in success" :key="succ.id">
           <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="succ.name" class="success__tooltip" v-show="succ.done"></span>
           <span class="success-unlock" v-if="succ.done">
-            <i class="nes-icon trophy is-large"></i>
+            <img :src="require(`@/assets/images/icons/coupe.png`)" alt="coupe">
           </span>
           <span class="success-lock" v-else>
             ?
@@ -38,6 +38,9 @@ export default {
     position: relative
     aspect-ratio: 1
     min-height: 110px
+    &-unlock
+      img
+        width: 100%
     &__tooltip
       display: block
       position: absolute

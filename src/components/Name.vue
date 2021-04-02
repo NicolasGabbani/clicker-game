@@ -32,6 +32,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .name
+    height: 114px
   .nes-badge span:first-child
     left: 0
   .nes-input
