@@ -1,8 +1,8 @@
 <template>
   <div class="btn-score-container">
     <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon" v-if="haveBonusCpsClicked">
-    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore();" :class="classBg"></button>
-    <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="haveSuccess || haveDialog">
+    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore();" :class="classBg"></button>;
+    <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="(haveSuccess && success?.content) || haveDialog">
       {{success?.content || this.licorneDialog}}
     </p>
   </div>
@@ -33,7 +33,7 @@ export default {
     displayScore(){
       this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.2
       const span = document.createElement('span')
-      span.innerHTML = `+${numeral(this.clickInc).format('0,0.0')}⭐️`
+      span.innerHTML = `+${numeral(this.clickInc).format('0,0.0')}<span class='fraise'></span>`
       span.style.top = `${Math.floor(Math.random() * 99)}%`
       span.style.left = `${Math.floor(Math.random() * 99)}%`
       document.querySelector('.btn-score').appendChild(span)
@@ -95,14 +95,18 @@ export default {
     &:hover
       transform: scale(1.05)
       background-image: url('~@/assets/images/licorne/licorne_01r.png')
-    span
+    span:not(.fraise)
       display: block
+      width: 150px
       position: absolute
       font-size: 1.5rem
       font-family: var(--font-press)
       color: var(--clr-white)
       text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
       animation: fadeOutTop .35s ease
+    span.fraise
+      width: 25px !important
+      height: 25px !important
     &.l3tsg01
       background-image: url('~@/assets/images/licorne/licorne_02.png')
       &:hover

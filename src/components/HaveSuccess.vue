@@ -1,7 +1,7 @@
 <template>
   <div class="have_success">
     <div class="nes-container is-rounded is-centered is-dark animate__animated animate__tada">
-      <div>{{success?.name}}</div>
+      <div>{{success?.name || `${success.buildName} débloqué !!` }}</div>
     </div>
   </div>
 </template>

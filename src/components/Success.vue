@@ -12,6 +12,15 @@
             ?
           </span>
         </div>
+        <div class="success nes-container is-rounded is-dark" v-for="succ in buildsSuccess" :key="succ.buildName">
+          <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="`${succ.buildName} débloqué`" class="success__tooltip" v-show="succ.done"></span>
+          <span class="success-unlock" v-if="succ.done">
+            <img :src="require(`@/assets/images/icons/coupe.png`)" alt="coupe">
+          </span>
+          <span class="success-lock" v-else>
+            ?
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -21,7 +30,8 @@
 export default {
   name: 'Success',
   props: {
-    success: Array
+    success: Array,
+    buildsSuccess: Array
   }
 }
 </script>

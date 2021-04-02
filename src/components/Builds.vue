@@ -1,6 +1,6 @@
 <template>
   <div class="nes-container is-rounded is-semi-white container-content">
-    <p class="title">Bâtiments</p>
+    <p class="title">Fabriques à miam-miam</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
       <div @click.prevent="$emit('buy', build); buildAdded(index);" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
         <div class="build__avatar">
@@ -8,8 +8,8 @@
         </div>
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
-          <p class="build__price">{{ build.price }}<span class="price">⭐️</span></p>
-          <p class="build__ps">(+{{ build.inc }}<span class="price">⭐️</span>/seconde)</p>
+          <p class="build__price">{{ build.price }}<span class="price fraise"></span></p>
+          <p class="build__ps">(+{{ build.inc }}<span class="price fraise"></span>/seconde)</p>
           <p class="build__number animate__animated" :class="{animate__tada: index == addBuild}">{{ build.number }}</p>
           <p class="build__percent">({{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde)</p>
           <p style="display: none" :class="{buyable: build.buyable}"></p>
@@ -127,7 +127,6 @@ export default {
     pointer-events: none !important
     color: var(--clr-red) !important
   .price
-    display: inline-block
-    position: relative
-    top: -4px
+    width: 20px !important
+    height: 20px !important
 </style>

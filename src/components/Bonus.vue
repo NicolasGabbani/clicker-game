@@ -6,7 +6,7 @@
     </div>
     <div class="buff" v-show="bonusCpsClicked">
       <div class="nes-container is-dark is-rounded is-centered">
-        CPSx2
+        <div><span class="buff-title fraise"></span>x2</div>
         <span></span>
       </div>
     </div>
@@ -52,7 +52,7 @@ export default {
       const randomNumber = this.randomIntFromInterval((this.minBonus * this.cpsNum) + this.minBonus, (this.maxBonus * this.cpsNum) + this.maxBonus)
       this.$emit('inc', randomNumber, 1, 'bonus')
       this.bonusClicked = true
-      document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${randomNumber}⭐️` : `${randomNumber}⭐️`
+      document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${randomNumber}<span class="fraise"></span>` : `${randomNumber}<span class="fraise"></span>`
       setTimeout(() => {
         this.bonusClicked = false
       }, this.bonusDisplayedTimer);
@@ -63,7 +63,7 @@ export default {
       this.$emit('bonusCpsClicked', this.bonusDisplayedTimer)
       this.bonusClicked = true
       this.bonusCpsClicked = true
-      document.querySelector('.bonus-added').innerHTML = 'CPSx2'
+      document.querySelector('.bonus-added').innerHTML = 'BONUS !'
       let bonusTime = this.bonusDisplayedTimer / 1000
       document.querySelector('.buff > .nes-container > span').innerHTML = bonusTime 
       const bonusTimer = setInterval(() => {
@@ -118,10 +118,14 @@ export default {
     background-position: center center
     background-size: cover
     filter: drop-shadow(5px 5px 5px #222)
+    outline: none !important
   .bonus-added
     display: none
     color: var(--clr-white)
     text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
+    .fraise
+      width: 25px !important
+      height: 25px !important
     &.fadeout
       display: block
       animation: fadeOutTop 1.5s ease forwards
@@ -130,7 +134,10 @@ export default {
     top: 1%
     left: 1%
     width: 150px
-    span
+    span:not(.fraise)
       display: block
       margin-top: 10px
+    &-title
+      width: 20px !important
+      height: 20px !important
 </style>

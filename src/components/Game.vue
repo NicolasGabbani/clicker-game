@@ -1,22 +1,51 @@
 <template>
   <div id="game-content" :class="classConditionBg">
-    <Bonus @inc="increment" @cps="cps" :cpsNum="this.user.cps" @bonusCpsClicked="bonusCpsClicked" />
+    <Bonus
+      @inc="increment"
+      @cps="cps"
+      :cpsNum="this.user.cps"
+      @bonusCpsClicked="bonusCpsClicked"
+    />
     <div class="game container">
       <div class="col container-centered-col text-center po-r">
         <Fontain :loaded="loaded" :cps="this.user.cps" />
         <Name :name="this.user.name" @changeName="changeName" />
-        <ClickButton @inc="increment" :cps="this.user.cps" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" :haveBonusCpsClicked="haveBonusCpsClicked" />
+        <ClickButton
+          @inc="increment"
+          :cps="this.user.cps"
+          :classBg="classConditionBg"
+          :haveSuccess="haveSuccess"
+          :success="currentSuccess"
+          :haveBonusCpsClicked="haveBonusCpsClicked"
+        />
         <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
       </div>
       <div class="col">
         <div>
           <div class="options">
-            <button class="nes-btn" :class="{'is-success': openSuccess}" @click.prevent="openSuccess = !openSuccess">succès</button>
-            <button class="nes-btn" :class="{'is-success': openOptions}" @click.prevent="openOptions = !openOptions">options</button>
+            <button
+              class="nes-btn"
+              :class="{ 'is-success': openSuccess }"
+              @click.prevent="openSuccess = !openSuccess"
+            >
+              succès
+            </button>
+            <button
+              class="nes-btn"
+              :class="{ 'is-success': openOptions }"
+              @click.prevent="openOptions = !openOptions"
+            >
+              options
+            </button>
           </div>
-          <Menu @reset="reset" @save="save" @closeOptions="closeOptions" v-show="openOptions" />
+          <Menu
+            @reset="reset"
+            @save="save"
+            @closeOptions="closeOptions"
+            v-show="openOptions"
+          />
           <div v-show="openSuccess">
-            <Success :success="display_success" />
+            <Success :success="display_success" :buildsSuccess="display_builds_success" />
           </div>
           <div v-show="!openSuccess">
             <Builds
@@ -29,14 +58,19 @@
         </div>
       </div>
     </div>
-    <div class="saved nes-container is-dark is-rounded is-centered" :class="{ onsave: onsave }">jeu sauvegardé</div>
+    <div
+      class="saved nes-container is-dark is-rounded is-centered"
+      :class="{ onsave: onsave }"
+    >
+      jeu sauvegardé
+    </div>
     <HaveSuccess v-if="haveSuccess" :success="currentSuccess" />
     <Deco />
   </div>
 </template>
 
 <script>
-import '@/libs/tooltip.js'
+import "@/libs/tooltip.js";
 import ClickButton from "@/components/ClickButton.vue";
 import Menu from "@/components/Menu.vue";
 import Score from "@/components/Score.vue";
@@ -59,13 +93,14 @@ export default {
     Success,
     Bonus,
     HaveSuccess,
-    Deco
+    Deco,
   },
   props: {
     user: Object,
     builds: String,
     success: String,
-    loaded: Boolean
+    buildsSuccess: String,
+    loaded: Boolean,
   },
   data() {
     return {
@@ -74,13 +109,14 @@ export default {
       display_cps: numeral(this.user.cps).format("0,0.0"),
       display_builds: JSON.parse(this.builds),
       display_success: JSON.parse(this.success),
+      display_builds_success: JSON.parse(this.buildsSuccess),
       onsave: false,
       onsaveTimer: 60000,
       openSuccess: false,
       openOptions: false,
       haveSuccess: false,
       currentSuccess: {},
-      haveBonusCpsClicked: false
+      haveBonusCpsClicked: false,
     };
   },
   methods: {
@@ -118,7 +154,7 @@ export default {
     },
 
     buy(build) {
-      if(this.user.currency < build.price) return
+      if (this.user.currency < build.price) return;
 
       this.user.currency = this.user.currency - build.price;
       this.display_currency = numeral(this.user.currency).format("0.0a");
@@ -126,14 +162,12 @@ export default {
       build.number += 1;
 
       if (
-        this.display_success.filter(
-          (succ) => succ.buildName === build.name && succ.id == "haveOne" && succ.done == false
+        this.display_builds_success.filter(
+          (succ) => succ.buildName === build.name && succ.done == false
         ).length
       ) {
         this.displaySuccess(
-          this.display_success.filter(
-            (succ) => succ.buildName === build.name && succ.id == "haveOne"
-          )[0]
+          this.display_builds_success.filter((succ) => succ.buildName === build.name)[0]
         );
       }
 
@@ -164,20 +198,22 @@ export default {
       this.$cookies.set("user", this.user, -1);
       this.$cookies.set("builds", JSON.stringify(this.display_builds), -1);
       this.$cookies.set("success", JSON.stringify(this.display_success), -1);
+      this.$cookies.set("buildssuccess", JSON.stringify(this.display_builds_success), -1);
       this.onsave = true;
     },
     reset() {
-      let c = confirm("T'es sûr de vouloir effacer ta partie ?")
-      if (!c) return this.closeOptions()
+      let c = confirm("T'es sûr de vouloir effacer ta partie ?");
+      if (!c) return this.closeOptions();
       this.$cookies.remove("user");
       this.$cookies.remove("builds");
       this.$cookies.remove("success");
+      this.$cookies.remove("buildssuccess");
       window.location.reload();
     },
     displaySuccess(succ) {
-      if(this.haveSuccess){
+      if (this.haveSuccess) {
         setTimeout(() => {
-          this.displaySuccess(succ)
+          this.displaySuccess(succ);
         }, 3500);
       } else {
         this.currentSuccess = succ;
@@ -194,24 +230,24 @@ export default {
       }
       this.save();
     },
-    closeOptions(){
-      this.openOptions = false
+    closeOptions() {
+      this.openOptions = false;
     },
-    bonusCpsClicked(timer){
-      this.bonusCpsClickedTimer = timer
-      this.haveBonusCpsClicked = true
-    }
+    bonusCpsClicked(timer) {
+      this.bonusCpsClickedTimer = timer;
+      this.haveBonusCpsClicked = true;
+    },
   },
   computed: {
     classConditionBg() {
       return {
-        l3tsg01: (this.user.total >= 15) && (this.user.total < 30),
-        cb0nc4: this.user.total >= 30 && (this.user.total < 60),
-        jml3sp0p: (this.user.total >= 60) && (this.user.total < 120),
-        j4im3l3sch4ts: (this.user.total >= 120) && (this.user.total < 200),
-        cm4rr4nt: (this.user.total >= 200) && (this.user.total < 500),
-        jss1l1c0rn3: (this.user.total >= 500) && (this.user.total < 1000),
-        g4m4d0n3gg: (this.user.total >= 1000)
+        l3tsg01: this.user.total >= 15 && this.user.total < 30,
+        cb0nc4: this.user.total >= 30 && this.user.total < 60,
+        jml3sp0p: this.user.total >= 60 && this.user.total < 120,
+        j4im3l3sch4ts: this.user.total >= 120 && this.user.total < 200,
+        cm4rr4nt: this.user.total >= 200 && this.user.total < 500,
+        jss1l1c0rn3: this.user.total >= 500 && this.user.total < 1000,
+        g4m4d0n3gg: this.user.total >= 1000,
       };
     },
   },
@@ -232,26 +268,26 @@ export default {
     onsave: function (val) {
       if (val) {
         setTimeout(() => {
-          this.onsave = false
+          this.onsave = false;
         }, 1000);
       }
     },
     haveSuccess: function (val) {
       if (val) {
         setTimeout(() => {
-          this.haveSuccess = false
-          this.currentSuccess = {}
+          this.haveSuccess = false;
+          this.currentSuccess = {};
         }, 3500);
       }
     },
-    haveBonusCpsClicked: function(val) {
-      if(this.bonusCpsClikedTimeOut){
-        clearTimeout(this.bonusCpsClikedTimeOut)
+    haveBonusCpsClicked: function (val) {
+      if (this.bonusCpsClikedTimeOut) {
+        clearTimeout(this.bonusCpsClikedTimeOut);
       }
       this.bonusCpsClikedTimeOut = setTimeout(() => {
-        this.haveBonusCpsClicked = false
+        this.haveBonusCpsClicked = false;
       }, this.bonusCpsClickedTimer);
-    }
+    },
   },
 };
 </script>
