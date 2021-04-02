@@ -245,13 +245,22 @@ export default {
   computed: {
     classConditionBg() {
       return {
-        l3tsg01: this.user.total >= 15 && this.user.total < 30,
-        cb0nc4: this.user.total >= 30 && this.user.total < 60,
-        jml3sp0p: this.user.total >= 60 && this.user.total < 120,
-        j4im3l3sch4ts: this.user.total >= 120 && this.user.total < 200,
-        cm4rr4nt: this.user.total >= 200 && this.user.total < 500,
-        jss1l1c0rn3: this.user.total >= 500 && this.user.total < 1000,
-        g4m4d0n3gg: this.user.total >= 1000,
+        l3tsg01: this.user.total >= 15,
+        cb0nc4: this.user.total >= 30,
+        jml3sp0p: this.user.total >= 60,
+        j4im3l3sch4ts: this.user.total >= 80,
+        cm4rr4nt: this.user.total >= 100,
+        jss1l1c0rn3: this.user.total >= 115,
+        g4m4d0n3gg: this.user.total >= 130,
+        g0g4l4x1e: this.user.total >= 180,
+        n3xtl3v3l: this.user.total >= 200,
+        un1v3rs20uf: this.user.total >= 215,
+        jss0ul4l0l: this.user.total >= 230,
+        j3v0l: this.user.total >= 280,
+        y0y0l30uf: this.user.total >= 300,
+        sky1sth3l1m1t: this.user.total >= 315,
+        n0m0rel1m1it: this.user.total >= 330,
+        sup3rbbl: this.user.total >= 380
       };
     },
   },
