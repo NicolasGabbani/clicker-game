@@ -3,7 +3,7 @@
     <div class="bottom-deco">
       <p class="grand-sage-balloon nes-balloon from-left animate__animated" :class="{ animate__fadeOut: displayTuto == false, animate__fadeIn: displayTuto }">
         Le but du jeu est de nourrir ta licorne pour qu'elle devienne aussi immense que possible ! <br><br>
-        Aide-toi des bâtiments pour la nourrir et clique sur son joli bidou !
+        Aide-toi des fabriques à miam-miam pour la nourrir et clique sur son joli bidou !
       </p>
       <div class="grand-sage-content">
         <div class="grand-sage nes-pointer" @mouseover="displayTuto = true" @mouseleave="displayTuto = false"></div>

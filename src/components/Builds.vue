@@ -81,6 +81,7 @@ export default {
     background: rgba(255,255,255,.1)
     backdrop-filter: blur(10px)
     transition: all var(--tr-du)
+    color: var(--clr-pink)
     &.with-hover:hover
       background: var(--clr-white)
     &__avatar
@@ -106,6 +107,7 @@ export default {
     &__title
       font-size: 1rem
       width: 90%
+      font-weight: bold
     &__price, &__ps
       display: inline-block
       vertical-align: baseline
@@ -125,7 +127,9 @@ export default {
       margin-bottom: 5px !important
   .disable
     pointer-events: none !important
-    color: var(--clr-red) !important
+    color: var(--clr-grey) !important
+    .build__avatar-img, .fraise
+      filter: grayscale(100%)
   .price
     width: 20px !important
     height: 20px !important

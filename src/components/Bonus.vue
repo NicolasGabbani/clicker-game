@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bonus-content nes-pointer" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
+    <div class="bonus-content nes-pointer animate__animated animate__swing animate__infinite" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
       <button class="bonus nes-pointer" @click.prevent.once="addRandomBonus" v-show="!bonusClicked"></button>
       <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
     </div>
@@ -45,6 +45,7 @@ export default {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
     addRandomBonus(){
+      document.querySelector('.bonus-content').classList.remove('animate__animated')
       const random = Math.floor(Math.random() * this.randomFunc.length)
       this.randomFunc[random].call()
     },

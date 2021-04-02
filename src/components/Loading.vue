@@ -27,7 +27,7 @@ export default{
     padding-top: 50px
 
   .loading
-    background: #FF1087
+    background: var(--clr-pink)
     height: 100vh
 
   .wrapper
