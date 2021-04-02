@@ -1,6 +1,6 @@
 <template>
   <Loading v-show="isLoading" />
-  <Game :user="user" :builds="builds" :success="success" v-show='!isLoading' />
+  <Game :user="user" :builds="builds" :success="success" :loaded="!isLoading" v-show='!isLoading' />
 </template>
 
 <script>

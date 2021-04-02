@@ -2,7 +2,8 @@
   <div id="game-content" :class="classConditionBg">
     <Bonus @inc="increment" @cps="cps" :cpsNum="this.user.cps" @bonusCpsClicked="bonusCpsClicked" />
     <div class="game container">
-      <div class="col container-centered-col text-center">
+      <div class="col container-centered-col text-center po-r">
+        <Fontain :loaded="loaded" :cps="this.user.cps" :total="this.user.currency" />
         <Name :name="this.user.name" @changeName="changeName" />
         <ClickButton @inc="increment" :cps="this.user.cps" :classBg="classConditionBg" :haveSuccess="haveSuccess" :success="currentSuccess" :haveBonusCpsClicked="haveBonusCpsClicked" />
         <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
@@ -40,6 +41,7 @@ import ClickButton from "@/components/ClickButton.vue";
 import Menu from "@/components/Menu.vue";
 import Score from "@/components/Score.vue";
 import Name from "@/components/Name.vue";
+import Fontain from "@/components/Fontain.vue";
 import Builds from "@/components/Builds.vue";
 import Success from "@/components/Success.vue";
 import Bonus from "@/components/Bonus.vue";
@@ -52,6 +54,7 @@ export default {
     Menu,
     Score,
     Name,
+    Fontain,
     Builds,
     Success,
     Bonus,
@@ -62,6 +65,7 @@ export default {
     user: Object,
     builds: String,
     success: String,
+    loaded: Boolean
   },
   data() {
     return {
@@ -115,6 +119,7 @@ export default {
 
     buy(build) {
       if(this.user.currency < build.price) return
+
       this.user.currency = this.user.currency - build.price;
       this.display_currency = numeral(this.user.currency).format("0.0a");
 
