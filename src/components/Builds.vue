@@ -8,8 +8,8 @@
         </div>
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
-          <p class="build__price">{{ build.price }}<span class="price fraise"></span></p>
-          <p class="build__ps">(+{{ build.inc }}<span class="price fraise"></span>/seconde)</p>
+          <p class="build__price">{{ this.renderNumeral(build.price) }}<span class="price fraise"></span></p>
+          <p class="build__ps">(+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde)</p>
           <p class="build__number animate__animated" :class="{animate__tada: index == addBuild}">{{ build.number }}</p>
           <p class="build__percent">({{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde)</p>
           <p style="display: none" :class="{buyable: build.buyable}"></p>
@@ -43,6 +43,10 @@ export default {
   methods: {
     buildAdded(index){
       this.addBuild = index
+    },
+    renderNumeral(val){
+      if(val >= 1000000) return numeral(val).format('0.000a')
+      return numeral(val).format('0,0')
     }
   },
   mounted(){

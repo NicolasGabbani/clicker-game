@@ -104,9 +104,9 @@ export default {
   },
   data() {
     return {
-      display_total: numeral(this.user.total).format("0.0a"),
-      display_currency: numeral(this.user.currency).format("0.0a"),
-      display_cps: numeral(this.user.cps).format("0,0.0"),
+      display_total: this.renderNumeral(this.user.total),
+      display_currency: this.renderNumeral(this.user.currency),
+      display_cps: this.renderNumeral(this.user.cps),
       display_builds: JSON.parse(this.builds),
       display_success: JSON.parse(this.success),
       display_builds_success: JSON.parse(this.buildsSuccess),
@@ -139,8 +139,8 @@ export default {
       }
       this.user.currency = this.user.currency + inc * number;
       this.user.total = this.user.total + inc * number;
-      this.display_currency = numeral(this.user.currency).format("0.0a");
-      this.display_total = numeral(this.user.total).format("0.0a");
+      this.display_currency = this.renderNumeral(this.user.currency);
+      this.display_total = this.renderNumeral(this.user.total);
     },
 
     calcCps(multiple = 1) {
@@ -150,14 +150,14 @@ export default {
           this.display_builds[index].number * this.display_builds[index].inc;
       }
       this.user.cps = this.user.cps * multiple;
-      this.display_cps = numeral(this.user.cps).format("0,0.0");
+      this.display_cps = this.renderNumeral(this.user.cps);
     },
 
     buy(build) {
       if (this.user.currency < build.price) return;
 
       this.user.currency = this.user.currency - build.price;
-      this.display_currency = numeral(this.user.currency).format("0.0a");
+      this.display_currency = this.renderNumeral(this.user.currency);
 
       build.number += 1;
 
@@ -237,6 +237,10 @@ export default {
       this.bonusCpsClickedTimer = timer;
       this.haveBonusCpsClicked = true;
     },
+    renderNumeral(val){
+      if(val >= 1000000) return numeral(val).format('0.000a')
+      return numeral(val).format('0,0.0')
+    }
   },
   computed: {
     classConditionBg() {

@@ -53,7 +53,7 @@ export default {
       const randomNumber = this.randomIntFromInterval((this.minBonus * this.cpsNum) + this.minBonus, (this.maxBonus * this.cpsNum) + this.maxBonus)
       this.$emit('inc', randomNumber, 1, 'bonus')
       this.bonusClicked = true
-      document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${randomNumber}<span class="fraise"></span>` : `${randomNumber}<span class="fraise"></span>`
+      document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${this.renderNumeral(randomNumber)}<span class="fraise"></span>` : `${this.renderNumeral(randomNumber)}<span class="fraise"></span>`
       setTimeout(() => {
         this.bonusClicked = false
       }, this.bonusDisplayedTimer);
@@ -92,6 +92,10 @@ export default {
           this.randomBonusInit();
         }, this.bonusDisplayedTimer);
       }, this.intervalBonus);
+    },
+    renderNumeral(val){
+      if(val >= 1000000) return numeral(val).format('0a')
+      return numeral(val).format('0,0')
     }
   },
   mounted(){
