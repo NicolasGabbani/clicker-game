@@ -33,7 +33,7 @@ export default {
     displayScore(){
       this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.2
       const span = document.createElement('span')
-      span.innerHTML = `+${numeral(this.clickInc).format('0,0.0')}<span class='fraise'></span>`
+      span.innerHTML = `+${this.renderNumeral(this.clickInc)}<span class='fraise'></span>`
       span.style.top = `${Math.floor(Math.random() * 99)}%`
       span.style.left = `${Math.floor(Math.random() * 99)}%`
       document.querySelector('.btn-score').appendChild(span)
@@ -46,6 +46,10 @@ export default {
         this.haveDialog = true
         this.licorneDialog = this.dialog[Math.floor(Math.random() * this.dialog.length)]
       }, this.dialogInterval); 
+    },
+    renderNumeral(val){
+      if(val >= 1000000) return numeral(val).format('0.0a')
+      return numeral(val).format('0,0')
     }
   },
   mounted(){
@@ -98,7 +102,8 @@ export default {
       background-image: url('~@/assets/images/licorne/licorne_01r.png')
     span:not(.fraise)
       display: block
-      width: 150px
+      text-align: center
+      width: 250px
       position: absolute
       font-size: 1.5rem
       font-family: var(--font-press)
