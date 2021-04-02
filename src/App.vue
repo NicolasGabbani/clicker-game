@@ -46,6 +46,9 @@ export default {
 
         require('@/assets/images/deco/grand-sage-sprite.png'),
         require('@/assets/images/deco/nuage.png'),
+
+        require('@/assets/images/icons/rayon.png'),
+        require('@/assets/images/icons/fraise.png'),
         
         require('@/assets/images/builds/unites-production-1.png'),
         require('@/assets/images/builds/unites-production-2.png'),

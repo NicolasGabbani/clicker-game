@@ -1,5 +1,6 @@
 <template>
   <div class="loading">
+    <img :src="require('@/assets/images/logos/superbbl-logo.png')" alt="superblablaland logo" class="logo">
     <div class="wrapper">
       <div class="circle"></div>
       <div class="circle"></div>
@@ -19,6 +20,12 @@ export default{
 </script>
 
 <style lang="sass">
+  .logo
+    width: 300px
+    margin: 0 auto
+    display: block
+    padding-top: 50px
+
   .loading
     background: #FF1087
     height: 100vh

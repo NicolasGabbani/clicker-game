@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bonus-content nes-pointer" :style="{top: bonusTop, left: bonusLeft}" v-if="haveBonus">
-      <button class="bonus nes-pointer" @click.prevent.once="addRandomBonus" v-show="!bonusClicked">⭐️</button>
+      <button class="bonus nes-pointer" @click.prevent.once="addRandomBonus" v-show="!bonusClicked"></button>
       <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
     </div>
     <div class="buff" v-show="bonusCpsClicked">
@@ -108,15 +108,16 @@ export default {
     z-index: 999
   .bonus
     all: unset
-    width: 64px
-    height: 64px
-    border-radius: 50%
-    background: var(--clr-black)
-    box-shadow: 0 0 10px 0 var(--clr-black)
+    width: 90px
+    height: 90px
     display: flex
     justify-content: center
     align-items: center
-    font-size: 2.5rem
+    background-image: url('~@/assets/images/icons/fraise.png')
+    background-repeat: no-repeat
+    background-position: center center
+    background-size: cover
+    filter: drop-shadow(5px 5px 5px #222)
   .bonus-added
     display: none
     color: var(--clr-white)

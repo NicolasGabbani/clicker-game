@@ -34,7 +34,7 @@ export default {
     z-index: 800
 
   .grand-sage-content
-    transform: scale(.4)
+    transform: scale(.6)
     position: fixed
     bottom: 0
     left: 0
@@ -56,8 +56,8 @@ export default {
 
   .grand-sage-balloon
     position: fixed
-    left: 100px
-    bottom: 80px
+    left: 130px
+    bottom: 140px
     z-index: 3
     width: 500px
     opacity: 0
