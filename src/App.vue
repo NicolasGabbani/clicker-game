@@ -25,9 +25,10 @@ export default {
       success: null,
       buildsSuccess: null,
       imagesToPreload: [
-        require('@/assets/images/bg/bg-nml.png'),
-        require('@/assets/images/bg/bg-dark-blue.png'),
-        require('@/assets/images/bg/bg-supercoins.jpg'),
+        require('@/assets/images/bg/decors-1.jpg'),
+        require('@/assets/images/bg/decors-2.jpg'),
+        require('@/assets/images/bg/decors-3.jpg'),
+        require('@/assets/images/bg/decors-4.jpg'),
 
         require('@/assets/images/licorne/licorne_01.png'),
         require('@/assets/images/licorne/licorne_01r.png'),
