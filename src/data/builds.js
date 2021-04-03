@@ -5,6 +5,8 @@ export default [
     price: 15,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 0
   },
   {
@@ -13,6 +15,8 @@ export default [
     price: 1000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 300
   },
   {
@@ -21,6 +25,8 @@ export default [
     price: 3500,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 600
   },
   {
@@ -29,6 +35,8 @@ export default [
     price: 10000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 1000
   },
   {
@@ -37,6 +45,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -45,6 +55,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -53,6 +65,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -61,6 +75,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -69,6 +85,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -77,6 +95,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -85,6 +105,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -93,6 +115,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -101,6 +125,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -109,6 +135,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -117,6 +145,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -125,6 +155,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -133,6 +165,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -141,6 +175,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -149,6 +185,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -157,6 +195,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -165,6 +205,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -173,6 +215,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -181,6 +225,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -189,6 +235,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   },
   {
@@ -197,6 +245,8 @@ export default [
     price: 250000,
     number: 0,
     buyable: false,
+    stars: 0,
+    total: 0,
     visible: 2000
   }
 ]

@@ -18,7 +18,7 @@
           :success="currentSuccess"
           :haveBonusCpsClicked="haveBonusCpsClicked"
         />
-        <Score :currency="display_currency" :cps="display_cps" :total="display_total" />
+        <Score :currency="display_currency" :cps="display_cps" :total="display_total" :totalNum="this.user.total" />
       </div>
       <div class="col">
         <div>
@@ -51,7 +51,6 @@
             <Builds
               @buy="buy"
               :builds="display_builds"
-              :store="display_store"
               :total="this.user.total"
               :cps="this.user.cps"
               :currency="this.user.currency"
@@ -100,7 +99,6 @@ export default {
   props: {
     user: Object,
     builds: String,
-    store: String,
     success: String,
     buildsSuccess: String,
     loaded: Boolean,
@@ -111,7 +109,6 @@ export default {
       display_currency: this.renderNumeral(this.user.currency),
       display_cps: this.renderNumeral(this.user.cps),
       display_builds: JSON.parse(this.builds),
-      display_store: JSON.parse(this.store),
       display_success: JSON.parse(this.success),
       display_builds_success: JSON.parse(this.buildsSuccess),
       onsave: false,
@@ -150,8 +147,7 @@ export default {
     calcCps(multiple = 1) {
       this.user.cps = 0;
       for (let index in this.display_builds) {
-        this.user.cps +=
-          this.display_builds[index].number * this.display_builds[index].inc;
+        this.user.cps += this.display_builds[index].number * this.display_builds[index].inc
       }
       this.user.cps = this.user.cps * multiple;
       this.display_cps = this.renderNumeral(this.user.cps);
@@ -189,8 +185,8 @@ export default {
 
       this.$timer = setInterval(() => {
         for (let index in this.display_builds) {
-          this.display_builds[index].buyable =
-            this.user.currency >= this.display_builds[index].price;
+          this.display_builds[index].buyable = this.user.currency >= this.display_builds[index].price
+          this.display_builds[index].total += (this.display_builds[index].number * this.display_builds[index].inc) / 10
         }
 
         this.increment(this.user.cps / 10);
@@ -201,20 +197,18 @@ export default {
     save() {
       this.$cookies.set("user", this.user, -1);
       localStorage.builds = JSON.stringify(this.display_builds)
-      localStorage.store = JSON.stringify(this.display_store)
       localStorage.success = JSON.stringify(this.display_success)
       localStorage.buildssuccess = JSON.stringify(this.display_builds_success)
       this.onsave = true;
     },
     reset() {
-      let c = confirm("T'es sûr de vouloir effacer ta partie ?");
-      if (!c) return this.closeOptions();
-      this.$cookies.remove("user");
-      localStorage.removeItem("builds");
-      localStorage.removeItem("store");
-      localStorage.removeItem("success");
-      localStorage.removeItem("buildssuccess");
-      window.location.reload();
+      let c = confirm("T'es sûr de vouloir effacer ta partie ?")
+      if (!c) return this.closeOptions()
+      this.$cookies.remove("user")
+      localStorage.removeItem("builds")
+      localStorage.removeItem("success")
+      localStorage.removeItem("buildssuccess")
+      window.location.reload()
     },
     displaySuccess(succ) {
       if (this.haveSuccess) {

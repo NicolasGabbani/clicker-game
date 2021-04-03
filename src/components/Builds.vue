@@ -2,9 +2,9 @@
   <div class="nes-container is-rounded is-semi-white container-content">
     <p class="title">Fabriques à miam-miam</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
-      <div @click.prevent="$emit('buy', build); buildAdded(index);" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
+      <div @click.prevent.stop="$emit('buy', build); buildAdded(index);" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
         <div class="build__stars">
-          <div class="build__stars-star" v-for="star in store.filter(s => s.name == build.name)[0]?.stars">
+          <div class="build__stars-star" v-for="star in build.stars">
             <i class="nes-icon star"></i>
           </div>
         </div>
@@ -22,8 +22,18 @@
           <p class="build__price">{{ this.renderNumeral(build.price) }}<span class="price fraise"></span></p>
           <p class="build__ps">(+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde)</p>
           <p class="build__number animate__animated" :class="{animate__tada: index == addBuild}">{{ build.number }}</p>
-          <p class="build__percent">({{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde)</p>
           <p style="display: none" :class="{buyable: build.buyable}"></p>
+          <button class="nes-btn" @click.prevent.stop="openInfo(index)">voir info</button>
+          <div class="build-info nes-container is-white is-rounded" v-show="index == infoClose" @click.prevent.stop="closeInfo">
+            <p class="title">Info</p>
+            <button class="nes-btn build-info-close"><i class="nes-icon close is-small" @click.prevent.stop="closeInfo"></i></button>
+            <div class="lists">
+              <ul class="nes-list is-disc">
+                <li>{{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde</li>
+                <li>{{ renderNumeral(build.total) }}<span class="fraise small-fraise fraise-bonus"></span>total depuis le début</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div v-for="build in builds" :key="build.name + 'locked'" v-show="total < build.visible" class="build nes-container is-dark is-rounded">
@@ -42,7 +52,6 @@ export default {
   name: 'Builds',
   props: {
     builds: Array,
-    store: Array,
     buy: Function,
     total: Number,
     currency: Number,
@@ -51,17 +60,24 @@ export default {
   data(){
     return{
       addBuild: null,
-      modulo: 10
+      modulo: 10,
+      infoClose: null
     }
   },
   methods: {
     buildAdded(index){
       this.addBuild = index
     },
+    openInfo(index){
+      this.infoClose = index
+    },
+    closeInfo(){
+      this.infoClose = null
+    },
     buyBuildBonus(build, index){
       if(this.currency < build.price*2) return
       build.inc *= 2
-      this.store.filter(s => s.name == build.name)[0].stars += 1
+      build.stars += 1
       // display success here
       this.$emit('buy', build)
     },
@@ -74,7 +90,7 @@ export default {
   mounted(){
     this.$timer = setInterval(() => {
       for (let index in this.$refs) {
-        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[2].children[5].classList.contains('buyable')){
+        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[2].children[4].classList.contains('buyable')){
           this.$refs[index].classList.add('disable')
           console.log('triche')
         }
@@ -114,7 +130,6 @@ export default {
       position: absolute
       top: 2px
       right: 10px
-      //background: red
       &-star
         display: inline-block
         margin-left: -15px
@@ -169,6 +184,21 @@ export default {
     &__percent
       margin-bottom: 0
       font-size: .6rem
+    &-info
+      position: absolute
+      top: -8px
+      left: -8px
+      right: -8px
+      bottom: -8px
+      color: var(--clr-black) !important
+      .nes-list
+        margin-left: 10px
+        li
+          margin-bottom: 5px
+      &-close
+        position: absolute
+        top: 8px
+        right: 8px
     &:last-child
       margin-bottom: 5px !important
   .disable
