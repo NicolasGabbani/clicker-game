@@ -4,7 +4,7 @@
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
       <div @click.prevent="$emit('buy', build); buildAdded(index);" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
         <div class="build__stars">
-          <div class="build__stars-star" v-for="star in store.filter(s => s.name == build.name)[0].stars">
+          <div class="build__stars-star" v-for="star in store.filter(s => s.name == build.name)[0]?.stars">
             <i class="nes-icon star"></i>
           </div>
         </div>

@@ -200,20 +200,20 @@ export default {
 
     save() {
       this.$cookies.set("user", this.user, -1);
-      this.$cookies.set("builds", JSON.stringify(this.display_builds), -1);
-      this.$cookies.set("store", JSON.stringify(this.display_store), -1);
-      this.$cookies.set("success", JSON.stringify(this.display_success), -1);
-      this.$cookies.set("buildssuccess", JSON.stringify(this.display_builds_success), -1);
+      localStorage.builds = JSON.stringify(this.display_builds)
+      localStorage.store = JSON.stringify(this.display_store)
+      localStorage.success = JSON.stringify(this.display_success)
+      localStorage.buildssuccess = JSON.stringify(this.display_builds_success)
       this.onsave = true;
     },
     reset() {
       let c = confirm("T'es sûr de vouloir effacer ta partie ?");
       if (!c) return this.closeOptions();
       this.$cookies.remove("user");
-      this.$cookies.remove("builds");
-      this.$cookies.remove("store");
-      this.$cookies.remove("success");
-      this.$cookies.remove("buildssuccess");
+      localStorage.removeItem("builds");
+      localStorage.removeItem("store");
+      localStorage.removeItem("success");
+      localStorage.removeItem("buildssuccess");
       window.location.reload();
     },
     displaySuccess(succ) {
