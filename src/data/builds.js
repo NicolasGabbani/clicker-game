@@ -1,7 +1,7 @@
 export default [
   {
     name: "Fraisier",
-    inc: 1000,
+    inc: 0.1,
     price: 15,
     number: 0,
     buyable: false,

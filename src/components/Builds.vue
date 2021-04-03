@@ -2,7 +2,7 @@
   <div class="nes-container is-rounded is-semi-white container-content">
     <p class="title">Fabriques à miam-miam</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
-      <div @click.prevent.stop="$emit('buy', build); buildAdded(index);" v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container nes-pointer is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
+      <div v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
         <div class="build__stars">
           <div class="build__stars-star" v-for="star in build.stars">
             <i class="nes-icon star"></i>
@@ -19,14 +19,19 @@
         </div>
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
-          <p class="build__price">{{ this.renderNumeral(build.price) }}<span class="price fraise"></span></p>
-          <p class="build__ps">(+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde)</p>
+          <p class="build__ps">+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde</p>
           <p class="build__number animate__animated" :class="{animate__tada: index == addBuild}">{{ build.number }}</p>
           <p style="display: none" :class="{buyable: build.buyable}"></p>
-          <button class="nes-btn" @click.prevent.stop="openInfo(index)">voir info</button>
-          <div class="build-info nes-container is-white is-rounded" v-show="index == infoClose" @click.prevent.stop="closeInfo">
+
+          <div class="build-btn-content container-space">
+            <button class="nes-btn" @click.prevent.stop="openInfo(index)">voir info</button>
+            <button class="nes-btn" :class="{'is-success': build.buyable, 'is-error': !build.buyable, 'btn-disable': !build.buyable}" @click.prevent.stop="$emit('buy', build); buildAdded(index);">{{ this.renderNumeral(build.price) }}<span class="price fraise very-small-fraise fraise-bonus"></span></button>
+          </div>
+          
+
+          <div class="build-info nes-container is-white is-rounded" v-show="index == infoClose">
             <p class="title">Info</p>
-            <button class="nes-btn build-info-close"><i class="nes-icon close is-small" @click.prevent.stop="closeInfo"></i></button>
+            <button class="nes-btn build-info-close" @click.prevent.stop="closeInfo"><i class="nes-icon close is-small"></i></button>
             <div class="lists">
               <ul class="nes-list is-disc">
                 <li>{{ Math.floor((build.inc*build.number * 100) / cps) || 0 }}% du total par seconde</li>
@@ -72,6 +77,7 @@ export default {
       this.infoClose = index
     },
     closeInfo(){
+      console.log('clik')
       this.infoClose = null
     },
     buyBuildBonus(build, index){
@@ -90,7 +96,7 @@ export default {
   mounted(){
     this.$timer = setInterval(() => {
       for (let index in this.$refs) {
-        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[2].children[4].classList.contains('buyable')){
+        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[2].children[3].classList.contains('buyable')){
           this.$refs[index].classList.add('disable')
           console.log('triche')
         }
@@ -123,13 +129,11 @@ export default {
     background: rgba(255,255,255,.1)
     backdrop-filter: blur(10px)
     transition: all var(--tr-du)
-    color: var(--clr-pink)
-    &.with-hover:hover
-      background: var(--clr-white)
+    color: var(--clr-black)
     &__stars
       position: absolute
-      top: 2px
-      right: 10px
+      bottom: 10px
+      left: 18px
       &-star
         display: inline-block
         margin-left: -15px
@@ -169,21 +173,18 @@ export default {
       font-size: 1rem
       width: 90%
       font-weight: bold
-    &__price, &__ps
-      display: inline-block
-      vertical-align: baseline
-    &__ps
-      font-size: .7rem
-      margin-left: 15px
     &__number
+      margin-bottom: 0
       position: absolute
-      bottom: -20px
-      right: 5px
+      top: 0
+      right: 20px
       font-size: 2rem
       color: var(--clr-grey)
     &__percent
       margin-bottom: 0
       font-size: .6rem
+    &-btn-content
+      width: 100%
     &-info
       position: absolute
       top: -8px
@@ -206,6 +207,8 @@ export default {
     color: var(--clr-grey) !important
     .build__avatar-img, .fraise:not(.fraise-bonus)
       filter: grayscale(100%)
+  .btn-disable
+    pointer-events: none !important
   .price
     width: 20px !important
     height: 20px !important

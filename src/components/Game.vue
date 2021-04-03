@@ -173,7 +173,7 @@ export default {
 
       this.calcCps();
 
-      //build.price *= 2; // EASY MODE
+      build.price *= 2; // EASY MODE
     },
 
     cps(multiple = 1) {
