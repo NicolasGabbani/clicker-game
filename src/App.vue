@@ -125,26 +125,6 @@ export default {
     }
     this.user = this.$cookies.get('user')
 
-    // if(!this.$cookies.isKey('builds')) {
-    //   this.$cookies.set('builds', JSON.stringify(Builds), -1)
-    // }
-    // this.builds = this.$cookies.get('builds')
-
-    // if(!this.$cookies.isKey('success')) {
-    //   this.$cookies.set('success', JSON.stringify(Success), -1)
-    // }
-    // this.success = this.$cookies.get('success')
-
-    // if(!this.$cookies.isKey('buildssuccess')) {
-    //   this.$cookies.set('buildssuccess', JSON.stringify(BuildsSuccess), -1)
-    // }
-    // this.buildsSuccess = this.$cookies.get('buildssuccess')
-
-    // if(!this.$cookies.isKey('store')) {
-    //   this.$cookies.set('store', JSON.stringify(Store), -1)
-    // }
-    // this.store = this.$cookies.get('store')
-
     if(!localStorage.builds){
       localStorage.builds = JSON.stringify(Builds)
     }
