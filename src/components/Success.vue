@@ -4,7 +4,12 @@
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
       <div class="success-content">
         <div @mouseenter="hideNewSucc(succ)" class="success nes-container is-rounded is-dark" v-for="succ in success" :key="succ.succ">
-          <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="succ.name" class="success__tooltip" v-show="succ.done"></span>
+          <tippy :followCursor="true" placement="top-start" duration="0">
+            <span class="success__tooltip" v-show="succ.done"></span>
+            <template #content>
+              <div class="nes-btn">{{succ.name}}</div>
+            </template>
+          </tippy>
           <span class="new-success-radar" v-if="succ.new"></span>
           <span class="success-unlock" v-if="succ.done">
             <img :src="require(`@/assets/images/icons/coupe.png`)" alt="coupe">
@@ -14,7 +19,12 @@
           </span>
         </div>
         <div @mouseenter="hideNewSucc(succ)" class="success nes-container is-rounded is-dark" v-for="succ in buildsSuccess" :key="succ.buildName">
-          <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="`${succ.buildName} débloqué`" class="success__tooltip" v-show="succ.done"></span>
+          <tippy :followCursor="true" placement="top-start" duration="0">
+            <span class="success__tooltip" v-show="succ.done"></span>
+            <template #content>
+              <div class="nes-btn">{{succ.buildName}} débloqué !</div>
+            </template>
+          </tippy>
           <span class="new-success-radar" v-if="succ.new"></span>
           <span class="success-unlock" v-if="succ.done">
             <img :src="require(`@/assets/images/icons/coupe.png`)" alt="coupe">

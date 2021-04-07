@@ -1,6 +1,12 @@
 <template>
   <div class="name">
-    <div data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" title="Double cliquer pour changer de nom !" class="nes-badge nes-pointer name__name" v-show="!displayInput" @dblclick="toggleInput"><span class="is-dark">{{name}}</span></div>
+    <tippy :followCursor="true" placement="top-start" duration="0">
+      <div class="nes-badge nes-pointer name__name" v-show="!displayInput" @dblclick="toggleInput"><span class="is-dark">{{name}}</span></div>
+      <template #content>
+        <div class="nes-btn">Double cliquer pour changer de nom !</div>
+      </template>
+    </tippy>
+    
     <form v-show="displayInput">
       <div class="nes-field">
         <input type="text"  class="nes-input" v-model="name" :maxlength="max">

@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import "@/libs/tooltip.js";
 import ClickButton from "@/components/ClickButton.vue";
 import Menu from "@/components/Menu.vue";
 import Score from "@/components/Score.vue";

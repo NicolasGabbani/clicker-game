@@ -2,28 +2,37 @@
   <div class="store nes-container is-rounded is-semi-white">
     <p class="title">Magasin</p>
     <div class="store-content container-start">
-      <button 
-        class="store-btn nes-btn" 
-        v-for="(s, index) in store" 
-        :key="store.id" 
-        v-show="!s.purchased && build(s.id).number >= s.buildNumber" 
-        :class="{
-          'is-success': currency >= s.price, 
-          'is-error': currency < s.price
-        }"
-        @click.prevent.stop="purchase(s)"
-        data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" 
-        :title="`${build(s.id).name} deux fois plus efficace ! (${s.price} fraises)`"
-      >
-        <div 
-          class="store__avatar" 
-          :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${index+1}.png`)})` }">
-        </div>
-      </button>
+      <div class="store-btn" v-for="(s, index) in store">
+        <tippy :followCursor="true" placement="top-start" duration="0">
+          <button 
+            class="store-btn nes-btn"  
+            :key="store.id" 
+            v-show="!s.purchased && build(s.id).number >= s.buildNumber" 
+            :class="{
+              'is-success': currency >= s.price, 
+              'is-error': currency < s.price
+            }"
+            @click.prevent.stop="purchase(s)"
+          >
+            <div 
+              class="store__avatar" 
+              :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${index+1}.png`)})` }">
+            </div>
+          </button>
 
-      <button class="store-btn nes-btn is-disabled" v-for="s in store" v-show="!s.purchased && build(s.id).number < s.buildNumber">
-        <div class="store__avatar">?</div>
-      </button>
+          <template #content>
+            <div class="nes-btn">
+              {{build(s.id).name}} deux fois plus efficace !
+              <br>
+              {{s.price}}<span class="fraise small-fraise"></span>
+            </div>
+          </template>
+        </tippy>
+
+        <button class="store-btn nes-btn is-disabled" v-show="!s.purchased && build(s.id).number < s.buildNumber">
+          <div class="store__avatar">?</div>
+        </button>
+      </div>
     </div>
   </div>
 </template>
