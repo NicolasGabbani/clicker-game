@@ -26,7 +26,7 @@
             <button
               class="nes-btn"
               :class="{ 'is-success': openSuccess }"
-              @click.prevent="(openSuccess = !openSuccess); haveNewSuccess = false"
+              @click.prevent="openSuccess = !openSuccess"
             >
               <span class="new-success-radar in-btn" v-if="haveNewSuccess"></span>
               succès
@@ -46,7 +46,7 @@
             v-show="openOptions"
           />
           <div v-show="openSuccess">
-            <Success :success="display_success" :buildsSuccess="display_builds_success" />
+            <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
           </div>
           <div v-show="!openSuccess">
             <Builds
@@ -222,8 +222,19 @@ export default {
         succ.done = true
         succ.new = true
         this.haveSuccess = true
-        this.haveNewSuccess = true
+        this.checkSucc()
       }
+    },
+    checkSucc(){
+      for(let index in this.display_success){
+        this.haveNewSuccess = this.display_success[index].new
+        if(this.haveNewSuccess) return
+      }
+      for(let index in this.display_builds_success){
+        this.haveNewSuccess = this.display_builds_success[index].new
+        if(this.haveNewSuccess) return
+      }
+      return this.haveNewSuccess
     },
     changeName(name) {
       this.user.name = name;
@@ -269,16 +280,17 @@ export default {
     },
   },
   mounted() {
-    this.cps();
+    this.cps()
+    this.checkSucc()
 
     this.$timer2 = setInterval(() => {
-      this.save();
-    }, this.onsaveTimer);
+      this.save()
+    }, this.onsaveTimer)
   },
   unmounted() {
-    clearInterval(this.$timer);
-    clearInterval(this.$timer2);
-    clearInterval(this.$timer3);
+    clearInterval(this.$timer)
+    clearInterval(this.$timer2)
+    clearInterval(this.$timer3)
   },
 
   watch: {
