@@ -1,7 +1,10 @@
 <template>
   <div class="nes-container is-rounded is-dark is-semi-dark score">
-    <div>{{ Math.round(totalNum * 100 / Number.MAX_SAFE_INTEGER) }}%</div>
-    <progress class="nes-progress" :value="totalNum" :max="Number.MAX_SAFE_INTEGER"></progress>
+    <div style="display:none">
+      <div>{{ Math.round(totalNum * 100 / Number.MAX_SAFE_INTEGER) }}%</div>
+      <progress class="nes-progress" :value="totalNum" :max="Number.MAX_SAFE_INTEGER"></progress>
+    </div>
+    
     <div class="currency">{{ currency }}<span class="fraise"></span></div>
     <div class="cps">{{ cps }}<span class="fraise"></span>/seconde</div>
     <div class="total">total: {{ total }} kg</div>

@@ -10,12 +10,6 @@
         </div>
         <div class="build__avatar">
           <div class="build__avatar-img nes-container is-rounded" :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${index+1}.png`)})` }"></div>
-          <button class="nes-btn build__bonusx2" :class="{'is-success': currency >= build.price*2, 'is-error': currency < build.price*2}" data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="`${build.name} deux fois plus efficace`" v-show="build.number % modulo == 0 && build.number != 0" @click.prevent.stop="buyBuildBonus(build, index)">
-            <span class="fraise small-fraise fraise-bonus"></span>x2 
-            <span class="build__bonusx2-price">
-              {{this.renderNumeral(build.price*2)}}<span class="fraise fraise-bonus very-small-fraise"></span>
-            </span>
-          </button>
         </div>
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
@@ -25,10 +19,9 @@
 
           <div class="build-btn-content container-space">
             <button class="nes-btn" @click.prevent.stop="openInfo(index)">voir info</button>
-            <button class="nes-btn" :class="{'is-success': build.buyable, 'is-error': !build.buyable, 'btn-disable': !build.buyable}" @click.prevent.stop="$emit('buy', build); buildAdded(index);">{{ this.renderNumeral(build.price) }}<span class="price fraise very-small-fraise fraise-bonus"></span></button>
+            <button class="nes-btn" :class="{'is-success': build.buyable, 'is-error': !build.buyable, 'btn-disable': !build.buyable}" @click.prevent.stop="$emit('buyBuild', build); buildAdded(index);">{{ this.renderNumeral(build.price) }}<span class="price fraise very-small-fraise fraise-bonus"></span></button>
           </div>
           
-
           <div class="build-info nes-container is-white is-rounded" v-show="index == infoClose">
             <p class="title">Info</p>
             <button class="nes-btn build-info-close" @click.prevent.stop="closeInfo"><i class="nes-icon close is-small"></i></button>
@@ -57,9 +50,8 @@ export default {
   name: 'Builds',
   props: {
     builds: Array,
-    buy: Function,
+    buyBuild: Function,
     total: Number,
-    currency: Number,
     cps: Number
   },
   data(){
@@ -77,15 +69,7 @@ export default {
       this.infoClose = index
     },
     closeInfo(){
-      console.log('clik')
       this.infoClose = null
-    },
-    buyBuildBonus(build, index){
-      if(this.currency < build.price*2) return
-      build.inc *= 2
-      build.stars += 1
-      // display success here
-      this.$emit('buy', build)
     },
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0.000a')
@@ -203,7 +187,6 @@ export default {
     &:last-child
       margin-bottom: 5px !important
   .disable
-    //pointer-events: none !important
     color: var(--clr-grey) !important
     .build__avatar-img, .fraise:not(.fraise-bonus)
       filter: grayscale(100%)

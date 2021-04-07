@@ -23,19 +23,11 @@
       <div class="col">
         <div>
           <div class="options">
-            <button
-              class="nes-btn"
-              :class="{ 'is-success': openSuccess }"
-              @click.prevent="openSuccess = !openSuccess"
-            >
+            <button class="nes-btn" :class="{ 'is-success': openSuccess }" @click.prevent="openSuccess = !openSuccess">
               <span class="new-success-radar in-btn" v-if="haveNewSuccess"></span>
               succès
             </button>
-            <button
-              class="nes-btn"
-              :class="{ 'is-success': openOptions }"
-              @click.prevent="openOptions = !openOptions"
-            >
+            <button class="nes-btn" :class="{ 'is-success': openOptions }" @click.prevent="openOptions = !openOptions">
               options
             </button>
           </div>
@@ -49,12 +41,13 @@
             <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
           </div>
           <div v-show="!openSuccess">
+            <Store :store="display_store" :builds="display_builds" :currency="this.user.currency" @buy="buy" />
             <Builds
+              @buyBuild="buyBuild"
               @buy="buy"
               :builds="display_builds"
               :total="this.user.total"
               :cps="this.user.cps"
-              :currency="this.user.currency"
             />
           </div>
         </div>
@@ -79,6 +72,7 @@ import Score from "@/components/Score.vue";
 import Name from "@/components/Name.vue";
 import Fontain from "@/components/Fontain.vue";
 import Builds from "@/components/Builds.vue";
+import Store from "@/components/Store.vue";
 import Success from "@/components/Success.vue";
 import Bonus from "@/components/Bonus.vue";
 import HaveSuccess from "@/components/HaveSuccess.vue";
@@ -92,6 +86,7 @@ export default {
     Name,
     Fontain,
     Builds,
+    Store,
     Success,
     Bonus,
     HaveSuccess,
@@ -100,6 +95,7 @@ export default {
   props: {
     user: Object,
     builds: String,
+    store: String,
     success: String,
     buildsSuccess: String,
     loaded: Boolean,
@@ -110,6 +106,7 @@ export default {
       display_currency: this.renderNumeral(this.user.currency),
       display_cps: this.renderNumeral(this.user.cps),
       display_builds: JSON.parse(this.builds),
+      display_store: JSON.parse(this.store),
       display_success: JSON.parse(this.success),
       display_builds_success: JSON.parse(this.buildsSuccess),
       onsave: false,
@@ -155,11 +152,15 @@ export default {
       this.display_cps = this.renderNumeral(this.user.cps);
     },
 
-    buy(build) {
+    buy(price){
+      this.user.currency = this.user.currency - price;
+      this.display_currency = this.renderNumeral(this.user.currency);
+    },
+
+    buyBuild(build) {
       if (this.user.currency < build.price) return;
 
-      this.user.currency = this.user.currency - build.price;
-      this.display_currency = this.renderNumeral(this.user.currency);
+      this.buy(build.price)
 
       build.number += 1;
 
@@ -199,19 +200,23 @@ export default {
     save() {
       this.$cookies.set("user", this.user, -1);
       localStorage.builds = JSON.stringify(this.display_builds)
+      localStorage.store = JSON.stringify(this.display_store)
       localStorage.success = JSON.stringify(this.display_success)
       localStorage.buildssuccess = JSON.stringify(this.display_builds_success)
       this.onsave = true;
     },
+
     reset() {
       let c = confirm("T'es sûr de vouloir effacer ta partie ?")
       if (!c) return this.closeOptions()
       this.$cookies.remove("user")
       localStorage.removeItem("builds")
+      localStorage.removeItem("store")
       localStorage.removeItem("success")
       localStorage.removeItem("buildssuccess")
       window.location.reload()
     },
+
     displaySuccess(succ) {
       if (this.haveSuccess) {
         setTimeout(() => {
@@ -225,6 +230,7 @@ export default {
         this.checkSucc()
       }
     },
+
     checkSucc(){
       for(let index in this.display_success){
         this.haveNewSuccess = this.display_success[index].new
@@ -236,6 +242,7 @@ export default {
       }
       return this.haveNewSuccess
     },
+
     changeName(name) {
       this.user.name = name;
       if (!this.display_success.filter((succ) => succ.succ === "changeName")[0].done) {
@@ -245,13 +252,16 @@ export default {
       }
       this.save();
     },
+
     closeOptions() {
       this.openOptions = false;
     },
+
     bonusCpsClicked(timer) {
       this.bonusCpsClickedTimer = timer;
       this.haveBonusCpsClicked = true;
     },
+
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0.000a')
       return numeral(val).format('0,0.0')
@@ -292,7 +302,6 @@ export default {
     clearInterval(this.$timer2)
     clearInterval(this.$timer3)
   },
-
   watch: {
     onsave: function (val) {
       if (val) {

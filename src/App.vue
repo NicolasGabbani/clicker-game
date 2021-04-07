@@ -1,6 +1,14 @@
 <template>
   <Loading v-show="isLoading" />
-  <Game :user="user" :builds="builds" :success="success" :buildsSuccess="buildsSuccess" :loaded="!isLoading" v-show='!isLoading' />
+  <Game 
+    :user="user" 
+    :builds="builds" 
+    :store="store" 
+    :success="success" 
+    :buildsSuccess="buildsSuccess" 
+    :loaded="!isLoading" 
+    v-show='!isLoading' 
+  />
 </template>
 
 <script>
@@ -9,6 +17,7 @@ import Loading from './components/Loading.vue'
 import Game from './components/Game.vue'
 import Data from './data/user'
 import Builds from '@/data/builds'
+import Store from '@/data/store'
 import Success from '@/data/success'
 import BuildsSuccess from '@/data/builds_success'
 export default {
@@ -22,6 +31,7 @@ export default {
     return {
       user: {},
       builds: null,
+      store: null,
       success: null,
       buildsSuccess: null,
       imagesToPreload: [
@@ -127,6 +137,11 @@ export default {
       localStorage.builds = JSON.stringify(Builds)
     }
     this.builds = localStorage.builds
+
+    if(!localStorage.store){
+      localStorage.store = JSON.stringify(Store)
+    }
+    this.store = localStorage.store
 
     if(!localStorage.success) {
       localStorage.success = JSON.stringify(Success)
