@@ -1,5 +1,6 @@
 export default [
   {
+    id: 1,
     name: "Fraisier",
     inc: 0.1,
     price: 15,
@@ -10,6 +11,7 @@ export default [
     visible: 0
   },
   {
+    id: 2,
     name: "Jardin potager BIO",
     inc: 0.5,
     price: 1000,
@@ -20,6 +22,7 @@ export default [
     visible: 300
   },
   {
+    id: 3,
     name: "Blablapareil à gauffres",
     inc: 2,
     price: 3500,
@@ -30,6 +33,7 @@ export default [
     visible: 600
   },
   {
+    id: 4,
     name: "N-50 de cuisine",
     inc: 4.5,
     price: 10000,
@@ -40,6 +44,7 @@ export default [
     visible: 1000
   },
   {
+    id: 5,
     name: "BlaBarbecue",
     inc: 10,
     price: 250000,
@@ -50,6 +55,7 @@ export default [
     visible: 2000
   },
   {
+    id: 6,
     name: "Machine à Blabapapa",
     inc: 10,
     price: 250000,
@@ -60,6 +66,7 @@ export default [
     visible: 2000
   },
   {
+    id: 7,
     name: "Machine à Glace froide",
     inc: 10,
     price: 250000,
@@ -70,6 +77,7 @@ export default [
     visible: 2000
   },
   {
+    id: 8,
     name: "Fontaine de chocolat rose",
     inc: 10,
     price: 250000,
@@ -80,6 +88,7 @@ export default [
     visible: 2000
   },
   {
+    id: 9,
     name: "BlaBar à sushis",
     inc: 10,
     price: 250000,
@@ -90,6 +99,7 @@ export default [
     visible: 2000
   },
   {
+    id: 10,
     name: "Flood truck",
     inc: 10,
     price: 250000,
@@ -100,6 +110,7 @@ export default [
     visible: 2000
   },
   {
+    id: 11,
     name: "Blabla-Snack",
     inc: 10,
     price: 250000,
@@ -110,6 +121,7 @@ export default [
     visible: 2000
   },
   {
+    id: 12,
     name: "Restaurant Coco Luxe",
     inc: 10,
     price: 250000,
@@ -120,6 +132,7 @@ export default [
     visible: 2000
   },
   {
+    id: 13,
     name: "Usine de gâteaux au sucre doux",
     inc: 10,
     price: 250000,
@@ -130,6 +143,7 @@ export default [
     visible: 2000
   },
   {
+    id: 14,
     name: "Volcan à bonbons",
     inc: 10,
     price: 250000,
@@ -140,6 +154,7 @@ export default [
     visible: 2000
   },
   {
+    id: 15,
     name: "Fraisier quantique",
     inc: 10,
     price: 250000,
@@ -150,6 +165,7 @@ export default [
     visible: 2000
   },
   {
+    id: 16,
     name: "Usine à biscuits intergalactique",
     inc: 10,
     price: 250000,
@@ -160,6 +176,7 @@ export default [
     visible: 2000
   },
   {
+    id: 17,
     name: "Corne d'abondance",
     inc: 10,
     price: 250000,
@@ -170,6 +187,7 @@ export default [
     visible: 2000
   },
   {
+    id: 18,
     name: "Duplicateur sucré salé",
     inc: 10,
     price: 250000,
@@ -180,6 +198,7 @@ export default [
     visible: 2000
   },
   {
+    id: 19,
     name: "Fraisier interdimensionnel",
     inc: 10,
     price: 250000,
@@ -190,6 +209,7 @@ export default [
     visible: 2000
   },
   {
+    id: 20,
     name: "Galaxie en chocolat",
     inc: 10,
     price: 250000,
@@ -200,6 +220,7 @@ export default [
     visible: 2000
   },
   {
+    id: 21,
     name: "Arc-en-ciel gourmand",
     inc: 10,
     price: 250000,
@@ -210,6 +231,7 @@ export default [
     visible: 2000
   },
   {
+    id: 22,
     name: "Vortex fruité",
     inc: 10,
     price: 250000,
@@ -220,6 +242,7 @@ export default [
     visible: 2000
   },
   {
+    id: 23,
     name: "Univers de surcreries",
     inc: 10,
     price: 250000,
@@ -230,6 +253,7 @@ export default [
     visible: 2000
   },
   {
+    id: 24,
     name: "Machine à rêves",
     inc: 10,
     price: 250000,
@@ -240,6 +264,7 @@ export default [
     visible: 2000
   },
   {
+    id: 25,
     name: "Fraisier omniprésent",
     inc: 10,
     price: 250000,

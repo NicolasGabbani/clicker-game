@@ -3,8 +3,9 @@
     <p>Succès</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
       <div class="success-content">
-        <div class="success nes-container is-rounded is-dark" v-for="succ in success" :key="succ.id">
+        <div @mouseenter="succ.new = false" class="success nes-container is-rounded is-dark" v-for="succ in success" :key="succ.succ">
           <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="succ.name" class="success__tooltip" v-show="succ.done"></span>
+          <span class="new-success-radar" v-if="succ.new"></span>
           <span class="success-unlock" v-if="succ.done">
             <img :src="require(`@/assets/images/icons/coupe.png`)" alt="coupe">
           </span>
@@ -12,8 +13,9 @@
             ?
           </span>
         </div>
-        <div class="success nes-container is-rounded is-dark" v-for="succ in buildsSuccess" :key="succ.buildName">
+        <div @mouseenter="hideNewSucc(succ)" class="success nes-container is-rounded is-dark" v-for="succ in buildsSuccess" :key="succ.buildName">
           <span data-tooltip="{ 'offset': 10, 'class': 'nes-btn' }" :title="`${succ.buildName} débloqué`" class="success__tooltip" v-show="succ.done"></span>
+          <span class="new-success-radar" v-if="succ.new"></span>
           <span class="success-unlock" v-if="succ.done">
             <img :src="require(`@/assets/images/icons/coupe.png`)" alt="coupe">
           </span>

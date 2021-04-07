@@ -26,8 +26,9 @@
             <button
               class="nes-btn"
               :class="{ 'is-success': openSuccess }"
-              @click.prevent="openSuccess = !openSuccess"
+              @click.prevent="(openSuccess = !openSuccess); haveNewSuccess = false"
             >
+              <span class="new-success-radar in-btn" v-if="haveNewSuccess"></span>
               succès
             </button>
             <button
@@ -116,6 +117,7 @@ export default {
       openSuccess: false,
       openOptions: false,
       haveSuccess: false,
+      haveNewSuccess: false,
       currentSuccess: {},
       haveBonusCpsClicked: false,
     };
@@ -124,18 +126,18 @@ export default {
     increment(inc = 1, number = 1, el = null) {
       if (
         el == "bonus" &&
-        !this.display_success.filter((succ) => succ.id === "oneBonus")[0].done
+        !this.display_success.filter((succ) => succ.succ === "oneBonus")[0].done
       ) {
         this.displaySuccess(
-          this.display_success.filter((succ) => succ.id === "oneBonus")[0]
+          this.display_success.filter((succ) => succ.succ === "oneBonus")[0]
         );
       }
       if (
         el == "button" &&
-        !this.display_success.filter((succ) => succ.id === "oneClicked")[0].done
+        !this.display_success.filter((succ) => succ.succ === "oneClicked")[0].done
       ) {
         this.displaySuccess(
-          this.display_success.filter((succ) => succ.id === "oneClicked")[0]
+          this.display_success.filter((succ) => succ.succ === "oneClicked")[0]
         );
       }
       this.user.currency = this.user.currency + inc * number;
@@ -213,19 +215,21 @@ export default {
     displaySuccess(succ) {
       if (this.haveSuccess) {
         setTimeout(() => {
-          this.displaySuccess(succ);
+          this.displaySuccess(succ)
         }, 3500);
       } else {
-        this.currentSuccess = succ;
-        succ.done = true;
-        this.haveSuccess = true;
+        this.currentSuccess = succ
+        succ.done = true
+        succ.new = true
+        this.haveSuccess = true
+        this.haveNewSuccess = true
       }
     },
     changeName(name) {
       this.user.name = name;
-      if (!this.display_success.filter((succ) => succ.id === "changeName")[0].done) {
+      if (!this.display_success.filter((succ) => succ.succ === "changeName")[0].done) {
         this.displaySuccess(
-          this.display_success.filter((succ) => succ.id === "changeName")[0]
+          this.display_success.filter((succ) => succ.succ === "changeName")[0]
         );
       }
       this.save();
