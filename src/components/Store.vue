@@ -21,7 +21,7 @@
         </div>
       </button>
 
-      <button class="store-btn nes-btn is-disabled" v-for="s in store" v-show="!s.purchased">
+      <button class="store-btn nes-btn is-disabled" v-for="s in store" v-show="!s.purchased && build(s.id).number < s.buildNumber">
         <div class="store__avatar">?</div>
       </button>
     </div>
