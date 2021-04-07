@@ -1,43 +1,60 @@
 <template>
   <div class="store nes-container is-rounded is-semi-white">
     <p class="title">Magasin</p>
-    <div class="store-content container-start">
-      <div class="store-btn" v-for="(s, index) in store">
-        <tippy :followCursor="true" placement="top-start" duration="0">
-          <button 
-            class="store-btn nes-btn"  
-            :key="store.id" 
-            v-show="!s.purchased && build(s.id).number >= s.buildNumber" 
-            :class="{
-              'is-success': currency >= s.price, 
-              'is-error': currency < s.price
-            }"
-            @click.prevent.stop="purchase(s)"
-          >
-            <div 
-              class="store__avatar" 
-              :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${index+1}.png`)})` }">
-            </div>
+    <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
+      <div class="store-content">
+        <div v-for="(s, index) in store">
+          <tippy :followCursor="true" placement="top-start" duration="0">
+            <button 
+              class="store-btn nes-btn"  
+              :key="store.id" 
+              v-show="!s.purchased && build(s.id).number >= s.buildNumber" 
+              :class="{
+                'is-success': currency >= s.price, 
+                'is-error': currency < s.price
+              }"
+              @click.prevent.stop="purchase(s)"
+            >
+              <div 
+                class="store__avatar" 
+                :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${index+1}.png`)})` }">
+              </div>
+            </button>
+
+            <template #content>
+              <div class="nes-btn">
+                {{build(s.id).name}} deux fois plus efficace !
+                <br>
+                {{s.price}}<span class="fraise small-fraise"></span>
+              </div>
+            </template>
+          </tippy>
+
+          <button class="store-btn nes-btn is-disabled" v-show="!s.purchased && build(s.id).number < s.buildNumber">
+            ?
           </button>
 
-          <template #content>
-            <div class="nes-btn">
-              {{build(s.id).name}} deux fois plus efficace !
-              <br>
-              {{s.price}}<span class="fraise small-fraise"></span>
-            </div>
-          </template>
-        </tippy>
+          <tippy :followCursor="true" placement="top-start" duration="0">
+            <button class="store-btn nes-btn" v-show="s.purchased">
+              <i class="nes-icon is-large heart"></i>
+            </button>
 
-        <button class="store-btn nes-btn is-disabled" v-show="!s.purchased && build(s.id).number < s.buildNumber">
-          <div class="store__avatar">?</div>
-        </button>
+            <template #content>
+              <div class="nes-btn">
+                {{build(s.id).name}} bonus débloqué !
+              </div>
+            </template>
+          </tippy>
+        </div>
       </div>
     </div>
+    
   </div>
 </template>
 
 <script>
+import 'simplebar'
+import 'simplebar/dist/simplebar.css'
 export default {
   name: 'Store',
   props: {
@@ -61,22 +78,28 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
+  .container-scroll
+    height: 115px !important // 172
   .store
     margin-bottom: 20px !important
-    height: 172px
+    &-content
+      display: grid
+      grid-gap: 15px
+      row-gap: 6px
+      grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) )
     &-btn
-      margin-right: 15px
-      &:last-child
-        margin-right: 0
-      &.is-disabled
-        .store__avatar
-          border: none !important
+      width: 100%
+      min-height: 90px
+      display: flex
+      justify-content: center
+      align-items: center
+      aspect-ratio: 1
     &__avatar
       width: 64px
       height: 64px
       background-size: cover
-      background-repeat: none
+      background-repeat: no-repeat
       background-position: center center
       filter: hue-rotate(60deg) sepia(78%)
       border: 3px solid var(--clr-black)
