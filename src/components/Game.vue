@@ -4,6 +4,7 @@
       @inc="increment"
       @cps="cps"
       :cpsNum="this.user.cps"
+      :totalNum="this.user.total"
       @bonusCpsClicked="bonusCpsClicked"
     />
     <div class="game container">

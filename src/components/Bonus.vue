@@ -10,6 +10,13 @@
         <span></span>
       </div>
     </div>
+
+    <div class="bonus-fraise container-centered-col" v-show="bonusFraise">
+      <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon">
+      <div class="bonus-fraise__timer nes-container is-white is-rounded">5</div>
+      <div class="bonus-fraise__fraise nes-pointer" @click.prevent="bonusFraiseClick"></div>
+      <progress class="nes-progress is-primary bonus-fraise__progress" :value="bonusFraiseProgress" max="100"></progress>
+    </div>
   </div>
 </template>
 
@@ -20,6 +27,7 @@ export default {
     inc: Function,
     cps: Function,
     cpsNum: Number,
+    totalNum: Number,
     top: String,
     left: String,
     interval: Number
@@ -28,6 +36,8 @@ export default {
     return {
       bonusClicked: false,
       bonusCpsClicked: false,
+      bonusFraise: false,
+      bonusFraiseProgress: 0,
       minBonus: -100,
       maxBonus: 1000,
       haveBonus: false,
@@ -37,7 +47,7 @@ export default {
       bonusTop: `${Math.floor(Math.random() * 99)}%`,
       bonusLeft: `${Math.floor(Math.random() * 99)}%`,
       bonusDisplayedTimer: 5000,
-      randomFunc: [this.addBonusInc, this.addBonusCps]
+      randomFunc: [this.addBonusInc, this.addBonusCps, this.addBonusFraise]
     }
   },
   methods: {
@@ -80,6 +90,23 @@ export default {
         this.$emit('cps')
       }, this.bonusDisplayedTimer)
     },
+    addBonusFraise(){
+      this.bonusClicked = true
+      this.bonusFraise = true
+      document.querySelector('.bonus-added').innerHTML = 'MEGA BONUS !'
+      let bonusTime = this.bonusDisplayedTimer / 1000
+      document.querySelector('.bonus-fraise > .bonus-fraise__timer').innerHTML = bonusTime 
+      const bonusTimer = setInterval(() => {
+        --bonusTime
+        document.querySelector('.bonus-fraise > .bonus-fraise__timer').innerHTML = bonusTime
+        if(bonusTime == -1) {
+          clearInterval(bonusTimer)
+          this.bonusClicked = false
+          this.bonusFraise = false
+          this.bonusFraiseProgress = 0
+        }
+      }, 1000);
+    },
     randomBonusInit() {
       this.intervalBonus = this.randomIntFromInterval(this.bonusMinInterval, this.bonusMaxInterval)
       this.$randomBonus = setTimeout(() => {
@@ -92,6 +119,15 @@ export default {
           this.randomBonusInit();
         }, this.bonusDisplayedTimer);
       }, this.intervalBonus);
+    },
+    bonusFraiseClick(){
+      if(this.bonusFraiseProgress == 100){
+        this.bonusFraise = false
+        this.bonusClicked = false
+        this.bonusFraiseProgress = 0
+        this.$emit('inc', this.totalNum / 2, 1, 'bonus')
+      }
+      this.bonusFraiseProgress += 10
     },
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0a')
@@ -145,4 +181,33 @@ export default {
     &-title
       width: 20px !important
       height: 20px !important
+  .bonus-fraise
+    position: fixed 
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    z-index: 9999999
+    background: var(--clr-semi-black)
+    padding: 80px
+    &__fraise
+      background-image: url('~@/assets/images/icons/fraise.png')
+      background-repeat: no-repeat
+      background-size: cover
+      background-position: center center
+      width: 200px
+      height: 200px
+      transition: all var(--tr-du)
+      margin-top: -50px
+      &:hover
+        transform: scale(1.1)
+      &:active
+        transform: scale(.9)
+    &__timer
+      font-size: 4rem
+    &__progress
+      width: 400px
+    .rayon
+      z-index: -1
+      pointer-events: none !important
 </style>
