@@ -19,5 +19,12 @@ export default [
     content: "Il déchire ce petit nom !",
     done: false,
     new: false
+  },
+  {
+    succ: 'bonusFraise',
+    name: 'Gagné au bonus de la mega fraise',
+    content: "Alors ça, c'était une sacré fraise !",
+    done: false,
+    new: false
   }
 ]

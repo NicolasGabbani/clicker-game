@@ -6,6 +6,7 @@
       :cpsNum="this.user.cps"
       :totalNum="this.user.total"
       @bonusCpsClicked="bonusCpsClicked"
+      @BonusFraiseSucc="BonusFraiseSucc"
     />
     <div class="game container">
       <div class="col container-centered-col text-center po-r">
@@ -251,6 +252,14 @@ export default {
         );
       }
       this.save();
+    },
+
+    BonusFraiseSucc(){
+      if (!this.display_success.filter((succ) => succ.succ === "bonusFraise")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.succ === "bonusFraise")[0]
+        );
+      }
     },
 
     closeOptions() {

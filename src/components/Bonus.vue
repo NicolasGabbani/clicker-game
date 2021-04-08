@@ -40,7 +40,8 @@ export default {
     totalNum: Number,
     top: String,
     left: String,
-    interval: Number
+    interval: Number,
+    BonusFraiseSucc: Function
   },
   data(){
     return {
@@ -143,6 +144,7 @@ export default {
         this.bonusFraiseResult = 'win'
         clearInterval(this.bonusFraiseInterval)
         this.$emit('inc', this.totalNum / 2, 1, 'bonus')
+        this.$emit('BonusFraiseSucc')
       }
       this.bonusFraiseProgress += 10
     },
