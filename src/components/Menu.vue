@@ -6,10 +6,14 @@
       <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
       <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
     </div>
-    <div class="menu">
-      <div class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click="this.$emit('selectDecor', index)">
-        {{index}}
+    <div class="menu-seperate">
+      <p class="title">Choisis ton fond d'écran :</p>
+      <div class="menu-grid">
+        <div class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click="this.$emit('selectDecor', index)">
+          {{index}}
+        </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -31,16 +35,23 @@ export default {
 <style lang="sass">
   .popup
     width: 30vw
+    height: calc(100vh - 50px)
     position: fixed
-    top: 50%
-    left: 50%
+    top: 20px
+    left: 20px
     z-index: 999
-    transform: translate(-50%, -50%)
   .menu
     margin-bottom: 20px
     display: flex
     justify-content: space-between
     position: relative
+    &-seperate
+      padding-top: 20px
+    &-grid
+      display: grid
+      grid-gap: 15px
+      row-gap: 6px
+      grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) )
 
   .closed
     padding: 0 4px !important
