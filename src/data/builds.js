@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     name: "Fraisier",
-    inc: 10,
+    inc: 0.1,
     price: 15,
     number: 0,
     buyable: false,
@@ -13,178 +13,178 @@ export default [
   {
     id: 2,
     name: "Jardin potager BIO",
-    inc: 0.5,
-    price: 1000,
+    inc: 1,
+    price: 100,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 300
+    visible: 100
   },
   {
     id: 3,
     name: "Blablapareil à gauffres",
-    inc: 2,
-    price: 3500,
+    inc: 8,
+    price: 1100,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 600
+    visible: 900
   },
   {
     id: 4,
     name: "N-50 de cuisine",
-    inc: 4.5,
-    price: 10000,
+    inc: 47,
+    price: 12000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 1000
+    visible: 10000
   },
   {
     id: 5,
     name: "BlaBarbecue",
-    inc: 10,
-    price: 250000,
+    inc: 260,
+    price: 130000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 100000
   },
   {
     id: 6,
     name: "Machine à Blabapapa",
-    inc: 10,
-    price: 250000,
+    inc: 1400,
+    price: 1400000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 1000000
   },
   {
     id: 7,
     name: "Machine à Glace froide",
-    inc: 10,
-    price: 250000,
+    inc: 7800,
+    price: 20000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 10000000
   },
   {
     id: 8,
     name: "Fontaine de chocolat rose",
-    inc: 10,
-    price: 250000,
+    inc: 44000,
+    price: 330000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 300000000
   },
   {
     id: 9,
     name: "BlaBar à sushis",
-    inc: 10,
-    price: 250000,
+    inc: 260000,
+    price: 5100000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 4000000000
   },
   {
     id: 10,
     name: "Flood truck",
-    inc: 10,
-    price: 250000,
+    inc: 1600000,
+    price: 75000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 10000000000
   },
   {
     id: 11,
     name: "Blabla-Snack",
-    inc: 10,
-    price: 250000,
+    inc: 10000000,
+    price: 1000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 100000000000
   },
   {
     id: 12,
     name: "Restaurant Coco Luxe",
-    inc: 10,
-    price: 250000,
+    inc: 65000000,
+    price: 14000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 10000000000000
   },
   {
     id: 13,
     name: "Usine de gâteaux au sucre doux",
-    inc: 10,
-    price: 250000,
+    inc: 430000000,
+    price: 170000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 100000000000000
   },
   {
     id: 14,
     name: "Volcan à bonbons",
-    inc: 10,
-    price: 250000,
+    inc: 2900000000,
+    price: 2100000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 1000000000000000
   },
   {
     id: 15,
     name: "Fraisier quantique",
-    inc: 10,
-    price: 250000,
+    inc: 21000000000,
+    price: 26000000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 10000000000000000
   },
   {
     id: 16,
     name: "Usine à biscuits intergalactique",
-    inc: 10,
-    price: 250000,
+    inc: 150000000000,
+    price: 310000000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 100000000000000000
   },
   {
     id: 17,
     name: "Corne d'abondance",
-    inc: 10,
-    price: 250000,
+    inc: 1100000000000,
+    price: 71000000000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 10000000000000000000
   },
   {
     id: 18,
