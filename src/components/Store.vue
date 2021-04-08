@@ -64,7 +64,8 @@ export default {
     currency: Number,
     buy: Function,
     purchaseStoreSucc: Function,
-    storeHeartSucc: Function
+    storeHeartSucc: Function,
+    calcCps: Function
   },
   methods: {
     build(id){
@@ -76,6 +77,7 @@ export default {
       this.$emit('purchaseStoreSucc')
       this.build(store.id).inc *= 2
       this.build(store.id).stars += 1
+      this.$emit('calcCps')
       store.purchased = true
     }
   }

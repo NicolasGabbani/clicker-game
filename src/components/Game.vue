@@ -47,7 +47,7 @@
             <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
           </div>
           <div v-show="!openSuccess">
-            <Store :store="display_store" :builds="display_builds" :currency="this.user.currency" @buy="buy" @purchaseStoreSucc="purchaseStoreSucc" @storeHeartSucc="storeHeartSucc" />
+            <Store :store="display_store" :builds="display_builds" :currency="this.user.currency" @buy="buy" @purchaseStoreSucc="purchaseStoreSucc" @storeHeartSucc="storeHeartSucc" @calcCps="calcCps" />
             <Builds
               @buyBuild="buyBuild"
               @buy="buy"
