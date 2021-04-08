@@ -6,6 +6,11 @@
       <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
       <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
     </div>
+    <div class="menu">
+      <div class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click="this.$emit('selectDecor', index)">
+        {{index}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,7 +20,10 @@ export default {
   props: {
     reset: Function,
     save: Function,
-    closeOptions: Function
+    closeOptions: Function,
+    decor: Array,
+    currentDecor: Number,
+    selectDecor: Function
   }
 }
 </script>

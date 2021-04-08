@@ -80,4 +80,5 @@ export default {
     width: 500px
     opacity: 0
     font-size: .8rem
+    pointer-events: none
 </style>

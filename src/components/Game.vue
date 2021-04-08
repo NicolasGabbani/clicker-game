@@ -1,5 +1,5 @@
 <template>
-  <div id="game-content" :class="classConditionBg">
+  <div id="game-content" :class="decorClass || decorArray.filter(d => d.get)[this.user.decor]?.cls">
     <Bonus
       @inc="increment"
       @cps="cps"
@@ -15,7 +15,7 @@
         <ClickButton
           @inc="increment"
           :cps="this.user.cps"
-          :classBg="classConditionBg"
+          :clsLicorne="decorClass"
           :haveSuccess="haveSuccess"
           :success="currentSuccess"
           :haveBonusCpsClicked="haveBonusCpsClicked"
@@ -39,6 +39,9 @@
             @save="save"
             @closeOptions="closeOptions"
             v-show="openOptions"
+            :decor="decorArray"
+            :currentDecor="this.user.decor"
+            @selectDecor="selectDecor"
           />
           <div v-show="openSuccess">
             <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
@@ -79,6 +82,7 @@ import Success from "@/components/Success.vue";
 import Bonus from "@/components/Bonus.vue";
 import HaveSuccess from "@/components/HaveSuccess.vue";
 import Deco from "@/components/Deco.vue";
+import Decor from "@/data/decor"
 export default {
   name: "Game",
   components: {
@@ -119,6 +123,8 @@ export default {
       haveNewSuccess: false,
       currentSuccess: {},
       haveBonusCpsClicked: false,
+      decorArray: Decor,
+      decorClass: ''
     };
   },
   methods: {
@@ -143,6 +149,18 @@ export default {
       this.user.total = this.user.total + inc * number;
       this.display_currency = this.renderNumeral(this.user.currency);
       this.display_total = this.renderNumeral(this.user.total);
+
+      let oldDecorArray = this.decorArray.filter(d => d.get).length
+
+      for(let i in this.decorArray){
+        this.decorArray[i].get = this.user.total >= this.decorArray[i].score
+      }
+
+      if(oldDecorArray != 0 && oldDecorArray != this.decorArray.filter(d => d.get).length){
+        this.user.decor = this.decorArray.filter(d => d.get).length - 1
+      }
+
+      this.decorClass = this.user.decor == -1 ? this.decorArray.filter(d => d.get).slice(-1)[0]?.cls : null
     },
 
     calcCps(multiple = 1) {
@@ -299,6 +317,11 @@ export default {
       this.openOptions = false;
     },
 
+    selectDecor(index){
+      this.user.decor = index
+      console.log(this.user.decor)
+    },
+
     bonusCpsClicked(timer) {
       this.bonusCpsClickedTimer = timer;
       this.haveBonusCpsClicked = true;
@@ -308,28 +331,6 @@ export default {
       if(val >= 1000000) return numeral(val).format('0.000a')
       return numeral(val).format('0,0.0')
     }
-  },
-  computed: {
-    classConditionBg() {
-      return {
-        l3tsg01: this.user.total >= 15,
-        cb0nc4: this.user.total >= 30,
-        jml3sp0p: this.user.total >= 60,
-        j4im3l3sch4ts: this.user.total >= 80,
-        cm4rr4nt: this.user.total >= 100,
-        jss1l1c0rn3: this.user.total >= 115,
-        g4m4d0n3gg: this.user.total >= 130,
-        g0g4l4x1e: this.user.total >= 180,
-        n3xtl3v3l: this.user.total >= 200,
-        un1v3rs20uf: this.user.total >= 215,
-        jss0ul4l0l: this.user.total >= 230,
-        j3v0l: this.user.total >= 280,
-        y0y0l30uf: this.user.total >= 300,
-        sky1sth3l1m1t: this.user.total >= 315,
-        n0m0rel1m1it: this.user.total >= 330,
-        sup3rbbl: this.user.total >= 380
-      };
-    },
   },
   mounted() {
     this.cps()
