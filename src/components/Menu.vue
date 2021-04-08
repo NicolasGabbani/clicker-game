@@ -6,7 +6,7 @@
       <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
       <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
     </div>
-    <div class="menu-seperate">
+    <div class="menu-seperate" v-show="decor.filter(d => d.get).length">
       <p class="title">Choisis ton fond d'écran :</p>
       <div class="menu-grid">
         <div class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click="this.$emit('selectDecor', index)">
@@ -50,8 +50,7 @@ export default {
     &-grid
       display: grid
       grid-gap: 15px
-      row-gap: 6px
-      grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) )
+      grid-template-columns: repeat(5, 1fr)
 
   .closed
     padding: 0 4px !important
