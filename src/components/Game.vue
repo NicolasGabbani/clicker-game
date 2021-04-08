@@ -19,6 +19,7 @@
           :haveSuccess="haveSuccess"
           :success="currentSuccess"
           :haveBonusCpsClicked="haveBonusCpsClicked"
+          @licorneClickSucc="licorneClickSucc"
         />
         <Score :currency="display_currency" :cps="display_cps" :total="display_total" :totalNum="this.user.total" />
       </div>
@@ -43,7 +44,7 @@
             <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
           </div>
           <div v-show="!openSuccess">
-            <Store :store="display_store" :builds="display_builds" :currency="this.user.currency" @buy="buy" />
+            <Store :store="display_store" :builds="display_builds" :currency="this.user.currency" @buy="buy" @purchaseStoreSucc="purchaseStoreSucc" @storeHeartSucc="storeHeartSucc" />
             <Builds
               @buyBuild="buyBuild"
               @buy="buy"
@@ -62,7 +63,7 @@
       jeu sauvegardé
     </div>
     <HaveSuccess v-if="haveSuccess" :success="currentSuccess" />
-    <Deco />
+    <Deco @grandSageSucc="grandSageSucc" />
   </div>
 </template>
 
@@ -258,6 +259,38 @@ export default {
       if (!this.display_success.filter((succ) => succ.succ === "bonusFraise")[0].done) {
         this.displaySuccess(
           this.display_success.filter((succ) => succ.succ === "bonusFraise")[0]
+        );
+      }
+    },
+
+    purchaseStoreSucc(){
+      if (!this.display_success.filter((succ) => succ.succ === "purchaseStore")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.succ === "purchaseStore")[0]
+        );
+      }
+    },
+
+    storeHeartSucc(){
+      if (!this.display_success.filter((succ) => succ.succ === "storeHeart")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.succ === "storeHeart")[0]
+        );
+      }
+    },
+
+    grandSageSucc(){
+      if (!this.display_success.filter((succ) => succ.succ === "grandSage")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.succ === "grandSage")[0]
+        );
+      }
+    },
+
+    licorneClickSucc(){
+      if (!this.display_success.filter((succ) => succ.succ === "licorneClick")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.succ === "licorneClick")[0]
         );
       }
     },

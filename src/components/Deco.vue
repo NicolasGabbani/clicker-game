@@ -6,7 +6,7 @@
         Aide-toi des fabriques à miam-miam pour la nourrir et clique sur son joli bidou !
       </p>
       <div class="grand-sage-content">
-        <div class="grand-sage nes-pointer" @mouseover="displayTuto = true" @mouseleave="displayTuto = false"></div>
+        <div class="grand-sage nes-pointer" @click="grandSageClick" @mouseover="displayTuto = true" @mouseleave="displayTuto = false"></div>
         <img :src="require('@/assets/images/deco/nuage.png')" alt="nuage" class="cloud">
       </div>
     </div>
@@ -16,11 +16,29 @@
 <script>
 export default {
   name: 'Deco',
+  props: {
+    grandSageSucc: Function
+  },
   data(){
     return {
-      displayTuto: null
+      displayTuto: null,
+      click: 0
     }
-  }
+  },
+  methods: {
+    grandSageClick(){
+      this.click++
+      if(this.click >= 30){
+        this.$emit('grandSageSucc')
+      }
+      if(this.$timer){
+        clearTimeout(this.$timer)
+      }
+      this.$timer = setTimeout(() => {
+        this.click = 0
+      }, 5000);
+    }
+  },
 }
 </script>
 

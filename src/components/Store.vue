@@ -23,9 +23,10 @@
 
             <template #content>
               <div class="nes-btn">
-                {{build(s.id).name}} deux fois plus efficace !
-                <br>
-                {{s.price}}<span class="fraise small-fraise"></span>
+                <div class="store-tooltip">
+                  {{build(s.id).name}} deux fois plus efficace !
+                </div>
+                <span class="nes-text" :class="{'is-success': currency >= s.price, 'is-error': currency < s.price}">{{s.price}}<span class="fraise small-fraise"></span></span>
               </div>
             </template>
           </tippy>
@@ -35,7 +36,7 @@
           </button>
 
           <tippy :followCursor="true" placement="top-start" duration="0">
-            <button class="store-btn nes-btn" v-show="s.purchased">
+            <button class="store-btn nes-btn" v-show="s.purchased" @click.prevent.stop="$emit('storeHeartSucc')">
               <i class="nes-icon is-large heart"></i>
             </button>
 
@@ -61,7 +62,9 @@ export default {
     store: Array,
     builds: Array,
     currency: Number,
-    buy: Function
+    buy: Function,
+    purchaseStoreSucc: Function,
+    storeHeartSucc: Function
   },
   methods: {
     build(id){
@@ -70,6 +73,7 @@ export default {
     purchase(store){
       if (this.currency < store.price) return;
       this.$emit('buy', store.price)
+      this.$emit('purchaseStoreSucc')
       this.build(store.id).inc *= 2
       this.build(store.id).stars += 1
       store.purchased = true
@@ -83,6 +87,11 @@ export default {
     height: 115px !important // 172
   .store
     margin-bottom: 20px !important
+    &-tooltip
+      border-bottom: 3px dashed var(--clr-black)
+      margin-bottom: 5px
+      padding-bottom: 5px
+      font-size: .8rem
     &-content
       display: grid
       grid-gap: 15px

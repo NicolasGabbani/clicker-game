@@ -1,7 +1,7 @@
 <template>
   <div class="btn-score-container">
     <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon" v-show="haveBonusCpsClicked">
-    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore();" :class="classBg"></button>
+    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore(); licorneClick();" :class="classBg"></button>
     <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="(haveSuccess && success?.content) || haveDialog">
       {{success?.content || this.licorneDialog}}
     </p>
@@ -18,7 +18,8 @@ export default {
     classBg: Object,
     haveSuccess: Boolean,
     success: Object,
-    haveBonusCpsClicked: Boolean
+    haveBonusCpsClicked: Boolean,
+    licorneClickSucc: Function
   },
   data(){
     return {
@@ -26,7 +27,8 @@ export default {
       licorneDialog: '',
       dialog: Dialog,
       haveDialog: false,
-      dialogInterval: 10000
+      dialogInterval: 10000,
+      click: 0
     }
   },
   methods: {
@@ -46,6 +48,18 @@ export default {
         this.haveDialog = true
         this.licorneDialog = this.dialog[Math.floor(Math.random() * this.dialog.length)]
       }, this.dialogInterval); 
+    },
+    licorneClick(){
+      this.click++
+      if(this.click >= 50){
+        this.$emit('licorneClickSucc')
+      }
+      if(this.$timer){
+        clearTimeout(this.$timer)
+      }
+      this.$timer = setTimeout(() => {
+        this.click = 0
+      }, 5000);
     },
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0.0a')
