@@ -18,7 +18,7 @@
     <div class="menu-seperate" v-show="decor.filter(d => d.licorne).length">
       <p class="title">Choisis ta licorne :</p>
       <div class="menu-grid">
-        <div class="nes-btn" :class="{'is-primary': currentLicorne == index || (index == decor.filter(d => d.licorne).length - 1 && currentLicorne == -1)}" v-for="(d, index) in decor.filter(d => d.licorne)" @click="this.$emit('selectLicorne', index)">
+        <div class="nes-btn" :class="{'is-success': currentLicorne == index || (index == decor.filter(d => d.licorne).length - 1 && currentLicorne == -1)}" v-for="(d, index) in decor.filter(d => d.licorne)" @click="this.$emit('selectLicorne', index)">
           {{index}}
         </div>
       </div>

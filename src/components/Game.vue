@@ -160,7 +160,10 @@ export default {
 
       for(let i in this.decorArray){
         this.decorArray[i].get = this.user.total >= this.decorArray[i].score
-        this.decorArray[i].licorne = this.user.total >= this.decorArray[i].score
+      }
+
+      for(let l in this.decorArray.filter(d => d.licorne != undefined)){
+        this.decorArray[l].licorne = this.user.total >= this.decorArray[l].score
       }
 
       if(oldDecorArray != 0 && oldDecorArray != this.decorArray.filter(d => d.get).length){

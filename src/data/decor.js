@@ -38,7 +38,8 @@ export default [
   {
     cls: 'g4m4d0n3gg',
     score: 130,
-    get: false
+    get: false,
+    licorne: false
   },
   {
     cls: 'g0g4l4x1e',
