@@ -151,6 +151,27 @@ export default {
       localStorage.buildssuccess = JSON.stringify(BuildsSuccess)
     }
     this.buildsSuccess = localStorage.buildssuccess
+
+    numeral.register('locale', 'fr', {
+        delimiters: {
+            thousands: ',',
+            decimal: '.'
+        },
+        abbreviations: {
+            thousand: 'mil',
+            million: 'mio',
+            billion: 'mia',
+            trillion: 'tri'
+        },
+        ordinal : function (number) {
+            return number === 1 ? 'er' : 'ème';
+        },
+        currency: {
+            symbol: '€'
+        }
+    });
+
+    numeral.locale('fr');
   },
   mounted(){
     this.loadImgs()
