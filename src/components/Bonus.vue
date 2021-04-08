@@ -4,6 +4,7 @@
       <button class="bonus nes-pointer" @click.prevent.once="addRandomBonus" v-show="!bonusClicked"></button>
       <span class="bonus-added" :class="{fadeout: bonusClicked}"></span>
     </div>
+
     <div class="buff" v-show="bonusCpsClicked">
       <div class="nes-container is-dark is-rounded is-centered">
         <div><span class="buff-title fraise"></span>x2</div>
@@ -16,6 +17,15 @@
       <div class="bonus-fraise__timer nes-container is-white is-rounded">5</div>
       <div class="bonus-fraise__fraise nes-pointer" @click.prevent="bonusFraiseClick"></div>
       <progress class="nes-progress is-primary bonus-fraise__progress" :value="bonusFraiseProgress" max="100"></progress>
+    </div>
+    <div class="bonus-fraise bonus-fraise-result container-centered" v-if="bonusFraiseResult != ''">
+      <div class="nes-container is-rounded is-centered is-white animate__animated animate__rubberBand" v-show="bonusFraiseResult == 'win'">
+        <h2>Excellent !</h2>
+        +{{renderNumeral(totalNum/2)}}<span class="fraise small-fraise"></span>
+      </div>
+      <div class="nes-container is-rounded is-centered is-white animate__animated animate__shakeX" v-show="bonusFraiseResult == 'lose'">
+        <h2>Perdu...</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +48,8 @@ export default {
       bonusCpsClicked: false,
       bonusFraise: false,
       bonusFraiseProgress: 0,
+      bonusFraiseResult: '',
+      bonusFraiseInterval: null,
       minBonus: -100,
       maxBonus: 1000,
       haveBonus: false,
@@ -93,17 +105,20 @@ export default {
     addBonusFraise(){
       this.bonusClicked = true
       this.bonusFraise = true
+      this.bonusFraiseResult = ''
+      clearInterval(this.bonusFraiseInterval)
       document.querySelector('.bonus-added').innerHTML = 'MEGA BONUS !'
       let bonusTime = this.bonusDisplayedTimer / 1000
       document.querySelector('.bonus-fraise > .bonus-fraise__timer').innerHTML = bonusTime 
-      const bonusTimer = setInterval(() => {
+      this.bonusFraiseInterval = setInterval(() => {
         --bonusTime
         document.querySelector('.bonus-fraise > .bonus-fraise__timer').innerHTML = bonusTime
         if(bonusTime == -1) {
-          clearInterval(bonusTimer)
+          clearInterval(this.bonusFraiseInterval)
           this.bonusClicked = false
           this.bonusFraise = false
           this.bonusFraiseProgress = 0
+          this.bonusFraiseResult = 'lose'
         }
       }, 1000);
     },
@@ -125,6 +140,8 @@ export default {
         this.bonusFraise = false
         this.bonusClicked = false
         this.bonusFraiseProgress = 0
+        this.bonusFraiseResult = 'win'
+        clearInterval(this.bonusFraiseInterval)
         this.$emit('inc', this.totalNum / 2, 1, 'bonus')
       }
       this.bonusFraiseProgress += 10
@@ -140,6 +157,19 @@ export default {
   unmounted() {
     clearTimeout(this.$randomBonus)
   },
+  watch: {
+    bonusFraiseResult: function(val){
+      if(this.bonusFraiseTimer){
+        clearTimeout(this.bonusFraiseTimer)
+      }
+      if(val != ''){
+        this.bonusFraiseTimer = setTimeout(() => {
+          this.bonusFraiseResult = ''
+          this.bonusFraiseProgress = 0
+        }, 1500);
+      }
+    }
+  }
 }
 </script>
 
