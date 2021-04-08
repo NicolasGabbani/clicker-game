@@ -6,8 +6,12 @@
       <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
       <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
     </div>
-    <div class="menu-seperate" v-show="decor.filter(d => d.get).length">
+
+    <div class="menu-seperate">
       <p class="title">Choisis ton fond d'écran :</p>
+      <div class="nes-container is-white is-rounded" v-show="!decor.filter(d => d.get).length">
+        Pas encore débloqué...
+      </div>
       <div class="menu-grid">
         <div class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click="this.$emit('selectDecor', index)">
           {{index}}
@@ -15,13 +19,21 @@
       </div>
     </div>
 
-    <div class="menu-seperate" v-show="decor.filter(d => d.licorne).length">
+    <div class="menu-seperate">
       <p class="title">Choisis ta licorne :</p>
+      <div class="nes-container is-white is-rounded" v-show="!decor.filter(d => d.licorne).length">
+        Pas encore débloqué...
+      </div>
       <div class="menu-grid">
         <div class="nes-btn" :class="{'is-success': currentLicorne == index || (index == decor.filter(d => d.licorne).length - 1 && currentLicorne == -1)}" v-for="(d, index) in decor.filter(d => d.licorne)" @click="this.$emit('selectLicorne', index)">
           {{index}}
         </div>
       </div>
+    </div>
+
+    <div class="copyright text-center">
+      <div>Illustrations par Yoann Montalban - Code par Nakin (encore lui...)</div>
+      <div>Tous droit réservés - 2021 - S.A.S Yoann Montalban</div>
     </div>
   </div>
 </template>
@@ -43,6 +55,17 @@ export default {
 </script>
 
 <style lang="sass">
+  .copyright
+    position: fixed
+    bottom: 0
+    left: 0
+    width: 100%
+    padding: 20px
+    font-size: .4rem
+    > div
+      margin-bottom: 15px
+      &:last-child
+        margin-bottom: 0
   .popup
     width: 30vw
     height: calc(100vh - 50px)
