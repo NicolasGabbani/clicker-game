@@ -1,7 +1,7 @@
 <template>
   <div class="btn-score-container">
     <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon" v-show="haveBonusCpsClicked">
-    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore(); licorneClick();" :class="clsLicorne"></button>
+    <button class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore(); licorneClick();" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls"></button>
     <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="(haveSuccess && success?.content) || haveDialog">
       {{success?.content || this.licorneDialog}}
     </p>
@@ -16,6 +16,8 @@ export default {
     inc: Function,
     cps: Number,
     clsLicorne: String,
+    decorArray: Array,
+    currentLicorne: Number,
     haveSuccess: Boolean,
     success: Object,
     haveBonusCpsClicked: Boolean,

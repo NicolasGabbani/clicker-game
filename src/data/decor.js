@@ -2,32 +2,38 @@ export default [
   {
     cls: 'l3tsg01',
     score: 15,
-    get: false
+    get: false,
+    licorne: false
   },
   {
     cls: 'cb0nc4',
     score: 30,
-    get: false
+    get: false,
+    licorne: false
   },
   {
     cls: 'jml3sp0p',
     score: 60,
-    get: false
+    get: false,
+    licorne: false
   },
   {
     cls: 'j4im3l3sch4ts',
     score: 80,
-    get: false
+    get: false,
+    licorne: false
   },
   {
     cls: 'cm4rr4nt',
     score: 100,
-    get: false
+    get: false,
+    licorne: false
   },
   {
     cls: 'jss1l1c0rn3',
     score: 115,
-    get: false
+    get: false,
+    licorne: false
   },
   {
     cls: 'g4m4d0n3gg',

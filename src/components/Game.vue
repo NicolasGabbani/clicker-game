@@ -15,7 +15,9 @@
         <ClickButton
           @inc="increment"
           :cps="this.user.cps"
-          :clsLicorne="decorClass"
+          :clsLicorne="licorneClass"
+          :decorArray="decorArray"
+          :currentLicorne="this.user.licorne"
           :haveSuccess="haveSuccess"
           :success="currentSuccess"
           :haveBonusCpsClicked="haveBonusCpsClicked"
@@ -42,6 +44,8 @@
             :decor="decorArray"
             :currentDecor="this.user.decor"
             @selectDecor="selectDecor"
+            :currentLicorne="this.user.licorne"
+            @selectLicorne="selectLicorne"
           />
           <div v-show="openSuccess">
             <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
@@ -124,7 +128,8 @@ export default {
       currentSuccess: {},
       haveBonusCpsClicked: false,
       decorArray: Decor,
-      decorClass: ''
+      decorClass: '',
+      licorneClass: ''
     };
   },
   methods: {
@@ -151,16 +156,23 @@ export default {
       this.display_total = this.renderNumeral(this.user.total);
 
       let oldDecorArray = this.decorArray.filter(d => d.get).length
+      let oldLicorneArray = this.decorArray.filter(d => d.licorne).length
 
       for(let i in this.decorArray){
         this.decorArray[i].get = this.user.total >= this.decorArray[i].score
+        this.decorArray[i].licorne = this.user.total >= this.decorArray[i].score
       }
 
       if(oldDecorArray != 0 && oldDecorArray != this.decorArray.filter(d => d.get).length){
         this.user.decor = this.decorArray.filter(d => d.get).length - 1
       }
 
+      if(oldLicorneArray != 0 && oldLicorneArray != this.decorArray.filter(d => d.licorne).length){
+        this.user.licorne = this.decorArray.filter(d => d.licorne).length - 1
+      }
+
       this.decorClass = this.user.decor == -1 ? this.decorArray.filter(d => d.get).slice(-1)[0]?.cls : null
+      this.licorneClass = this.user.licorne == -1 ? this.decorArray.filter(d => d.licorne).slice(-1)[0]?.cls : null
     },
 
     calcCps(multiple = 1) {
@@ -319,7 +331,10 @@ export default {
 
     selectDecor(index){
       this.user.decor = index
-      console.log(this.user.decor)
+    },
+
+    selectLicorne(index){
+      this.user.licorne = index
     },
 
     bonusCpsClicked(timer) {
