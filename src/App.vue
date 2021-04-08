@@ -126,7 +126,6 @@ export default {
     }
   },
   created(){
-    this.loadImgs()
     
     if(!this.$cookies.isKey('user')) {
       this.$cookies.set('user', Data, -1)
@@ -152,6 +151,9 @@ export default {
       localStorage.buildssuccess = JSON.stringify(BuildsSuccess)
     }
     this.buildsSuccess = localStorage.buildssuccess
+  },
+  mounted(){
+    this.loadImgs()
   }
 }
 </script>
