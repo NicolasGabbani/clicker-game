@@ -1,5 +1,5 @@
 <template>
-  <div class="nes-container is-semi-white is-rounded popup">
+  <div class="nes-container is-white is-rounded popup">
     <p class="title">Options</p>
     <button class="closed nes-container is-white is-rounded" @click.prevent="$emit('closeOptions')"><i class="nes-icon close is-small"></i></button>
     <div class="menu">
@@ -67,7 +67,7 @@ export default {
 
 <style lang="sass">
   .copyright
-    position: fixed
+    position: absolute
     bottom: 0
     left: 0
     width: 100%

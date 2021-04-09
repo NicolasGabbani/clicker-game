@@ -25,17 +25,17 @@ export default {
   },
   data(){
     return {
-      clickInc: this.cps == 0 ? 1 : (1 + this.cps) * 1.2,
+      clickInc: this.cps == 0 ? 1 : (1 + this.cps) * 1.1,
       licorneDialog: '',
       dialog: Dialog,
       haveDialog: false,
-      dialogInterval: 10000,
+      dialogInterval: 30000,
       click: 0
     }
   },
   methods: {
     displayScore(){
-      this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.2
+      this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.1
       const span = document.createElement('span')
       span.innerHTML = `+${this.renderNumeral(this.clickInc)}<span class='fraise'></span>`
       span.style.top = `${Math.floor(Math.random() * 99)}%`

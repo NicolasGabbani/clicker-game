@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     name: "Fraisier",
-    inc: 1000,
+    inc: 0.1,
     price: 15,
     number: 0,
     buyable: false,
@@ -19,7 +19,7 @@ export default [
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 100
+    visible: 30
   },
   {
     id: 3,
@@ -30,35 +30,68 @@ export default [
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 900
+    visible: 500
   },
   {
     id: 4,
     name: "N-50 de cuisine",
+    inc: 20,
+    price: 4500,
+    number: 0,
+    buyable: false,
+    stars: 0,
+    total: 0,
+    visible: 2500
+  },
+  {
+    id: 5,
+    name: "BlaBarbecue",
     inc: 47,
     price: 12000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 10000
-  },
-  {
-    id: 5,
-    name: "BlaBarbecue",
-    inc: 260,
-    price: 130000,
-    number: 0,
-    buyable: false,
-    stars: 0,
-    total: 0,
-    visible: 100000
+    visible: 5000
   },
   {
     id: 6,
     name: "Machine à Blabapapa",
+    inc: 101,
+    price: 45000,
+    number: 0,
+    buyable: false,
+    stars: 0,
+    total: 0,
+    visible: 20000
+  },
+  {
+    id: 7,
+    name: "Machine à Glace froide",
+    inc: 260,
+    price: 125000,
+    number: 0,
+    buyable: false,
+    stars: 0,
+    total: 0,
+    visible: 85000
+  },
+  {
+    id: 8,
+    name: "Fontaine de chocolat rose",
+    inc: 556,
+    price: 500000,
+    number: 0,
+    buyable: false,
+    stars: 0,
+    total: 0,
+    visible: 200000
+  },
+  {
+    id: 9,
+    name: "BlaBar à sushis",
     inc: 1400,
-    price: 1400000,
+    price: 1750000,
     number: 0,
     buyable: false,
     stars: 0,
@@ -66,10 +99,21 @@ export default [
     visible: 1000000
   },
   {
-    id: 7,
-    name: "Machine à Glace froide",
-    inc: 7800,
-    price: 20000000,
+    id: 10,
+    name: "Flood truck",
+    inc: 22222,
+    price: 5000000,
+    number: 0,
+    buyable: false,
+    stars: 0,
+    total: 0,
+    visible: 3500000
+  },
+  {
+    id: 11,
+    name: "Blabla-Snack",
+    inc: 44000,
+    price: 14500000,
     number: 0,
     buyable: false,
     stars: 0,
@@ -77,59 +121,15 @@ export default [
     visible: 10000000
   },
   {
-    id: 8,
-    name: "Fontaine de chocolat rose",
-    inc: 44000,
-    price: 330000000,
-    number: 0,
-    buyable: false,
-    stars: 0,
-    total: 0,
-    visible: 300000000
-  },
-  {
-    id: 9,
-    name: "BlaBar à sushis",
-    inc: 260000,
-    price: 5100000000,
-    number: 0,
-    buyable: false,
-    stars: 0,
-    total: 0,
-    visible: 4000000000
-  },
-  {
-    id: 10,
-    name: "Flood truck",
-    inc: 1600000,
-    price: 75000000000,
-    number: 0,
-    buyable: false,
-    stars: 0,
-    total: 0,
-    visible: 10000000000
-  },
-  {
-    id: 11,
-    name: "Blabla-Snack",
-    inc: 10000000,
-    price: 1000000000000,
-    number: 0,
-    buyable: false,
-    stars: 0,
-    total: 0,
-    visible: 100000000000
-  },
-  {
     id: 12,
     name: "Restaurant Coco Luxe",
-    inc: 65000000,
-    price: 14000000000000,
+    inc: 99999,
+    price: 44444444,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 10000000000000
+    visible: 30000000
   },
   {
     id: 13,

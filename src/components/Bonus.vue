@@ -21,7 +21,7 @@
     <div class="bonus-fraise bonus-fraise-result container-centered" v-if="bonusFraiseResult != ''">
       <div class="nes-container is-rounded is-centered is-white animate__animated animate__rubberBand" v-show="bonusFraiseResult == 'win'">
         <h2>Excellent !</h2>
-        +{{renderNumeral(totalNum/2)}}<span class="fraise small-fraise"></span>
+        +{{renderNumeral(cpsNum * 100)}}<span class="fraise small-fraise"></span>
       </div>
       <div class="nes-container is-rounded is-centered is-white animate__animated animate__shakeX" v-show="bonusFraiseResult == 'lose'">
         <h2>Perdu...</h2>
@@ -37,7 +37,6 @@ export default {
     inc: Function,
     cps: Function,
     cpsNum: Number,
-    totalNum: Number,
     top: String,
     left: String,
     interval: Number,
@@ -52,10 +51,10 @@ export default {
       bonusFraiseResult: '',
       bonusFraiseInterval: null,
       minBonus: -100,
-      maxBonus: 1000,
+      maxBonus: 500,
       haveBonus: false,
-      bonusMinInterval: 1000,
-      bonusMaxInterval: 5000,
+      bonusMinInterval: 300000,
+      bonusMaxInterval: 900000,
       intervalBonus: this.randomIntFromInterval(this.bonusMinInterval, this.bonusMaxInterval),
       bonusTop: `${Math.floor(Math.random() * 99)}%`,
       bonusLeft: `${Math.floor(Math.random() * 99)}%`,
@@ -73,7 +72,7 @@ export default {
       this.randomFunc[random].call()
     },
     addBonusInc(){
-      const randomNumber = this.randomIntFromInterval((this.minBonus * this.cpsNum) + this.minBonus, (this.maxBonus * this.cpsNum) + this.maxBonus)
+      const randomNumber = this.randomIntFromInterval((this.minBonus * this.cpsNum /2) + this.minBonus, (this.maxBonus * this.cpsNum /2) + this.maxBonus)
       this.$emit('inc', randomNumber, 1, 'bonus')
       this.bonusClicked = true
       document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${this.renderNumeral(randomNumber)}<span class="fraise"></span>` : `${this.renderNumeral(randomNumber)}<span class="fraise"></span>`
@@ -143,10 +142,10 @@ export default {
         this.bonusFraiseProgress = 0
         this.bonusFraiseResult = 'win'
         clearInterval(this.bonusFraiseInterval)
-        this.$emit('inc', this.totalNum / 2, 1, 'bonus')
+        this.$emit('inc', this.cpsNum * 100, 1, 'bonus')
         this.$emit('BonusFraiseSucc')
       }
-      this.bonusFraiseProgress += 10
+      this.bonusFraiseProgress += 5
     },
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0a')
