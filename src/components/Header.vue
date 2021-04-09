@@ -1,7 +1,5 @@
 <template>
-  <nav class="nav">
-    <div class="nav-name">🦄Super Licorne Clicker🦄</div>
-  </nav>
+  <img :src="require('@/assets/images/logos/logo_superlicorne.png')" alt="logo superlicorne" class="super-licorne">
 </template>
 
 <script>
@@ -11,18 +9,9 @@ export default {
 </script>
 
 <style lang="sass">
-  .nav
+  .super-licorne
     position: fixed
-    top: 0
-    left: 0
-    width: 100%
-    padding: 12px
-
-    display: flex
-    justify-content: center
-    align-items: center
-
-    &-name
-      font-family: var(--font-train)
-      font-size: 4rem
+    top: 20px
+    left: 20px
+    width: 160px
 </style>

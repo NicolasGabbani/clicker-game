@@ -1,6 +1,6 @@
 <template>
   <div class="loading">
-    <img :src="require('@/assets/images/logos/superbbl-logo.png')" alt="superblablaland logo" class="logo">
+    <img :src="require('@/assets/images/logos/logo_superlicorne.png')" alt="superblablaland logo" class="logo">
     <div class="wrapper">
       <div class="circle"></div>
       <div class="circle"></div>

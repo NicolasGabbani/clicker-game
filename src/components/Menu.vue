@@ -41,6 +41,7 @@
     </div>
 
     <div class="copyright text-center">
+      <img :src="require('@/assets/images/logos/logo_superlicorne.png')" alt="logo superlicorne" class="copyright-super-licorne">
       <div>Illustrations par Yoann Montalban - Code par Nakin (encore lui...)</div>
       <div>Tous droit réservés - 2021 - S.A.S Yoann Montalban</div>
     </div>
@@ -77,6 +78,9 @@ export default {
       margin-bottom: 15px
       &:last-child
         margin-bottom: 0
+    &-super-licorne
+      width: 100px
+      margin-bottom: 20px
   .popup
     width: 30vw
     height: calc(100vh - 50px)

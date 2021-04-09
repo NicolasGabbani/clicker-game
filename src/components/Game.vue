@@ -1,5 +1,6 @@
 <template>
   <div id="game-content" :class="decorClass || decorArray.filter(d => d.get)[this.user.decor]?.cls">
+    <Header />
     <Bonus
       @inc="increment"
       @cps="cps"
@@ -78,6 +79,7 @@
 <script>
 import ClickButton from "@/components/ClickButton.vue";
 import Menu from "@/components/Menu.vue";
+import Header from "@/components/Header.vue";
 import Score from "@/components/Score.vue";
 import Name from "@/components/Name.vue";
 import Fontain from "@/components/Fontain.vue";
@@ -93,6 +95,7 @@ export default {
   components: {
     ClickButton,
     Menu,
+    Header,
     Score,
     Name,
     Fontain,
