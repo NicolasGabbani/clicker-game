@@ -291,7 +291,6 @@ export default {
 
     optionRain(rain){
       this.user.rain = rain
-      console.log(this.user.rain)
     },
 
     BonusFraiseSucc(){

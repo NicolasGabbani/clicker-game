@@ -158,10 +158,10 @@ export default {
             decimal: '.'
         },
         abbreviations: {
-            thousand: 'mil',
-            million: 'mio',
-            billion: 'mia',
-            trillion: 'tri'
+            thousand: ' mil',
+            million: ' mio',
+            billion: ' mia',
+            trillion: ' tri'
         },
         ordinal : function (number) {
             return number === 1 ? 'er' : 'ème';
