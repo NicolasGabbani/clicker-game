@@ -10,8 +10,8 @@
               :key="store.id" 
               v-show="!s.purchased && build(s.id).number >= s.buildNumber" 
               :class="{
-                'is-success': currency >= s.price, 
-                'is-error': currency < s.price
+                'is-success': currency >= build(s.id).price * 2, 
+                'is-error': currency < build(s.id).price * 2
               }"
               @click.prevent.stop="purchase(s)"
             >
@@ -26,7 +26,7 @@
                 <div class="store-tooltip">
                   {{build(s.id).name}} deux fois plus efficace !
                 </div>
-                <span class="nes-text" :class="{'is-success': currency >= s.price, 'is-error': currency < s.price}">{{s.price}}<span class="fraise small-fraise"></span></span>
+                <span class="nes-text" :class="{'is-success': currency >= build(s.id).price * 2, 'is-error': currency < build(s.id).price * 2}">{{build(s.id).price * 2}}<span class="fraise small-fraise"></span></span>
               </div>
             </template>
           </tippy>
@@ -72,8 +72,8 @@ export default {
       return this.builds.filter(b => b.id == id)[0]
     },
     purchase(store){
-      if (this.currency < store.price) return;
-      this.$emit('buy', store.price)
+      if (this.currency < this.build(store.id).price * 2) return;
+      this.$emit('buy', this.build(store.id).price * 2)
       this.$emit('purchaseStoreSucc')
       this.build(store.id).inc *= 2
       this.build(store.id).stars += 1

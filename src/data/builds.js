@@ -96,24 +96,35 @@ export default [
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 1000000
+    visible: 750000
   },
   {
     id: 10,
     name: "Flood truck",
-    inc: 22222,
+    inc: 5500,
     price: 5000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 3500000
+    visible: 1000000
   },
   {
     id: 11,
     name: "Blabla-Snack",
-    inc: 44000,
+    inc: 9999,
     price: 14500000,
+    number: 0,
+    buyable: false,
+    stars: 0,
+    total: 0,
+    visible: 8500000
+  },
+  {
+    id: 12,
+    name: "Restaurant Coco Luxe",
+    inc: 22222,
+    price: 20000000,
     number: 0,
     buyable: false,
     stars: 0,
@@ -121,157 +132,146 @@ export default [
     visible: 10000000
   },
   {
-    id: 12,
-    name: "Restaurant Coco Luxe",
-    inc: 99999,
+    id: 13,
+    name: "Usine de gâteaux au sucre doux",
+    inc: 56000,
     price: 44444444,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 30000000
-  },
-  {
-    id: 13,
-    name: "Usine de gâteaux au sucre doux",
-    inc: 430000000,
-    price: 170000000000000,
-    number: 0,
-    buyable: false,
-    stars: 0,
-    total: 0,
-    visible: 100000000000000
+    visible: 11444444
   },
   {
     id: 14,
     name: "Volcan à bonbons",
-    inc: 2900000000,
-    price: 2100000000000000,
+    inc: 122221,
+    price: 100000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 1000000000000000
+    visible: 50000000
   },
   {
     id: 15,
     name: "Fraisier quantique",
-    inc: 21000000000,
-    price: 26000000000000000,
+    inc: 221112,
+    price: 440000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 10000000000000000
+    visible: 110000000
   },
   {
     id: 16,
     name: "Usine à biscuits intergalactique",
-    inc: 150000000000,
-    price: 310000000000000000,
+    inc: 512000,
+    price: 1000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 100000000000000000
+    visible: 700000000
   },
   {
     id: 17,
     name: "Corne d'abondance",
-    inc: 1100000000000,
-    price: 71000000000000000000,
+    inc: 800800,
+    price: 7777777777,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 10000000000000000000
+    visible: 1111111111
   },
   {
     id: 18,
     name: "Duplicateur sucré salé",
-    inc: 10,
-    price: 250000,
+    inc: 1300000,
+    price: 10000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 7000000000
   },
   {
     id: 19,
     name: "Fraisier interdimensionnel",
-    inc: 10,
-    price: 250000,
+    inc: 3333333,
+    price: 22000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 10000000000
   },
   {
     id: 20,
     name: "Galaxie en chocolat",
-    inc: 10,
-    price: 250000,
+    inc: 8000000,
+    price: 40000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 10000000000
   },
   {
     id: 21,
     name: "Arc-en-ciel gourmand",
-    inc: 10,
-    price: 250000,
+    inc: 32000000,
+    price: 111000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 100000000000
   },
   {
     id: 22,
     name: "Vortex fruité",
-    inc: 10,
-    price: 250000,
+    inc: 123000000,
+    price: 250000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 100000000000
   },
   {
     id: 23,
     name: "Univers de surcreries",
-    inc: 10,
-    price: 250000,
+    inc: 300000000,
+    price: 400000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 100000000000
   },
   {
     id: 24,
     name: "Machine à rêves",
-    inc: 10,
-    price: 250000,
+    inc: 720000000,
+    price: 780000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 300000000000
   },
   {
     id: 25,
     name: "Fraisier omniprésent",
-    inc: 10,
-    price: 250000,
+    inc: 1000000000,
+    price: 1000000000000,
     number: 0,
     buyable: false,
     stars: 0,
     total: 0,
-    visible: 2000
+    visible: 600000000000
   }
 ]
