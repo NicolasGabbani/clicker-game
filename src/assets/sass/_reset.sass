@@ -14,5 +14,14 @@ a
 .nes-container.is-rounded, .nes-balloon
   border-image-repeat: stretch !important
 
+.nes-checkbox:checked:focus+span::before, .nes-checkbox:focus+span::before
+  color: #212529 !important
+
+.nes-checkbox + span
+  font-size: .7rem !important
+
+.nes-checkbox + span::before, .nes-checkbox:checked + span::before
+  top: -7px !important
+
 .simplebar-track
   right: -20px !important

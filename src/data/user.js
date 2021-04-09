@@ -4,5 +4,6 @@ export default {
   total: 0,
   name: 'Josette',
   decor: -1,
-  licorne: -1
+  licorne: -1,
+  rain: true
 }

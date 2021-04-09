@@ -1,6 +1,6 @@
 <template>
   <div class="have_success">
-    <div class="nes-container is-rounded text-center with-title is-dark animate__animated animate__tada">
+    <div class="nes-container is-rounded text-center is-pink animate__animated animate__heartBeat">
       <p class="title">Nouveau succès !</p>
       <div>{{success?.name || `${success.buildName} débloqué !!` }}</div>
     </div>

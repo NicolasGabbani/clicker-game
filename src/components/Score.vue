@@ -29,11 +29,14 @@ export default {
     z-index: 4
   .currency
     font-size: 2rem
+    span
+      margin-left: 14px
   .cps
     font-size: .7rem
     span
       width: 30px
       height: 30px
+      margin-left: 10px
   .total
     margin-top: 20px
 </style>

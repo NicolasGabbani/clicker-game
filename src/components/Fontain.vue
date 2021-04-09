@@ -2,7 +2,7 @@
   <div class="fontain">
     <Particles
       id="tsparticles"
-      v-if="loaded && cps != 0"
+      v-if="loaded && cps != 0 && rain"
       :options="{
         background: {
           color: {
@@ -76,7 +76,8 @@ export default {
   name: 'Fontain',
   props: {
     loaded: Boolean,
-    cps: Number
+    cps: Number,
+    rain: Boolean
   }
 }
 </script>
@@ -87,7 +88,7 @@ export default {
     top: -20px
     left: 50%
     transform: translateX(-50%)
-    width: 30vw
+    width: 66vw
     height: calc(100% + 40px)
   #tsparticles
     position: absolute

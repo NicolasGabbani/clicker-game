@@ -1,5 +1,11 @@
 export default [
   {
+    cls: '',
+    score: 0,
+    get: true,
+    licorne: true
+  },
+  {
     cls: 'l3tsg01',
     score: 15,
     get: false,

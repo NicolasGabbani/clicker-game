@@ -10,7 +10,7 @@
     />
     <div class="game container">
       <div class="col container-centered-col text-center po-r">
-        <Fontain :loaded="loaded" :cps="this.user.cps" />
+        <Fontain :loaded="loaded" :cps="this.user.cps" :rain="this.user.rain" />
         <Name :name="this.user.name" @changeName="changeName" />
         <ClickButton
           @inc="increment"
@@ -46,6 +46,8 @@
             @selectDecor="selectDecor"
             :currentLicorne="this.user.licorne"
             @selectLicorne="selectLicorne"
+            :rain="this.user.rain"
+            @optionRain="optionRain"
           />
           <div v-show="openSuccess">
             <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
@@ -286,6 +288,11 @@ export default {
         );
       }
       this.save();
+    },
+
+    optionRain(rain){
+      this.user.rain = rain
+      console.log(this.user.rain)
     },
 
     BonusFraiseSucc(){

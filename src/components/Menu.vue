@@ -3,30 +3,39 @@
     <p class="title">Options</p>
     <button class="closed nes-container is-white is-rounded" @click.prevent="$emit('closeOptions')"><i class="nes-icon close is-small"></i></button>
     <div class="menu">
-      <button class="nes-btn is-primary" @click.prevent="$emit('save')">save game</button>
-      <button class="nes-btn is-error" @click.prevent="$emit('reset')">reset game</button>
+      <button class="nes-btn is-primary" @click.prevent="$emit('save')">sauvegarder</button>
+      <button class="nes-btn is-error" @click.prevent="$emit('reset')">tout supprimer</button>
     </div>
 
     <div class="menu-seperate">
-      <p class="title">Choisis ton fond d'écran :</p>
+      <p class="title">Graphismes</p>
+
+      <label>
+        <input type="checkbox" class="nes-checkbox" v-model="rain" @change="this.$emit('optionRain', rain)" />
+        <span>Activer la pluie de fraises</span>
+      </label>
+    </div>
+
+    <div class="menu-seperate">
+      <p class="title">Choisis ton fond d'écran</p>
       <div class="nes-container is-white is-rounded" v-show="!decor.filter(d => d.get).length">
         Pas encore débloqué...
       </div>
       <div class="menu-grid">
         <div class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click="this.$emit('selectDecor', index)">
-          {{index}}
+          {{index + 1}}
         </div>
       </div>
     </div>
 
     <div class="menu-seperate">
-      <p class="title">Choisis ta licorne :</p>
+      <p class="title">Choisis ta licorne</p>
       <div class="nes-container is-white is-rounded" v-show="!decor.filter(d => d.licorne).length">
         Pas encore débloqué...
       </div>
       <div class="menu-grid">
         <div class="nes-btn" :class="{'is-success': currentLicorne == index || (index == decor.filter(d => d.licorne).length - 1 && currentLicorne == -1)}" v-for="(d, index) in decor.filter(d => d.licorne)" @click="this.$emit('selectLicorne', index)">
-          {{index}}
+          {{index + 1}}
         </div>
       </div>
     </div>
@@ -49,7 +58,9 @@ export default {
     currentDecor: Number,
     selectDecor: Function,
     currentLicorne: Number,
-    selectLicorne: Function
+    selectLicorne: Function,
+    rain: Boolean,
+    optionRain: Function
   }
 }
 </script>
