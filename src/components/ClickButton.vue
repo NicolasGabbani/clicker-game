@@ -119,7 +119,7 @@ export default {
     span:not(.fraise)
       display: block
       text-align: center
-      width: 250px
+      width: 300px
       position: absolute
       font-size: 1.5rem
       font-family: var(--font-press)

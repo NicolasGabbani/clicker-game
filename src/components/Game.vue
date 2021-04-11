@@ -11,7 +11,7 @@
     <div class="game container">
       <div class="col container-centered-col text-center po-r">
         <Fontain :loaded="loaded" :cps="this.user.cps" :rain="this.user.rain" />
-        <Name :name="this.user.name" @changeName="changeName" />
+        <Name :name="this.user.name ? this.user.name : '????'" @changeName="changeName" />
         <ClickButton
           @inc="increment"
           :cps="this.user.cps"
@@ -232,7 +232,7 @@ export default {
         }
 
         this.increment(this.user.cps / 10);
-        document.title = `${this.display_currency} étoiles - Super jeu de clique dans l'univers de SuperBlablaland`;
+        document.title = `${this.display_currency} fraises - SuperLicorne - Super jeu de clique dans l'univers de SuperBlablaland`;
       }, 100);
     },
 

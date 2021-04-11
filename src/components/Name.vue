@@ -26,7 +26,7 @@ export default {
   data(){
     return {
       displayInput: false,
-      max: 12
+      max: 8
     }
   },
   methods: {

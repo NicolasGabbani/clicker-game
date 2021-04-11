@@ -202,9 +202,9 @@ export default {
       display: block
       animation: fadeOutTop 1.5s ease forwards
   .buff
-    position: fixed
-    top: 1%
-    left: 1%
+    position: absolute
+    top: 17px
+    left: calc(66vw - 160px)
     width: 150px
     span:not(.fraise)
       display: block
@@ -212,6 +212,7 @@ export default {
     &-title
       width: 20px !important
       height: 20px !important
+      margin-left: 0 !important
   .bonus-fraise
     position: fixed 
     top: 0
