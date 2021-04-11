@@ -134,7 +134,7 @@ export default {
       decorArray: Decor,
       decorClass: '',
       licorneClass: '',
-      buySound: new Audio(require('../assets/sounds/click2.mp3'))
+      classicSound: new Audio(require('../assets/sounds/click2.mp3'))
     };
   },
   methods: {
@@ -201,10 +201,6 @@ export default {
       if (this.user.currency < build.price) return;
 
       this.buy(build.price)
-
-      this.buySound.currentTime = 0
-      this.buySound.volume = .2
-      this.buySound.play()
 
       build.number += 1;
 
@@ -347,10 +343,12 @@ export default {
 
     selectDecor(index){
       this.user.decor = index
+      this.playClassicSound()
     },
 
     selectLicorne(index){
       this.user.licorne = index
+      this.playClassicSound()
     },
 
     bonusCpsClicked(timer) {
@@ -361,11 +359,26 @@ export default {
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0.000a')
       return numeral(val).format('0,0.0')
+    },
+    playClassicSound(){
+      this.classicSound.currentTime = 0
+      this.classicSound.volume = .2
+      this.classicSound.play()
+    },
+    initPlayClassicSound(){
+      document.querySelectorAll('button, input[type="checkbox"], .bonus').forEach(b =>
+        b.addEventListener('click', () => {
+          console.log('click')
+          if(b.id == 'btn-score') return
+          this.playClassicSound()
+        })
+      )
     }
   },
   mounted() {
     this.cps()
     this.checkSucc()
+    this.initPlayClassicSound()
 
     this.$timer2 = setInterval(() => {
       this.save()
@@ -399,7 +412,7 @@ export default {
       this.bonusCpsClikedTimeOut = setTimeout(() => {
         this.haveBonusCpsClicked = false;
       }, this.bonusCpsClickedTimer);
-    },
+    }
   },
 };
 </script>

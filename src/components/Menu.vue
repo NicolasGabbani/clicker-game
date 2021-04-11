@@ -19,25 +19,25 @@
 
       <div class="menu-seperate">
         <p class="title">Choisis ton fond d'écran</p>
-        <div class="nes-container is-white is-rounded" v-show="!decor.filter(d => d.get).length">
+        <div class="nes-container is-white is-rounded" v-if="!decor.filter(d => d.get).length">
           Pas encore débloqué...
         </div>
         <div class="menu-grid">
-          <div class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click="this.$emit('selectDecor', index)">
+          <button class="nes-btn" :class="{'is-primary': currentDecor == index || (index == decor.filter(d => d.get).length - 1 && currentDecor == -1)}" v-for="(d, index) in decor.filter(d => d.get)" @click.prevent.stop="this.$emit('selectDecor', index)">
             {{index + 1}}
-          </div>
+          </button>
         </div>
       </div>
 
       <div class="menu-seperate">
         <p class="title">Choisis ta licorne</p>
-        <div class="nes-container is-white is-rounded" v-show="!decor.filter(d => d.licorne).length">
+        <div class="nes-container is-white is-rounded" v-if="!decor.filter(d => d.licorne).length">
           Pas encore débloqué...
         </div>
         <div class="menu-grid">
-          <div class="nes-btn" :class="{'is-success': currentLicorne == index || (index == decor.filter(d => d.licorne).length - 1 && currentLicorne == -1)}" v-for="(d, index) in decor.filter(d => d.licorne)" @click="this.$emit('selectLicorne', index)">
+          <button class="nes-btn" :class="{'is-success': currentLicorne == index || (index == decor.filter(d => d.licorne).length - 1 && currentLicorne == -1)}" v-for="(d, index) in decor.filter(d => d.licorne)" @click.prevent.stop="this.$emit('selectLicorne', index)">
             {{index + 1}}
-          </div>
+          </button>
         </div>
       </div>
 
@@ -63,7 +63,8 @@ export default {
     currentLicorne: Number,
     selectLicorne: Function,
     rain: Boolean,
-    optionRain: Function
+    optionRain: Function,
+    initPlayClassicSound: Function
   }
 }
 </script>

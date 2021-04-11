@@ -59,7 +59,8 @@ export default {
       bonusTop: `${Math.floor(Math.random() * 99)}%`,
       bonusLeft: `${Math.floor(Math.random() * 99)}%`,
       bonusDisplayedTimer: 5000,
-      randomFunc: [this.addBonusInc, this.addBonusCps, this.addBonusFraise]
+      randomFunc: [this.addBonusInc, this.addBonusCps, this.addBonusFraise],
+      clickSound: new Audio(require('../assets/sounds/click.mp3'))
     }
   },
   methods: {
@@ -67,6 +68,9 @@ export default {
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
     addRandomBonus(){
+      this.clickSound.currentTime = 0
+      this.clickSound.volume = .2
+      this.clickSound.play()
       document.querySelector('.bonus-content').classList.remove('animate__animated')
       const random = Math.floor(Math.random() * this.randomFunc.length)
       this.randomFunc[random].call()
@@ -136,6 +140,9 @@ export default {
       }, this.intervalBonus);
     },
     bonusFraiseClick(){
+      this.clickSound.currentTime = 0
+      this.clickSound.volume = .2
+      this.clickSound.play()
       if(this.bonusFraiseProgress == 100){
         this.bonusFraise = false
         this.bonusClicked = false
