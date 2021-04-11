@@ -13,13 +13,13 @@
         </div>
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
-          <p class="build__ps">+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde</p>
           <p class="build__number animate__animated" :class="{animate__tada: index == addBuild}">{{ build.number }}</p>
+          <p class="build__ps">+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde</p>
           <p style="display: none" :class="{buyable: build.buyable}"></p>
 
-          <div class="build-btn-content container-space">
-            <button class="nes-btn" @click.prevent.stop="openInfo(index)">voir info</button>
-            <button class="nes-btn" :class="{'is-success': build.buyable, 'is-error': !build.buyable, 'btn-disable': !build.buyable}" @click.prevent.stop="$emit('buyBuild', build); buildAdded(index);">{{ this.renderNumeral(build.price) }}<span class="price fraise very-small-fraise fraise-bonus"></span></button>
+          <div class="build-btn-content container-grid-space">
+            <button class="nes-btn build-btn-info" @click.prevent.stop="openInfo(index)">voir info</button>
+            <button class="nes-btn build-btn-buy" :class="{'is-success': build.buyable, 'is-error': !build.buyable, 'btn-disable': !build.buyable}" @click.prevent.stop="$emit('buyBuild', build); buildAdded(index);">{{ this.renderNumeral(build.price) }}<span class="price fraise very-small-fraise fraise-bonus"></span></button>
           </div>
           
           <div class="build-info nes-container is-white is-rounded" v-show="index == infoClose">
@@ -192,6 +192,8 @@ export default {
       filter: grayscale(100%)
   .btn-disable
     pointer-events: none !important
+  .build-btn-buy
+    grid-column: span 2
   .price
     width: 20px !important
     height: 20px !important

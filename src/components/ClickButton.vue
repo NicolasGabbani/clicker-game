@@ -30,7 +30,8 @@ export default {
       dialog: Dialog,
       haveDialog: false,
       dialogInterval: 30000,
-      click: 0
+      click: 0,
+      clickSound: new Audio(require('../assets/sounds/click.mp3'))
     }
   },
   methods: {
@@ -38,12 +39,15 @@ export default {
       this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.1
       const span = document.createElement('span')
       span.innerHTML = `+${this.renderNumeral(this.clickInc)}<span class='fraise'></span>`
-      span.style.top = `${Math.floor(Math.random() * 99)}%`
-      span.style.left = `${Math.floor(Math.random() * 99)}%`
+      span.style.top = `${Math.floor(Math.random() * 50)}%`
+      span.style.left = `${Math.floor(Math.random() * 50)}%`
       document.querySelector('.btn-score').appendChild(span)
       setTimeout(() => {
         document.querySelector('.btn-score').removeChild(span)
-      }, 750);
+      }, 750); 
+      this.clickSound.currentTime = 0
+      this.clickSound.volume = .2
+      this.clickSound.play()
     },
     randomDialog(){
       this.$timer = setInterval(() => {
@@ -125,7 +129,7 @@ export default {
       font-family: var(--font-press)
       color: var(--clr-white)
       text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
-      animation: fadeOutTop .35s ease
+      animation: fadeOutTop .75s ease
     span.fraise
       width: 25px !important
       height: 25px !important

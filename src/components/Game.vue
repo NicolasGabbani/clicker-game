@@ -133,7 +133,8 @@ export default {
       haveBonusCpsClicked: false,
       decorArray: Decor,
       decorClass: '',
-      licorneClass: ''
+      licorneClass: '',
+      buySound: new Audio(require('../assets/sounds/click2.mp3'))
     };
   },
   methods: {
@@ -200,6 +201,10 @@ export default {
       if (this.user.currency < build.price) return;
 
       this.buy(build.price)
+
+      this.buySound.currentTime = 0
+      this.buySound.volume = .2
+      this.buySound.play()
 
       build.number += 1;
 
