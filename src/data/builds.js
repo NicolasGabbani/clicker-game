@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     name: "Fraisier",
-    inc: 100000000,
+    inc: 0.1,
     price: 15,
     number: 0,
     buyable: false,
