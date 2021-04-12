@@ -9,6 +9,10 @@
       </div>
 
       <div class="menu-seperate">
+        <button class="nes-btn" @click.prevent="$emit('toggleScreenshot')">voir stats</button>
+      </div>
+
+      <div class="menu-seperate">
         <p class="title">Graphismes</p>
 
         <label>
@@ -64,7 +68,8 @@ export default {
     selectLicorne: Function,
     rain: Boolean,
     optionRain: Function,
-    initPlayClassicSound: Function
+    initPlayClassicSound: Function,
+    toggleScreenshot: Function
   }
 }
 </script>

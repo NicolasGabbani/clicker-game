@@ -100,7 +100,7 @@ export default {
     z-index: 2
     transform: translate(-50%, -50%) rotate(0deg)
     animation: rayonRotate 6s linear infinite
-  .btn-score
+  .btn-score, .licorne
     border: none
     outline: none
     transition: all var(--tr-du) linear

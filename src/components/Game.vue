@@ -1,5 +1,22 @@
 <template>
   <div id="game-content" :class="decorClass || decorArray.filter(d => d.get)[this.user.decor]?.cls">
+    <Screenshot 
+      :gameStart="this.user.gameStart" 
+      :decorClass="decorClass"
+      :currentDecor="this.user.decor"
+      :decorArray="decorArray"
+      :clsLicorne="licorneClass" 
+      :currentLicorne="this.user.licorne"
+      :total="display_total" 
+      :cps="display_cps"
+      :builds="display_builds"
+      :name="this.user.name ? this.user.name : '????'"
+      :success="display_success"
+      :buildsSuccess="display_builds_success"
+      @toggleScreenshot="toggleScreenshot"
+      @closeOptions="closeOptions"
+      v-show="openScreenshot"
+    />
     <Header />
     <Bonus
       @inc="increment"
@@ -49,6 +66,7 @@
             @selectLicorne="selectLicorne"
             :rain="this.user.rain"
             @optionRain="optionRain"
+            @toggleScreenshot="toggleScreenshot"
           />
           <div v-show="openSuccess">
             <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
@@ -89,8 +107,10 @@ import Store from "@/components/Store.vue";
 import Success from "@/components/Success.vue";
 import Bonus from "@/components/Bonus.vue";
 import HaveSuccess from "@/components/HaveSuccess.vue";
+import Screenshot from "@/components/Screenshot.vue";
 import Deco from "@/components/Deco.vue";
 import Decor from "@/data/decor"
+import moment from 'moment'
 export default {
   name: "Game",
   components: {
@@ -106,6 +126,7 @@ export default {
     Bonus,
     HaveSuccess,
     Deco,
+    Screenshot
   },
   props: {
     user: Object,
@@ -128,6 +149,7 @@ export default {
       onsaveTimer: 60000,
       openSuccess: false,
       openOptions: false,
+      openScreenshot: false,
       haveSuccess: false,
       haveNewSuccess: false,
       currentSuccess: {},
@@ -172,11 +194,12 @@ export default {
         this.decorArray[l].licorne = this.user.total >= this.decorArray[l].score
       }
 
-      if(oldDecorArray != 0 && oldDecorArray != this.decorArray.filter(d => d.get).length){
+      if(oldDecorArray > 1 && oldDecorArray != this.decorArray.filter(d => d.get).length){
+        console.log(oldDecorArray, this.decorArray.filter(d => d.get).length)
         this.user.decor = this.decorArray.filter(d => d.get).length - 1
       }
 
-      if(oldLicorneArray != 0 && oldLicorneArray != this.decorArray.filter(d => d.licorne).length){
+      if(oldLicorneArray > 1 && oldLicorneArray != this.decorArray.filter(d => d.licorne).length){
         this.user.licorne = this.decorArray.filter(d => d.licorne).length - 1
       }
 
@@ -350,6 +373,10 @@ export default {
       this.openOptions = false;
     },
 
+    toggleScreenshot(){
+      this.openScreenshot = !this.openScreenshot
+    },
+
     selectDecor(index){
       this.user.decor = index
       this.playClassicSound()
@@ -378,11 +405,14 @@ export default {
     initPlayClassicSound(){
       document.querySelectorAll('button, input[type="checkbox"], .bonus').forEach(b =>
         b.addEventListener('click', () => {
-          console.log('click')
           if(b.id == 'btn-score') return
           this.playClassicSound()
         })
       )
+    },
+
+    showTime(){
+      console.log(moment(this.user.gameStart).fromNow(true))
     }
   },
   mounted() {
@@ -422,6 +452,12 @@ export default {
       this.bonusCpsClikedTimeOut = setTimeout(() => {
         this.haveBonusCpsClicked = false;
       }, this.bonusCpsClickedTimer);
+    }
+  },
+  created() {
+    if(this.user.gameStart == null){
+      this.user.gameStart = Date.now()
+      this.save()
     }
   },
 };
