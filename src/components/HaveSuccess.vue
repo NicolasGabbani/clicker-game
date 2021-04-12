@@ -22,6 +22,6 @@ export default {
     position: fixed
     bottom: 100px
     left: 50%
-    z-index: 999
+    z-index: 99999999
     transform: translateX(-50%)
 </style>

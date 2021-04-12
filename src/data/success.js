@@ -22,8 +22,15 @@ export default [
   },
   {
     succ: 'bonusFraise',
-    name: 'Gagné au bonus de la mega fraise',
+    name: 'Gagner au bonus de la mega fraise',
     content: "Alors ça, c'était une sacré fraise !",
+    done: false,
+    new: false
+  },
+  {
+    succ: 'bonusFraiseLose',
+    name: 'Perdre au bonus de la mega fraise',
+    content: "Bah alors, ça clique pas assez vite ? J'ai faim du coup...",
     done: false,
     new: false
   },

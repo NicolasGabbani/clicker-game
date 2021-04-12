@@ -40,7 +40,8 @@ export default {
     top: String,
     left: String,
     interval: Number,
-    BonusFraiseSucc: Function
+    BonusFraiseSucc: Function,
+    BonusFraiseLoseSucc: Function
   },
   data(){
     return {
@@ -110,6 +111,7 @@ export default {
       this.bonusClicked = true
       this.bonusFraise = true
       this.bonusFraiseResult = ''
+      this.$emit('inc', 0, 1, 'bonus')
       clearInterval(this.bonusFraiseInterval)
       document.querySelector('.bonus-added').innerHTML = 'MEGA BONUS !'
       let bonusTime = this.bonusDisplayedTimer / 1000
@@ -123,6 +125,7 @@ export default {
           this.bonusFraise = false
           this.bonusFraiseProgress = 0
           this.bonusFraiseResult = 'lose'
+          this.$emit('BonusFraiseLoseSucc')
         }
       }, 1000);
     },
