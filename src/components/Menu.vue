@@ -49,6 +49,15 @@
         <img :src="require('@/assets/images/logos/logo_superlicorne.png')" alt="logo superlicorne" class="copyright-super-licorne">
         <div>Illustrations par Yoann Montalban - Code par Nakin (encore lui...)</div>
         <div>Tous droit réservés - 2021 - S.A.S Yoann Montalban</div>
+        <div class="beta-test">
+          <span>Merci à : </span>
+          <span>Vasco</span> -
+          <span>Aelin</span> -
+          <span>Koopa</span> -
+          <span>Bixy</span> -
+          <span>Kisekae</span> -
+          <span>Asphyxiate</span>
+        </div>
       </div>
     </div>
   </div>
@@ -105,7 +114,8 @@ export default {
       display: grid
       grid-gap: 15px
       grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) )
-
+  .beta-test
+    font-size: .3rem
   .closed
     padding: 0 4px !important
     position: absolute
