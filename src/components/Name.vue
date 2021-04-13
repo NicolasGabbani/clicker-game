@@ -9,7 +9,7 @@
     
     <form v-show="displayInput" @submit.prevent="$emit('changeName'); toggleInput();">
       <div class="nes-field">
-        <input type="text"  class="nes-input" v-model="name" :maxlength="max" required="required">
+        <input type="text"  class="nes-input" v-model.trim="name" :maxlength="max" required="required">
         <button class="nes-btn is-success name__btn" type="submit">valider</button>
       </div>
     </form>
