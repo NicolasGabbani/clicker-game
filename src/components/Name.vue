@@ -7,10 +7,10 @@
       </template>
     </tippy>
     
-    <form v-show="displayInput">
+    <form v-show="displayInput" @submit.prevent="$emit('changeName'); toggleInput();">
       <div class="nes-field">
-        <input type="text"  class="nes-input" v-model="name" :maxlength="max">
-        <button class="nes-btn is-success name__btn" type="submit" @click.prevent="$emit('changeName', name); toggleInput();">valider</button>
+        <input type="text"  class="nes-input" v-model="name" :maxlength="max" required="required">
+        <button class="nes-btn is-success name__btn" type="submit">valider</button>
       </div>
     </form>
   </div>
@@ -26,7 +26,7 @@ export default {
   data(){
     return {
       displayInput: false,
-      max: 8
+      max: 8,
     }
   },
   methods: {

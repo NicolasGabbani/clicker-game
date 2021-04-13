@@ -10,7 +10,7 @@
       :total="display_total" 
       :cps="display_cps"
       :builds="display_builds"
-      :name="this.user.name ? this.user.name : '????'"
+      :name="this.user.name"
       :success="display_success"
       :buildsSuccess="display_builds_success"
       @toggleScreenshot="toggleScreenshot"
@@ -29,7 +29,7 @@
     <div class="game container">
       <div class="col container-centered-col text-center po-r">
         <Fontain :loaded="loaded" :cps="this.user.cps" :rain="this.user.rain" />
-        <Name :name="this.user.name ? this.user.name : '????'" @changeName="changeName" />
+        <Name :name="this.user.name" @changeName="changeName" />
         <ClickButton
           @inc="increment"
           :cps="this.user.cps"
@@ -308,7 +308,6 @@ export default {
     },
 
     changeName(name) {
-      this.user.name = name;
       if (!this.display_success.filter((succ) => succ.succ === "changeName")[0].done) {
         this.displaySuccess(
           this.display_success.filter((succ) => succ.succ === "changeName")[0]
