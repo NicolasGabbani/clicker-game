@@ -308,6 +308,7 @@ export default {
     },
 
     changeName(name) {
+      this.user.name = name
       if (!this.display_success.filter((succ) => succ.succ === "changeName")[0].done) {
         this.displaySuccess(
           this.display_success.filter((succ) => succ.succ === "changeName")[0]
