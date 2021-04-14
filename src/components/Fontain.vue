@@ -47,7 +47,7 @@
               enable: true,
               value_area: 800
             },
-            value: 80
+            value: 10
           },
           opacity: {
             value: 1
