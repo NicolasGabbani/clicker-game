@@ -9,7 +9,7 @@
     <div class="screenshot__stats">
       <div class="nes-container is-semi-white is-rounded is-centered">
         <p class="title">STATS</p>
-        <span class="screenshot-stat">{{total}} kg</span>
+        <span class="screenshot-stat">{{total}}<span class="fraise"></span></span>
         <span class="screenshot-stat">{{cps}}<span class="fraise small-fraise"></span>/seconde</span>
         <span class="screenshot-stat">Tu joues depuis {{time}}</span>
         <span class="screenshot-stat">Tu as {{success.filter(succ => succ.done).length + buildsSuccess.filter(succ => succ.done).length}} succès</span>
@@ -99,7 +99,7 @@ export default {
       &-grid
         display: grid
         grid-gap: 15px
-        grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) )
+        grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) )
       &-build
         display: flex
         justify-content: flex-start

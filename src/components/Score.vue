@@ -7,7 +7,6 @@
     
     <div class="currency">{{ currency }}<span class="fraise"></span></div>
     <div class="cps">{{ cps }}<span class="fraise"></span>/seconde</div>
-    <div class="total">total: {{ total }} kg</div>
   </div>
 </template>
 
@@ -17,7 +16,6 @@ export default {
   props: {
     currency: String,
     cps: String,
-    total: String,
     totalNum: Number
   }
 }

@@ -41,7 +41,7 @@
           :haveBonusCpsClicked="haveBonusCpsClicked"
           @licorneClickSucc="licorneClickSucc"
         />
-        <Score :currency="display_currency" :cps="display_cps" :total="display_total" :totalNum="this.user.total" />
+        <Score :currency="display_currency" :cps="display_cps" :totalNum="this.user.total" />
       </div>
       <div class="col">
         <div>

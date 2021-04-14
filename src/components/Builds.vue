@@ -2,7 +2,7 @@
   <div class="nes-container is-rounded is-semi-white container-content">
     <p class="title">Fabriques à miam-miam</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
-      <div v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`'>
+      <div v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`' @mouseenter="toggleInfo = index" @mouseleave="toggleInfo = null">
         <div class="build__stars">
           <div class="build__stars-star" v-for="star in build.stars">
             <i class="nes-icon star"></i>
@@ -14,11 +14,13 @@
         <div class="build-content">
           <p class="build__title">{{ build.name }}</p>
           <p class="build__number animate__animated" :class="{animate__tada: index == addBuild}">{{ build.number }}</p>
-          <p class="build__ps">+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde</p>
           <p style="display: none" :class="{buyable: build.buyable}"></p>
 
           <div class="build-btn-content container-grid-space">
-            <button class="nes-btn build-btn-info" @click.prevent.stop="openInfo(index)">voir info</button>
+            <div>
+              <button v-show="index == toggleInfo" class="nes-btn build-btn-info" @click.prevent.stop="openInfo(index)">voir info</button>
+              <p v-show="toggleInfo == null || index != toggleInfo" class="build__ps">+{{ this.renderNumeral(build.inc) }}<span class="price fraise"></span>/seconde</p>
+            </div>
             <button class="nes-btn build-btn-buy" :class="{'is-success': build.buyable, 'is-error': !build.buyable, 'btn-disable': !build.buyable}" @click.prevent.stop="$emit('buyBuild', build); buildAdded(index);">{{ this.renderNumeral(build.price) }}<span class="price fraise very-small-fraise fraise-bonus"></span></button>
           </div>
           
@@ -58,7 +60,8 @@ export default {
     return{
       addBuild: null,
       modulo: 10,
-      infoClose: null
+      infoClose: null,
+      toggleInfo: null
     }
   },
   methods: {
@@ -76,19 +79,6 @@ export default {
       if(val % 1 !== 0) return numeral(val).format('0,0.0')
       return numeral(val).format('0,0')
     }
-  },
-  mounted(){
-    this.$timer = setInterval(() => {
-      for (let index in this.$refs) {
-        if(!this.$refs[index].classList.contains('disable') && !this.$refs[index].children[2].children[3].classList.contains('buyable')){
-          this.$refs[index].classList.add('disable')
-          console.log('triche')
-        }
-      }
-    }, 100);
-  },
-  unmounted() {
-    clearInterval(this.$timer)
   },
   watch: {
     addBuild: function(val){
@@ -117,10 +107,12 @@ export default {
     &__stars
       position: absolute
       bottom: 10px
-      left: 18px
+      left: 0
+      z-index: 2
       &-star
         display: inline-block
-        margin-left: -15px
+        i
+          margin: 0 !important
     &__avatar
       text-align: center
       position: absolute
@@ -132,18 +124,6 @@ export default {
         background-repeat: no-repeat
         background-size: cover
         background-position: center center
-    &__bonusx2
-      display: block
-      width: 100%
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      &-price
-        font-size: .5rem
-        display: block
-        margin-top: 15px
     &-content
       margin-left: 90px
       &.build-placeholder
@@ -157,6 +137,8 @@ export default {
       font-size: 1rem
       width: 90%
       font-weight: bold
+    &__ps
+      margin-bottom: 0
     &__number
       margin-bottom: 0
       position: absolute
@@ -164,9 +146,6 @@ export default {
       right: 20px
       font-size: 2rem
       color: var(--clr-grey)
-    &__percent
-      margin-bottom: 0
-      font-size: .6rem
     &-btn-content
       width: 100%
     &-info
@@ -175,6 +154,7 @@ export default {
       left: -8px
       right: -8px
       bottom: -8px
+      z-index: 10
       color: var(--clr-black) !important
       .nes-list
         margin-left: 10px
@@ -193,7 +173,8 @@ export default {
   .btn-disable
     pointer-events: none !important
   .build-btn-buy
-    grid-column: span 2
+    //grid-column: span 2
+    margin-right: 5px
   .price
     width: 20px !important
     height: 20px !important
