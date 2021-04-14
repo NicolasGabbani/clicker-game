@@ -47,7 +47,7 @@
 
       <div class="copyright text-center">
         <img :src="require('@/assets/images/logos/logo_superlicorne.png')" alt="logo superlicorne" class="copyright-super-licorne">
-        <div>Illustrations par Yoann Montalban - Code par Nakin (encore lui...)</div>
+        <div>Illustrations par Yoann Montalban - Code par Nakin</div>
         <div>Tous droit réservés - 2021 - S.A.S Yoann Montalban</div>
         <div class="beta-test">
           <span>Merci à : </span>
@@ -88,7 +88,7 @@ export default {
     width: 100%
     padding: 20px
     margin-top: 40px
-    font-size: .4rem
+    font-size: .7rem
     > div
       margin-bottom: 15px
       &:last-child
@@ -115,7 +115,7 @@ export default {
       grid-gap: 15px
       grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) )
   .beta-test
-    font-size: .3rem
+    font-size: .6rem
   .closed
     padding: 0 4px !important
     position: absolute

@@ -1,7 +1,7 @@
 <template>
   <div class="btn-score-container">
     <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon" v-show="haveBonusCpsClicked">
-    <button id="btn-score" class="btn-score nes-pointer" @click.prevent="$emit('inc', clickInc, 1, 'button'); displayScore(); licorneClick();" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls"></button>
+    <button id="btn-score" class="btn-score nes-pointer" @click="$emit('inc', clickInc, 1, 'button'); displayScore($event); licorneClick();" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls"></button>
     <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="(haveSuccess && success?.content) || haveDialog">
       {{success?.content || this.licorneDialog}}
     </p>
@@ -35,15 +35,15 @@ export default {
     }
   },
   methods: {
-    displayScore(){
+    displayScore(event){
       this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.1
       const span = document.createElement('span')
       span.innerHTML = `+${this.renderNumeral(this.clickInc)}<span class='fraise'></span>`
-      span.style.top = `${Math.floor(Math.random() * 50)}%`
-      span.style.left = `${Math.floor(Math.random() * 50)}%`
-      document.querySelector('.btn-score').appendChild(span)
+      span.style.top = `${event.clientY - event.currentTarget.getBoundingClientRect().top - 30}px`
+      span.style.left = `${event.clientX - event.currentTarget.getBoundingClientRect().left - 150 + 12}px`
+      document.querySelector('#btn-score').appendChild(span)
       setTimeout(() => {
-        document.querySelector('.btn-score').removeChild(span)
+        document.querySelector('#btn-score').removeChild(span)
       }, 750); 
       this.clickSound.currentTime = 0
       this.clickSound.volume = .2
@@ -91,7 +91,7 @@ export default {
 <style lang="sass">
   .btn-score-container
     position: relative
-    width: 360px
+    width: 450px
   .rayon
     display: block
     position: absolute
@@ -114,7 +114,7 @@ export default {
     position: relative
     z-index: 3
     width: 100%
-    height: 298px
+    height: 355px
     &:active
       transform: scale(.9) !important
     &:hover

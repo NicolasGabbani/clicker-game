@@ -7,9 +7,8 @@
     </div>
     <div class="screenshot__name nes-badge"><span class="is-dark">{{name}}</span></div>
     <div class="screenshot__stats">
-      <div class="nes-container is-white is-rounded is-centered">
+      <div class="nes-container is-semi-white is-rounded is-centered">
         <p class="title">STATS</p>
-        <br>
         <span class="screenshot-stat">{{total}} kg</span>
         <span class="screenshot-stat">{{cps}}<span class="fraise small-fraise"></span>/seconde</span>
         <span class="screenshot-stat">Tu joues depuis {{time}}</span>
@@ -20,7 +19,7 @@
       <div class="licorne" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls"></div>
     </div>
     <div class="screenshot__builds">
-      <div class="nes-container is-white is-rounded is-centered">
+      <div class="nes-container is-semi-white is-rounded is-centered">
         <p class="title">Fabriques à miam-miam</p>
         <div class="screenshot__builds-grid">
           <div v-for="(build, index) in builds.filter(b => b.number > 0)" :key="build.name" class="screenshot__builds-build nes-container is-rounded" :ref='`build${index}`'>
@@ -78,7 +77,7 @@ export default {
     > div
       display: flex
       justify-content: center
-      align-items: center
+      align-items: flex-start
       > .nes-container
         width: 100%
     &__name
@@ -89,17 +88,18 @@ export default {
       font-size: 2rem
     &__stats
       .title
-        font-size: 3rem
+        margin-bottom: 15px
       .screenshot-stat
         display: block
         margin-bottom: 15px
+        font-size: 1.6rem
         &:last-child
           margin-bottom: 0
     &__builds
       &-grid
         display: grid
         grid-gap: 15px
-        grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) )
+        grid-template-columns: repeat( auto-fit, minmax(90px, 1fr) )
       &-build
         display: flex
         justify-content: flex-start
@@ -127,8 +127,10 @@ export default {
       a
         display: block
   .licorne
-    width: 360px
+    width: 450px
+    align-self: center
   .closed
-    top: 20px
-    right: 20px
+    top: 10px
+    right: 10px
+    z-index: 100
 </style>
