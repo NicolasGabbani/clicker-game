@@ -9,7 +9,8 @@
     <div class="screenshot__stats">
       <div class="nes-container is-semi-white is-rounded is-centered">
         <p class="title">STATS</p>
-        <span class="screenshot-stat">{{total}}<span class="fraise"></span></span>
+        <span class="screenshot-stat">score total :{{total}}<span class="fraise small-fraise"></span></span>
+        <span class="screenshot-stat">score actuel :{{currency}}<span class="fraise small-fraise"></span></span>
         <span class="screenshot-stat">{{cps}}<span class="fraise small-fraise"></span>/seconde</span>
         <span class="screenshot-stat">Tu joues depuis {{time}}</span>
         <span class="screenshot-stat">Tu as {{success.filter(succ => succ.done).length + buildsSuccess.filter(succ => succ.done).length}} succès</span>
@@ -24,7 +25,16 @@
         <div class="screenshot__builds-grid">
           <div v-for="(build, index) in builds.filter(b => b.number > 0)" :key="build.name" class="screenshot__builds-build nes-container is-rounded" :ref='`build${index}`'>
             <div class="screenshot__builds-img" :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${index+1}.png`)})` }"></div>
-            <span class="nes-text" :class="{'is-warning': build.stars == 1}">x{{build.number}}</span>
+            <span 
+              class="nes-text" 
+              :class="{
+                'is-warning': build.stars == 1,
+                'is-primary': build.stars == 2,
+                'is-success': build.stars == 3
+              }"
+            >
+              x{{build.number}}
+            </span>
           </div>
         </div>
         <div v-if="!builds.filter(b => b.number > 0).length">Pas de fabriques à miam-miam...</div>
@@ -45,6 +55,7 @@ export default {
     clsLicorne: String,
     currentLicorne: Number,
     total: String,
+    currency: String,
     cps: String,
     builds: Array,
     success: Array,
@@ -92,7 +103,7 @@ export default {
       .screenshot-stat
         display: block
         margin-bottom: 15px
-        font-size: 1.6rem
+        font-size: 1.1rem
         &:last-child
           margin-bottom: 0
     &__builds
