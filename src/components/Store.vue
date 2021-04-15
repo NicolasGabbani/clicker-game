@@ -27,18 +27,6 @@
             </div>
           </template>
         </tippy>
-
-        <tippy :followCursor="true" placement="top-start" duration="0">
-          <button class="store-btn nes-btn" v-show="s.purchased" @click.prevent.stop="$emit('storeHeartSucc')">
-            <i class="nes-icon is-large heart"></i>
-          </button>
-
-          <template #content>
-            <div class="nes-btn">
-              {{build(s.id).name}} bonus débloqué !
-            </div>
-          </template>
-        </tippy>
       </div>
     </div>
   </div>
@@ -55,7 +43,6 @@ export default {
     currency: Number,
     buy: Function,
     purchaseStoreSucc: Function,
-    storeHeartSucc: Function,
     calcCps: Function,
   },
   methods: {

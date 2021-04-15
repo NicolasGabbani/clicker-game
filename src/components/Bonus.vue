@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     randomIntFromInterval(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min);
+      return Math.floor(Math.random() * (max - min + 1) + min)
     },
     addRandomBonus(){
       this.clickSound.currentTime = 0
@@ -83,7 +83,7 @@ export default {
       document.querySelector('.bonus-added').innerHTML = randomNumber > 0 ? `+${this.renderNumeral(randomNumber)}<span class="fraise"></span>` : `${this.renderNumeral(randomNumber)}<span class="fraise"></span>`
       setTimeout(() => {
         this.bonusClicked = false
-      }, this.bonusDisplayedTimer);
+      }, this.bonusDisplayedTimer)
     },
     addBonusCps(){
       this.$emit('cps', 2)
@@ -101,7 +101,7 @@ export default {
           clearInterval(bonusTimer)
           this.bonusCpsClicked = false
         }
-      }, 1000);
+      }, 1000)
       setTimeout(() => {
         this.bonusClicked = false
         this.$emit('cps')
@@ -133,14 +133,19 @@ export default {
       this.intervalBonus = this.randomIntFromInterval(this.bonusMinInterval, this.bonusMaxInterval)
       this.$randomBonus = setTimeout(() => {
         (this.bonusTop = `${Math.floor(Math.random() * 99)}%`),
-        (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`);
-        this.haveBonus = true;
+        (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`)
+        // this.$crazyInterval = setInterval(() => {
+        //   (this.bonusTop = `${Math.floor(Math.random() * 99)}%`),
+        //   (this.bonusLeft = `${Math.floor(Math.random() * 99)}%`)
+        // }, 1000)
+        this.haveBonus = true
         this.$bonusTimer = setTimeout(() => {
-          clearTimeout(this.$randomBonus);
-          this.haveBonus = false;
-          this.randomBonusInit();
-        }, this.bonusDisplayedTimer);
-      }, this.intervalBonus);
+          clearTimeout(this.$randomBonus)
+          //clearInterval(this.$crazyInterval)
+          this.haveBonus = false
+          this.randomBonusInit()
+        }, this.bonusDisplayedTimer)
+      }, this.intervalBonus)
     },
     bonusFraiseClick(){
       this.clickSound.currentTime = 0
@@ -163,7 +168,7 @@ export default {
     }
   },
   mounted(){
-    this.randomBonusInit();
+    this.randomBonusInit()
   },
   unmounted() {
     clearTimeout(this.$randomBonus)
@@ -177,7 +182,7 @@ export default {
         this.bonusFraiseTimer = setTimeout(() => {
           this.bonusFraiseResult = ''
           this.bonusFraiseProgress = 0
-        }, 1500);
+        }, 1500)
       }
     }
   }
@@ -188,6 +193,7 @@ export default {
   .bonus-content
     position: fixed
     z-index: 999
+    transition: all 1s linear
   .bonus
     all: unset
     width: 90px

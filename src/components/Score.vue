@@ -5,7 +5,7 @@
       <progress class="nes-progress" :value="totalNum" :max="Number.MAX_SAFE_INTEGER"></progress>
     </div>
     
-    <div class="currency">{{ currency }}<span class="fraise"></span></div>
+    <div class="currency">{{ currency }}<span class="fraise" @click="$emit('scoreFraiseSucc')"></span></div>
     <div class="cps">{{ cps }}<span class="fraise"></span>/seconde</div>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
   props: {
     currency: String,
     cps: String,
-    totalNum: Number
+    totalNum: Number,
+    scoreFraiseSucc: Function
   }
 }
 </script>

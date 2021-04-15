@@ -42,9 +42,9 @@ export default [
     new: false
   },
   {
-    succ: 'storeHeart',
-    name: "<3",
-    content: "Moi aussi j'aime trop les fraises !",
+    succ: 'scoreFraise',
+    name: "Avoir cru cliquer sur un bonus",
+    content: "Et non, ce n'est pas un bonus ça !",
     done: false,
     new: false
   },
