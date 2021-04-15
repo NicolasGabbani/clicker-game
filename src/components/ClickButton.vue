@@ -1,10 +1,23 @@
 <template>
   <div class="btn-score-container">
     <img :src="require('@/assets/images/icons/rayon.png')" alt="rayon" class="rayon" v-show="haveBonusCpsClicked">
-    <button id="btn-score" class="btn-score nes-pointer" @click="$emit('inc', clickInc, 1, 'button'); displayScore($event); licorneClick();" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls"></button>
+    <button id="btn-score" class="btn-score nes-pointer" @click="$emit('inc', clickInc, 1, 'button'); licorneClick(); displayScore($event);" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls"></button>
     <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="(haveSuccess && success?.content) || haveDialog">
       {{success?.content || this.licorneDialog}}
     </p>
+    <div class="click-progress" v-show="this.click >= 10">
+      <progress 
+        class="nes-progress" 
+        :class="{'is-success': clickProgress == 100}" 
+        :value="clickProgress" 
+        max="100"
+      ></progress>
+      <span 
+        class="nes-text"
+        :class="{'is-success': clickProgress == 100}"
+      >{{clickProgress == 100 ? 'x2' : 'x1'}}</span>
+    </div>
+    
   </div>
 </template>
 
@@ -25,18 +38,20 @@ export default {
   },
   data(){
     return {
-      clickInc: this.cps == 0 ? 1 : (1 + this.cps) * 1.1,
+      clickInc: this.cps == 0 ? 1 : ((1 + this.cps) * 1.1),
+      click: 0,
+      clickMultiple: 1,
+      clickProgress: 0,
       licorneDialog: '',
       dialog: Dialog,
       haveDialog: false,
       dialogInterval: 30000,
-      click: 0,
       clickSound: new Audio(require('../assets/sounds/click.mp3'))
     }
   },
   methods: {
     displayScore(event){
-      this.clickInc = this.cps == 0 ? 1 : (1 + this.cps) * 1.1
+      this.clickInc = this.cps == 0 ? 1 * this.clickMultiple : ((1 + this.cps) * 1.1) * this.clickMultiple
       const span = document.createElement('span')
       span.innerHTML = `+${this.renderNumeral(this.clickInc)}<span class='fraise'></span>`
       span.style.top = `${event.clientY - event.currentTarget.getBoundingClientRect().top - 30}px`
@@ -57,6 +72,17 @@ export default {
     },
     licorneClick(){
       this.click++
+      
+      if(this.click >= 10){
+        this.clickMultiple = this.clickProgress == 100 ? 2 : 1
+        this.clickProgress = this.clickProgress >= 100 ? 100 : this.clickProgress += 15
+        if(this.$interval){
+          clearInterval(this.$interval)
+        }
+        this.$interval = setInterval(() => {
+          this.clickProgress -= 10
+        }, 500);
+      }
       if(this.click >= 50){
         this.$emit('licorneClickSucc')
       }
@@ -65,11 +91,16 @@ export default {
       }
       this.$timer = setTimeout(() => {
         this.click = 0
+        this.clickMultiple = 1
+        this.clickProgress = 0
+        if(this.$interval){
+          clearInterval(this.$interval)
+        }
       }, 5000);
     },
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0.0a')
-      return numeral(val).format('0,0')
+      return numeral(val).format('0.0')
     }
   },
   mounted(){
@@ -166,4 +197,19 @@ export default {
     position: absolute
     left: 100%
     top: -10%
+  .click-progress
+    position: absolute
+    bottom: 100px
+    right: -80px
+    progress
+      height: 20px
+      width: 100px
+      transform: rotate(-90deg)
+    span
+      display: block
+      position: absolute
+      top: -63px
+      right: 35px
+      color: var(--clr-white)
+      text-shadow: 1px 1px 1px var(--clr-black), -1px 1px 1px var(--clr-black), 1px -1px 1px var(--clr-black), -1px -1px 1px var(--clr-black), 2px 2px 2px var(--clr-black), -2px 2px 2px var(--clr-black), 2px -2px 2px var(--clr-black), -2px -2px 2px var(--clr-black)
 </style>
