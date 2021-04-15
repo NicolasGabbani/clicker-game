@@ -20,6 +20,7 @@ import Builds from '@/data/builds'
 import Store from '@/data/store'
 import Success from '@/data/success'
 import BuildsSuccess from '@/data/builds_success'
+import '@/libs/momentum'
 export default {
   name: 'App',
   components: {
