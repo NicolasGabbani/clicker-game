@@ -39,21 +39,6 @@ export default {
         require('@/assets/images/bg/decors-1.jpg'),
         require('@/assets/images/bg/decors-2.jpg'),
         require('@/assets/images/bg/decors-3.jpg'),
-        require('@/assets/images/bg/decors-4.jpg'),
-        require('@/assets/images/bg/decors-5.jpg'),
-        require('@/assets/images/bg/decors-6.jpg'),
-        require('@/assets/images/bg/decors-7.jpg'),
-        require('@/assets/images/bg/decors-8.jpg'),
-        require('@/assets/images/bg/decors-9.jpg'),
-        require('@/assets/images/bg/decors-10.jpg'),
-        require('@/assets/images/bg/decors-11.jpg'),
-        require('@/assets/images/bg/decors-12.jpg'),
-        require('@/assets/images/bg/decors-13.jpg'),
-        require('@/assets/images/bg/decors-14.jpg'),
-        require('@/assets/images/bg/decors-15.jpg'),
-        require('@/assets/images/bg/decors-16.jpg'),
-        require('@/assets/images/bg/decors-17.jpg'),
-        require('@/assets/images/bg/decors-18.jpg'),
 
         require('@/assets/images/licorne/licorne_01.png'),
         require('@/assets/images/licorne/licorne_01r.png'),
@@ -61,16 +46,6 @@ export default {
         require('@/assets/images/licorne/licorne_02r.png'),
         require('@/assets/images/licorne/licorne_03.png'),
         require('@/assets/images/licorne/licorne_03r.png'),
-        require('@/assets/images/licorne/licorne_04.png'),
-        require('@/assets/images/licorne/licorne_04r.png'),
-        require('@/assets/images/licorne/licorne_05.png'),
-        require('@/assets/images/licorne/licorne_05r.png'),
-        require('@/assets/images/licorne/licorne_06.png'),
-        require('@/assets/images/licorne/licorne_06r.png'),
-        require('@/assets/images/licorne/licorne_07.png'),
-        require('@/assets/images/licorne/licorne_07r.png'),
-        require('@/assets/images/licorne/licorne_08.png'),
-        require('@/assets/images/licorne/licorne_08r.png'),
 
         require('@/assets/images/deco/grand-sage-sprite.png'),
         require('@/assets/images/deco/nuage.png'),
@@ -91,20 +66,6 @@ export default {
         require('@/assets/images/builds/unites-production-8.png'),
         require('@/assets/images/builds/unites-production-9.png'),
         require('@/assets/images/builds/unites-production-10.png'),
-        require('@/assets/images/builds/unites-production-11.png'),
-        require('@/assets/images/builds/unites-production-12.png'),
-        require('@/assets/images/builds/unites-production-13.png'),
-        require('@/assets/images/builds/unites-production-14.png'),
-        require('@/assets/images/builds/unites-production-15.png'),
-        require('@/assets/images/builds/unites-production-16.png'),
-        require('@/assets/images/builds/unites-production-17.png'),
-        require('@/assets/images/builds/unites-production-18.png'),
-        require('@/assets/images/builds/unites-production-19.png'),
-        require('@/assets/images/builds/unites-production-21.png'),
-        require('@/assets/images/builds/unites-production-22.png'),
-        require('@/assets/images/builds/unites-production-23.png'),
-        require('@/assets/images/builds/unites-production-24.png'),
-        require('@/assets/images/builds/unites-production-25.png')
       ],
       isLoading: true
     }
@@ -120,9 +81,7 @@ export default {
           imageLoaded++;
 
           if (imageLoaded === this.imagesToPreload.length) {
-            setTimeout(() => {
-              this.isLoading = false;
-            }, 1000);
+            this.isLoading = false;
           }
         };
       }
