@@ -72,4 +72,12 @@ export default {
       );
     }
   },
+
+  statsLicorneClickSucc(){ 
+    if (!this.display_success.filter((succ) => succ.succ === "statsLicorneClick")[0].done) {
+      this.displaySuccess(
+        this.display_success.filter((succ) => succ.succ === "statsLicorneClick")[0]
+      );
+    }
+  }
 }

@@ -86,6 +86,7 @@ export default {
       if(this.click >= 50){
         this.$emit('licorneClickSucc')
       }
+
       if(this.$timer){
         clearTimeout(this.$timer)
       }

@@ -1,7 +1,7 @@
 <template>
   <div id="game-content" :class="decorClass || decorArray.filter(d => d.get)[this.user.decor]?.cls">
     <Screenshot 
-      :gameStart="this.user.gameStart" 
+      :gameStart="this.user.gameStart"
       :decorClass="decorClass"
       :currentDecor="this.user.decor"
       :decorArray="decorArray"
@@ -16,6 +16,7 @@
       :buildsSuccess="display_builds_success"
       @toggleScreenshot="toggleScreenshot"
       @closeOptions="closeOptions"
+      @statsLicorneClickSucc="statsLicorneClickSucc"
       v-show="openScreenshot"
     />
     <Header />
@@ -41,6 +42,7 @@
           :success="currentSuccess"
           :haveBonusCpsClicked="haveBonusCpsClicked"
           @licorneClickSucc="licorneClickSucc"
+          :totalClick="this.user.totalClick"
         />
         <Score :currency="display_currency" :cps="display_cps" :totalNum="this.user.total" @scoreFraiseSucc="scoreFraiseSucc" />
       </div>

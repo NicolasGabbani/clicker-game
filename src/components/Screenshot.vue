@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="screenshot__licorne">
-      <div class="licorne" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls"></div>
+      <div class="licorne" :class="clsLicorne || decorArray.filter(d => d.get)[currentLicorne]?.cls" @click="$emit('statsLicorneClickSucc')"></div>
     </div>
     <div class="screenshot__builds">
       <div class="nes-container is-semi-white is-rounded is-centered">
@@ -62,13 +62,22 @@ export default {
     buildsSuccess: Array,
     name: String,
     toggleScreenshot: Function,
-    closeOptions: Function
+    closeOptions: Function,
+    statsLicorneClickSucc: Function
   },
   data() {
     return {
       time: moment(this.gameStart).locale('fr').fromNow(true)
     }
-  }
+  },
+  mounted() {
+    this.$timeInterval = setInterval(() => {
+      this.time = moment(this.gameStart).locale('fr').fromNow(true)
+    }, 30000);
+  },
+  unmounted() {
+    clearTimeout(this.$timeInterval)
+  },
 }
 </script>
 

@@ -16,6 +16,21 @@ export default {
         this.display_success.filter((succ) => succ.succ === "oneClicked")[0]
       );
     }
+
+    if(el == "button"){
+      this.user.totalClick++
+      if (this.user.totalClick == 100 && !this.display_success.filter((succ) => succ.succ === "totalClick100")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.succ === "totalClick100")[0]
+        );
+      }
+      if (this.user.totalClick == 10000 && !this.display_success.filter((succ) => succ.succ === "totalClick10000")[0].done) {
+        this.displaySuccess(
+          this.display_success.filter((succ) => succ.succ === "totalClick10000")[0]
+        );
+      }
+    }
+
     this.user.currency = this.user.currency + inc * number;
     this.user.total = this.user.total + inc * number;
     this.display_currency = this.renderNumeral(this.user.currency);

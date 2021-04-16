@@ -7,6 +7,27 @@ export default [
     new: false
   },
   {
+    succ: 'totalClick100',
+    name: 'Avoir cliqué 100 fois sur la licorne',
+    content: 'Clic clic ! Pleins de fraises !',
+    done: false,
+    new: false
+  },
+  {
+    succ: 'totalClick10000',
+    name: 'Avoir cliqué 10,000 fois sur la licorne',
+    content: 'Clic clic clic clic ! Te casse pas le poignet non plus...',
+    done: false,
+    new: false
+  },
+  {
+    succ: 'statsLicorneClick',
+    name: 'Avoir cliqué sur la licorne de la vue stats',
+    content: "Et oui, c'est encore moi !",
+    done: false,
+    new: false
+  },
+  {
     succ: 'oneBonus',
     name: 'Avoir cliqué sur une fraise bonus',
     content: 'Super bonus pour bien grossir !',
