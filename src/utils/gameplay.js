@@ -78,7 +78,6 @@ export default {
     if (this.user.currency < build.price) return;
 
     this.buy(build.price)
-
     build.number += 1;
 
     if (
@@ -91,6 +90,8 @@ export default {
       );
     }
 
+    this.checkStore()
+    
     this.calcCps();
 
     build.price *= 1.2; // EASY MODE

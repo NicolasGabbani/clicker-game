@@ -78,10 +78,12 @@
             <Store 
               :store="display_store" 
               :builds="display_builds" 
-              :currency="this.user.currency" 
+              :currency="this.user.currency"
+              :storeEmpty="storeEmpty"
               @buy="buy" 
               @purchaseStoreSucc="purchaseStoreSucc" 
-              @calcCps="calcCps" 
+              @calcCps="calcCps"
+              @checkStore="checkStore"
             />
             <Builds
               @buyBuild="buyBuild"
@@ -171,7 +173,8 @@ export default {
       decorArray: Decor,
       decorClass: '',
       licorneClass: '',
-      classicSound: new Audio(require('../assets/sounds/click2.mp3'))
+      classicSound: new Audio(require('../assets/sounds/click2.mp3')),
+      storeEmpty: true
     };
   },
   methods: {
@@ -195,6 +198,15 @@ export default {
       this.haveBonusCpsClicked = true;
     },
 
+    checkStore(){
+      if(this.$checkStoreTimer){
+        clearTimeout(this.$checkStoreTimer)
+      }
+      this.$checkStoreTimer = setTimeout(() => {
+        this.storeEmpty = !document.querySelector('.store-btn')
+      }, 100);
+    },
+
     renderNumeral(val){
       if(val >= 1000000) return numeral(val).format('0.000a')
       return numeral(val).format('0,0.0')
@@ -203,6 +215,7 @@ export default {
   mounted() {
     this.cps()
     this.checkSucc()
+    this.checkStore()
     this.initPlayClassicSound()
 
     this.$timer2 = setInterval(() => {

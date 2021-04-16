@@ -5,7 +5,7 @@
       <div v-for="(build, index) in builds" :key="build.name" class="build with-hover nes-container is-rounded" :class="{ disable: !build.buyable }" v-show="total >= build.visible" :ref='`build${index}`' @mouseenter="toggleInfo = index" @mouseleave="toggleInfo = null">
         <div class="build__stars">
           <div class="build__stars-star" v-for="star in build.stars">
-            <i class="nes-icon star"></i>
+            <i class="nes-icon star animate__animated animate__fadeIn animate__faster"></i>
           </div>
         </div>
         <div class="build__avatar">
@@ -35,12 +35,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div v-for="build in builds" :key="build.name + 'locked'" v-show="total < build.visible" class="build nes-container is-dark is-rounded">
-        <div class="build__avatar">
-          <div class="build__avatar-img nes-container is-dark is-rounded container-centered">?</div>
-        </div>
-        <div class="build-content container-centered build-placeholder">?</div>
       </div>
     </div>
   </div>
@@ -106,7 +100,7 @@ export default {
     color: var(--clr-black)
     &__stars
       position: absolute
-      bottom: 10px
+      top: 70px
       left: 0
       z-index: 2
       &-star

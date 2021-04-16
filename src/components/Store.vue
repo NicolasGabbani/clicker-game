@@ -2,32 +2,40 @@
   <div class="store nes-container is-rounded is-semi-white">
     <p class="title">Magasin</p>
     <div class="container-scroll" data-simplebar data-simplebar-auto-hide="false">
-      <div v-for="(s, i) in store" :key="s.id" class="store-content">
-        <tippy :followCursor="true" placement="top-start" duration="0" v-for="(store, index) in s.store" v-show="!store.purchase && build(s.id).number >= store.number">
-          <button 
-            class="store-btn nes-btn"  
-            :class="{
-              'is-success': currency >= build(s.id).price * (index + 2),
-              'is-error': currency <  build(s.id).price * (index + 2)
-            }"
-            @click.prevent.stop="purchase(s, store, index)"
+      <div class="store-empty text-center" v-if="storeEmpty">Rien a acheter pour le moment...</div>
+      <template v-for="(s, i) in store" :key="s.id" class="store-content">
+        <template v-for="(store, index) in s.store" :key="index">
+          <tippy 
+            :followCursor="true" 
+            placement="top-start" 
+            duration="0" 
+            v-if="!store.purchase && build(s.id).number >= store.number"
           >
-            <div 
-              class="store__avatar" 
-              :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${i+1}.png`)})` }">
-            </div>
-          </button>
-
-          <template #content>
-            <div class="nes-btn">
-              <div class="store-tooltip">
-                {{build(s.id).name}} deux fois plus efficace !
+            <button 
+              class="store-btn nes-btn animate__animated animate__fadeInDown"  
+              :class="{
+                'is-success': currency >= build(s.id).price * (index + 2),
+                'is-error': currency <  build(s.id).price * (index + 2)
+              }"
+              @click.prevent.stop="purchase(s, store, index)"
+            >
+              <div 
+                class="store__avatar" 
+                :style="{backgroundImage: `url(${require(`@/assets/images/builds/unites-production-${i+1}.png`)})` }">
               </div>
-              <span class="nes-text" :class="{'is-success': currency >= build(s.id).price * (index + 2), 'is-error': currency < build(s.id).price * (index + 2)}">{{renderNumeral(build(s.id).price * (index + 2))}}<span class="fraise small-fraise"></span></span>
-            </div>
-          </template>
-        </tippy>
-      </div>
+            </button>
+
+            <template #content>
+              <div class="nes-btn">
+                <div class="store-tooltip">
+                  {{build(s.id).name}} deux fois plus efficace !
+                </div>
+                <span class="nes-text" :class="{'is-success': currency >= build(s.id).price * (index + 2), 'is-error': currency < build(s.id).price * (index + 2)}">{{renderNumeral(build(s.id).price * (index + 2))}}<span class="fraise small-fraise"></span></span>
+              </div>
+            </template>
+          </tippy>
+        </template>
+      </template>
     </div>
   </div>
 </template>
@@ -44,6 +52,8 @@ export default {
     buy: Function,
     purchaseStoreSucc: Function,
     calcCps: Function,
+    checkStore: Function,
+    storeEmpty: Boolean
   },
   methods: {
     build(id){
@@ -56,6 +66,7 @@ export default {
       this.build(store.id).inc *= 2
       this.build(store.id).stars += 1
       this.$emit('calcCps')
+      this.$emit('checkStore')
       currentStore.purchase = true
     },
     renderNumeral(val){
@@ -69,6 +80,9 @@ export default {
 <style lang="sass" scoped>
   .container-scroll
     height: 71px !important // 172
+    margin: 0 -10px
+  .store-empty
+    margin: 0 10px
   .store
     margin-bottom: 20px !important
     &-tooltip
@@ -82,13 +96,14 @@ export default {
       gap: 15px
       margin-bottom: 15px
     &-btn
-      width: 100%
+      width: 10%
       min-height: 40px
-      display: flex
+      display: inline-flex
       justify-content: center
       align-items: center
       aspect-ratio: 1
       padding: 0 !important
+      margin: 10px
     &__avatar
       width: 40px
       height: 40px
