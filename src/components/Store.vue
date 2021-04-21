@@ -96,7 +96,7 @@ export default {
       gap: 15px
       margin-bottom: 15px
     &-btn
-      width: 10%
+      width: min(50px, 10%)
       min-height: 40px
       display: inline-flex
       justify-content: center
