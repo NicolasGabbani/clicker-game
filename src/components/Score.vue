@@ -17,7 +17,6 @@ export default {
     currency: String,
     cps: String,
     totalNum: Number,
-    scoreFraiseSucc: Function
   }
 }
 </script>

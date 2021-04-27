@@ -49,10 +49,6 @@ export default {
     store: Array,
     builds: Array,
     currency: Number,
-    buy: Function,
-    purchaseStoreSucc: Function,
-    calcCps: Function,
-    checkStore: Function,
     storeEmpty: Boolean
   },
   methods: {

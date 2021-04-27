@@ -34,14 +34,10 @@
 export default {
   name: 'Bonus',
   props: {
-    inc: Function,
-    cps: Function,
     cpsNum: Number,
     top: String,
     left: String,
     interval: Number,
-    BonusFraiseSucc: Function,
-    BonusFraiseLoseSucc: Function
   },
   data(){
     return {

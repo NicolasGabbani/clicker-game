@@ -44,7 +44,6 @@ export default {
   props: {
     success: Array,
     buildsSuccess: Array,
-    checkSucc: Function
   },
   methods: {
     hideNewSucc(succ){

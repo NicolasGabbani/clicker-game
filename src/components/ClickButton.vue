@@ -26,7 +26,6 @@ import Dialog from '@/data/dialog'
 export default {
   name: 'ClickButton',
   props: {
-    inc: Function,
     cps: Number,
     clsLicorne: String,
     decorArray: Array,
@@ -34,7 +33,6 @@ export default {
     haveSuccess: Boolean,
     success: Object,
     haveBonusCpsClicked: Boolean,
-    licorneClickSucc: Function
   },
   data(){
     return {

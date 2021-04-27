@@ -17,9 +17,6 @@
 <script>
 export default {
   name: 'Deco',
-  props: {
-    grandSageSucc: Function
-  },
   data(){
     return {
       displayTuto: null,

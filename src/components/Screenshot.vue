@@ -28,7 +28,7 @@
             <span 
               class="nes-text" 
               :class="{
-                'is-warning': build.stars == 1,
+                'is-error': build.stars == 1,
                 'is-primary': build.stars == 2,
                 'is-success': build.stars == 3
               }"
@@ -61,9 +61,6 @@ export default {
     success: Array,
     buildsSuccess: Array,
     name: String,
-    toggleScreenshot: Function,
-    closeOptions: Function,
-    statsLicorneClickSucc: Function
   },
   data() {
     return {

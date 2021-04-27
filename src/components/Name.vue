@@ -21,7 +21,6 @@ export default {
   name: 'Name',
   props: {
     name: String,
-    changeName: Function
   },
   data(){
     return {

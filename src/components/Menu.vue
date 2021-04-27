@@ -67,18 +67,10 @@
 export default {
   name: 'Menu',
   props: {
-    reset: Function,
-    save: Function,
-    closeOptions: Function,
     decor: Array,
     currentDecor: Number,
-    selectDecor: Function,
     currentLicorne: Number,
-    selectLicorne: Function,
     rain: Boolean,
-    optionRain: Function,
-    initPlayClassicSound: Function,
-    toggleScreenshot: Function
   }
 }
 </script>

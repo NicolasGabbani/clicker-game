@@ -46,7 +46,6 @@ export default {
   name: 'Builds',
   props: {
     builds: Array,
-    buyBuild: Function,
     total: Number,
     cps: Number
   },
