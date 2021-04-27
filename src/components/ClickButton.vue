@@ -5,7 +5,7 @@
     <p class="licorne-balloon nes-balloon from-left animate__animated animate__fadeIn" v-if="(haveSuccess && success?.content) || haveDialog">
       {{success?.content || this.licorneDialog}}
     </p>
-    <div class="click-progress" v-show="this.click >= 10">
+    <div class="click-progress" v-show="this.click >= 15">
       <progress 
         class="nes-progress" 
         :class="{'is-success': clickProgress == 100}" 
@@ -71,9 +71,9 @@ export default {
     licorneClick(){
       this.click++
       
-      if(this.click >= 10){
+      if(this.click >= 15){
         this.clickMultiple = this.clickProgress == 100 ? 2 : 1
-        this.clickProgress = this.clickProgress >= 100 ? 100 : this.clickProgress += 15
+        this.clickProgress = this.clickProgress >= 100 ? 100 : this.clickProgress += 2
         if(this.$interval){
           clearInterval(this.$interval)
         }
