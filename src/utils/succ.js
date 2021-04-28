@@ -13,19 +13,19 @@ export default {
     }
   },
 
-  checkSucc(){
-      for(let index in this.display_success){
+  checkSucc() {
+    for (let index in this.display_success) {
       this.haveNewSuccess = this.display_success[index].new
-      if(this.haveNewSuccess) return
+      if (this.haveNewSuccess) return
     }
-    for(let index in this.display_builds_success){
+    for (let index in this.display_builds_success) {
       this.haveNewSuccess = this.display_builds_success[index].new
-      if(this.haveNewSuccess) return
+      if (this.haveNewSuccess) return
     }
     return this.haveNewSuccess
   },
-  
-  BonusFraiseSucc(){
+
+  BonusFraiseSucc() {
     if (!this.display_success.filter((succ) => succ.succ === "bonusFraise")[0].done) {
       this.displaySuccess(
         this.display_success.filter((succ) => succ.succ === "bonusFraise")[0]
@@ -33,7 +33,7 @@ export default {
     }
   },
 
-  BonusFraiseLoseSucc(){
+  BonusFraiseLoseSucc() {
     if (!this.display_success.filter((succ) => succ.succ === "bonusFraiseLose")[0].done) {
       this.displaySuccess(
         this.display_success.filter((succ) => succ.succ === "bonusFraiseLose")[0]
@@ -41,7 +41,7 @@ export default {
     }
   },
 
-  purchaseStoreSucc(){
+  purchaseStoreSucc() {
     if (!this.display_success.filter((succ) => succ.succ === "purchaseStore")[0].done) {
       this.displaySuccess(
         this.display_success.filter((succ) => succ.succ === "purchaseStore")[0]
@@ -49,7 +49,7 @@ export default {
     }
   },
 
-  grandSageSucc(){
+  grandSageSucc() {
     if (!this.display_success.filter((succ) => succ.succ === "grandSage")[0].done) {
       this.displaySuccess(
         this.display_success.filter((succ) => succ.succ === "grandSage")[0]
@@ -57,7 +57,7 @@ export default {
     }
   },
 
-  licorneClickSucc(){
+  licorneClickSucc() {
     if (!this.display_success.filter((succ) => succ.succ === "licorneClick")[0].done) {
       this.displaySuccess(
         this.display_success.filter((succ) => succ.succ === "licorneClick")[0]
@@ -65,7 +65,15 @@ export default {
     }
   },
 
-  scoreFraiseSucc(){
+  licorneClickBonusx2Succ() {
+    if (!this.display_success.filter((succ) => succ.succ === "bonusx2")[0].done) {
+      this.displaySuccess(
+        this.display_success.filter((succ) => succ.succ === "bonusx2")[0]
+      );
+    }
+  },
+
+  scoreFraiseSucc() {
     if (!this.display_success.filter((succ) => succ.succ === "scoreFraise")[0].done) {
       this.displaySuccess(
         this.display_success.filter((succ) => succ.succ === "scoreFraise")[0]
@@ -73,7 +81,7 @@ export default {
     }
   },
 
-  statsLicorneClickSucc(){ 
+  statsLicorneClickSucc() {
     if (!this.display_success.filter((succ) => succ.succ === "statsLicorneClick")[0].done) {
       this.displaySuccess(
         this.display_success.filter((succ) => succ.succ === "statsLicorneClick")[0]

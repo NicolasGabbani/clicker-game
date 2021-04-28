@@ -1,11 +1,14 @@
 <template>
-  <div id="game-content" :class="decorClass || decorArray.filter(d => d.get)[this.user.decor]?.cls">
-    <Screenshot 
+  <div
+    id="game-content"
+    :class="decorClass || decorArray.filter((d) => d.get)[this.user.decor]?.cls"
+  >
+    <Screenshot
       :gameStart="this.user.gameStart"
       :decorClass="decorClass"
       :currentDecor="this.user.decor"
       :decorArray="decorArray"
-      :clsLicorne="licorneClass" 
+      :clsLicorne="licorneClass"
       :currentLicorne="this.user.licorne"
       :total="display_total"
       :currency="display_currency"
@@ -42,18 +45,35 @@
           :success="currentSuccess"
           :haveBonusCpsClicked="haveBonusCpsClicked"
           @licorneClickSucc="licorneClickSucc"
+          @licorneClickBonusx2Succ="licorneClickBonusx2Succ"
           :totalClick="this.user.totalClick"
         />
-        <Score :currency="display_currency" :cps="display_cps" :totalNum="this.user.total" @scoreFraiseSucc="scoreFraiseSucc" />
+        <Score
+          :currency="display_currency"
+          :cps="display_cps"
+          :totalNum="this.user.total"
+          @scoreFraiseSucc="scoreFraiseSucc"
+        />
       </div>
       <div class="col">
         <div>
           <div class="options">
-            <button class="nes-btn" :class="{ 'is-success': openSuccess }" @click.prevent="openSuccess = !openSuccess">
-              <span class="new-success-radar in-btn" v-if="haveNewSuccess"></span>
+            <button
+              class="nes-btn"
+              :class="{ 'is-success': openSuccess }"
+              @click.prevent="openSuccess = !openSuccess"
+            >
+              <span
+                class="new-success-radar in-btn"
+                v-if="haveNewSuccess"
+              ></span>
               succès
             </button>
-            <button class="nes-btn" :class="{ 'is-success': openOptions }" @click.prevent="openOptions = !openOptions">
+            <button
+              class="nes-btn"
+              :class="{ 'is-success': openOptions }"
+              @click.prevent="openOptions = !openOptions"
+            >
               options
             </button>
           </div>
@@ -72,16 +92,20 @@
             @toggleScreenshot="toggleScreenshot"
           />
           <div v-show="openSuccess">
-            <Success :success="display_success" :buildsSuccess="display_builds_success" @checkSucc="checkSucc" />
+            <Success
+              :success="display_success"
+              :buildsSuccess="display_builds_success"
+              @checkSucc="checkSucc"
+            />
           </div>
           <div v-show="!openSuccess">
-            <Store 
-              :store="display_store" 
-              :builds="display_builds" 
+            <Store
+              :store="display_store"
+              :builds="display_builds"
               :currency="this.user.currency"
               :storeEmpty="storeEmpty"
-              @buy="buy" 
-              @purchaseStoreSucc="purchaseStoreSucc" 
+              @buy="buy"
+              @purchaseStoreSucc="purchaseStoreSucc"
               @calcCps="calcCps"
               @checkStore="checkStore"
             />
@@ -112,21 +136,21 @@ import fnSucc from "@/utils/succ"
 import fnMenu from "@/utils/menu"
 import fnGameplay from "@/utils/gameplay"
 import fnSound from "@/utils/sound"
-import ClickButton from "@/components/ClickButton.vue";
-import Menu from "@/components/Menu.vue";
-import Header from "@/components/Header.vue";
-import Score from "@/components/Score.vue";
-import Name from "@/components/Name.vue";
-import Fontain from "@/components/Fontain.vue";
-import Builds from "@/components/Builds.vue";
-import Store from "@/components/Store.vue";
-import Success from "@/components/Success.vue";
-import Bonus from "@/components/Bonus.vue";
-import HaveSuccess from "@/components/HaveSuccess.vue";
-import Screenshot from "@/components/Screenshot.vue";
-import Deco from "@/components/Deco.vue";
+import ClickButton from "@/components/ClickButton.vue"
+import Menu from "@/components/Menu.vue"
+import Header from "@/components/Header.vue"
+import Score from "@/components/Score.vue"
+import Name from "@/components/Name.vue"
+import Fontain from "@/components/Fontain.vue"
+import Builds from "@/components/Builds.vue"
+import Store from "@/components/Store.vue"
+import Success from "@/components/Success.vue"
+import Bonus from "@/components/Bonus.vue"
+import HaveSuccess from "@/components/HaveSuccess.vue"
+import Screenshot from "@/components/Screenshot.vue"
+import Deco from "@/components/Deco.vue"
 import Decor from "@/data/decor"
-import moment from 'moment'
+import moment from "moment"
 export default {
   name: "Game",
   components: {
@@ -142,7 +166,7 @@ export default {
     Bonus,
     HaveSuccess,
     Deco,
-    Screenshot
+    Screenshot,
   },
   props: {
     user: Object,
@@ -171,11 +195,11 @@ export default {
       currentSuccess: {},
       haveBonusCpsClicked: false,
       decorArray: Decor,
-      decorClass: '',
-      licorneClass: '',
-      classicSound: new Audio(require('../assets/sounds/click2.mp3')),
-      storeEmpty: true
-    };
+      decorClass: "",
+      licorneClass: "",
+      classicSound: new Audio(require("../assets/sounds/click2.mp3")),
+      storeEmpty: true,
+    }
   },
   methods: {
     ...fnSucc,
@@ -185,31 +209,34 @@ export default {
 
     changeName(name) {
       this.user.name = name
-      if (!this.display_success.filter((succ) => succ.succ === "changeName")[0].done) {
+      if (
+        !this.display_success.filter((succ) => succ.succ === "changeName")[0]
+          .done
+      ) {
         this.displaySuccess(
           this.display_success.filter((succ) => succ.succ === "changeName")[0]
-        );
+        )
       }
-      this.save();
+      this.save()
     },
 
     bonusCpsClicked(timer) {
-      this.bonusCpsClickedTimer = timer;
-      this.haveBonusCpsClicked = true;
+      this.bonusCpsClickedTimer = timer
+      this.haveBonusCpsClicked = true
     },
 
-    checkStore(){
-      if(this.$checkStoreTimer){
+    checkStore() {
+      if (this.$checkStoreTimer) {
         clearTimeout(this.$checkStoreTimer)
       }
       this.$checkStoreTimer = setTimeout(() => {
-        this.storeEmpty = !document.querySelector('.store-btn')
-      }, 100);
+        this.storeEmpty = !document.querySelector(".store-btn")
+      }, 100)
     },
 
-    renderNumeral(val){
-      if(val >= 1000000) return numeral(val).format('0.000a')
-      return numeral(val).format('0,0.0')
+    renderNumeral(val) {
+      if (val >= 1000000) return numeral(val).format("0.000a")
+      return numeral(val).format("0,0.0")
     },
   },
   mounted() {
@@ -231,32 +258,32 @@ export default {
     onsave: function (val) {
       if (val) {
         setTimeout(() => {
-          this.onsave = false;
-        }, 1000);
+          this.onsave = false
+        }, 1000)
       }
     },
     haveSuccess: function (val) {
       if (val) {
         setTimeout(() => {
-          this.haveSuccess = false;
-          this.currentSuccess = {};
-        }, 3500);
+          this.haveSuccess = false
+          this.currentSuccess = {}
+        }, 3500)
       }
     },
     haveBonusCpsClicked: function (val) {
       if (this.bonusCpsClikedTimeOut) {
-        clearTimeout(this.bonusCpsClikedTimeOut);
+        clearTimeout(this.bonusCpsClikedTimeOut)
       }
       this.bonusCpsClikedTimeOut = setTimeout(() => {
-        this.haveBonusCpsClicked = false;
-      }, this.bonusCpsClickedTimer);
-    }
+        this.haveBonusCpsClicked = false
+      }, this.bonusCpsClickedTimer)
+    },
   },
   created() {
-    if(this.user.gameStart == null){
+    if (this.user.gameStart == null) {
       this.user.gameStart = Date.now()
       this.save()
     }
   },
-};
+}
 </script>

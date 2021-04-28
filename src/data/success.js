@@ -21,6 +21,13 @@ export default [
     new: false
   },
   {
+    succ: 'bonusx2',
+    name: 'Avoir atteint le bonus x2 en cliquant sur la licorne',
+    content: 'Continue de cliquer !!',
+    done: false,
+    new: false
+  },
+  {
     succ: 'statsLicorneClick',
     name: 'Avoir cliqué sur la licorne de la vue stats',
     content: "Et oui, c'est encore moi !",
