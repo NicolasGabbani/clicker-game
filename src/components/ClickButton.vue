@@ -10,7 +10,7 @@
       id="btn-score"
       class="btn-score nes-pointer"
       @click.self="
-        enableClick
+        enableClick && $event.isTrusted
           ? ($emit('inc', clickInc, 1, 'button'),
             licorneClick(),
             displayScore($event))
