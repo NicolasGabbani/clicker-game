@@ -9,11 +9,14 @@
     <button
       id="btn-score"
       class="btn-score nes-pointer"
-      @click="
-        $emit('inc', clickInc, 1, 'button'),
-          licorneClick(),
-          displayScore($event)
+      @click.self="
+        enableClick
+          ? ($emit('inc', clickInc, 1, 'button'),
+            licorneClick(),
+            displayScore($event))
+          : null
       "
+      @keydown.enter="enableClick = false"
       :class="
         clsLicorne || decorArray.filter((d) => d.get)[currentLicorne]?.cls
       "
@@ -53,6 +56,7 @@ export default {
   },
   data() {
     return {
+      enableClick: true,
       clickInc: this.cps == 0 ? 1 : (1 + this.cps) * 1.1,
       click: 0,
       clickMultiple: 1,
@@ -156,6 +160,16 @@ export default {
       setTimeout(() => {
         this.haveDialog = false
       }, 3000)
+    },
+    enableClick(val) {
+      if (this.resetEnableClick) {
+        clearTimeout(this.resetEnableClick)
+      }
+      if (!val) {
+        this.resetEnableClick = setTimeout(() => {
+          this.enableClick = true
+        }, 1000)
+      }
     },
   },
 }
